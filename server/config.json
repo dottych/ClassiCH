@@ -1,0 +1,73 @@
+{
+    "server": {
+        "port": 25565,
+
+        "name": "My ClassiCH Server",
+
+        "maxPlayers": 64,
+
+        "public": false,
+        "authentication": false,
+
+        "joinKick": false,
+
+        "motdTitle": "%servername%",
+        "motdDescription": "%greeting%, %playername%! -noclip",
+        "motdDescriptionOP": "%greeting%, %playername%!",
+
+        "checkForUpdate": true
+    },
+
+    "world": {
+        "name": "world",
+
+        "size": {
+            "x": 256,
+            "y": 128,
+            "z": 256
+        },
+
+        "spawn": {
+            "x": -1,
+            "y": -1,
+            "z": -1
+        },
+
+        "saveInterval": 45,
+
+        "generationType": "land",
+
+        "spamCount": 80,
+        "spamInterval": 5,
+
+        "features": {
+            "blastRadius": 2,
+            "explosions": false,
+            "slabs": true,
+            "saplings": true,
+            "sponges": true
+        }
+    },
+
+    "messages": {
+        "spamCount": 5,
+        "spamInterval": 5
+    },
+
+    "commands": {
+        "selfActions": false,
+        "8ballDelay": 10,
+        "flipDelay": 10
+    },
+
+    "heartbeat": {
+        "enabled": true,
+        "url": "https://www.classicube.net/server/heartbeat",
+        "interval": 45
+    },
+
+    "logging": {
+        "console": true,
+        "file": true
+    }
+}
