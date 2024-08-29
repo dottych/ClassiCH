@@ -396,16 +396,17 @@ class World {
     }
 	
 	generateDesert() {
-		const noise = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 3});
+		const noise = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 4});
 		const shift = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 6});
-		const junk = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 4});
+		const junk = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 3});
 		const water = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 5});
+		const flat = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 6});
 		
         const calculateHeight = (x, z) => {
 			let xOff = Math.floor(x * (shift[z + (x * this.z)] * 0.1 + 0.2));
-			let height = Math.sin(noise[z + (xOff * this.z)]) * 8;
-			height *= height;
-			height /= 6;
+			let height = noise[z + (xOff * this.z)];
+			height = 1 - Math.sin(Math.abs(height - 0.5) * 4);
+			height *= flat[z + (xOff * this.z)] * 6 + 2;
 			height += shift[z + (x * this.z)] * 16;
             return Math.round(height) + this.halfY;
         }
@@ -475,7 +476,7 @@ class World {
 						}
 					}
 					
-					if(Math.random() * (waterVal * waterVal) > 0.7) {
+					if(Math.random() * (waterVal * waterVal) > 0.725) {
 						this.setBlock(38, false, x, this.halfY + 1, z); // roses
 					}
 					
@@ -487,7 +488,7 @@ class World {
 				
 				doOre(x, height - 8, z);
 				doOre(x, height - 8, z);
-				doOre(x, height - 4, z);
+				doOre(x, height - 6, z);
 				this.setBlock(11, false, x, 0, z);
 			}
 		}
