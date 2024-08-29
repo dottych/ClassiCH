@@ -55,8 +55,15 @@ class World {
             this.generate();
         }
 
+		//toggle world saves, good for debugging
+		let saveWorld = config.self.world.saveWorld;
+		
+		if(saveWorld == undefined) {
+			saveWorld = true;
+		}
+		
         // save world on interval
-		if(config.self.world.saveWorld) { // good for debugging
+		if(saveWorld) {
 			setInterval(() => {
 
 				this.save();
