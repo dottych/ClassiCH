@@ -3,7 +3,7 @@ const fs = require('fs');
 // do not change this, this is strictly for 0.30 only (but 0.28 had 0x07 already)
 const pvn = 0x07;
 // do not change this as well, this is the server software's name, version and URLs
-const version = "0.1.0";
+const version = "0.1.1 DEV";
 const software = `&2ClassiCH &7${version}`;
 const softwareRaw = `ClassiCH ${version}`;
 const softwareUrl = "https://github.com/dottych/ClassiCH";
