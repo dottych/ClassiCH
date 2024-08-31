@@ -33,6 +33,7 @@
             "z": -1
         },
 
+        "saveWorld": true,
         "saveInterval": 45,
 
         "generationType": "land",
