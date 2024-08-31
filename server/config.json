@@ -34,7 +34,6 @@
         },
 
         "saveInterval": 45,
-		"saveWorld": true,
 
         "generationType": "land",
 
