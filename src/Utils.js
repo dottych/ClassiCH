@@ -131,7 +131,7 @@ class Utils {
     }
 
     /**
-     * Clamps an integer. Example: (11, 3, 9) would return 11.
+     * Clamps an integer. Example: (11, 3, 9) would return 9.
      * @param {number} int An integer.
      * @param {number} min An integer minimum.
      * @param {number} max An integer maximum.
