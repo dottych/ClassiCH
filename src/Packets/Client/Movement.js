@@ -1,6 +1,7 @@
 const ClientPacket = require('../ClientPacket');
 
-const ServerMovementPacket = require('../Server/Movement');
+const ServerTeleportPacket = require('../Server/Teleport');
+const ServerRotationPacket = require('../Server/Rotation');
 
 const lists = require('../../Lists');
 const utils = require('../../Utils');
@@ -46,6 +47,13 @@ class MovementPacket extends ClientPacket {
             return;
         }
 
+        // temporarily store previous values
+        let previousX = player.x;
+        let previousY = player.y;
+        let previousZ = player.z;
+        let previousYaw = player.yaw;
+        let previousPitch = player.pitch;
+
         // set player's position/rotation
         player.x = this.x;
         player.y = this.y;
@@ -56,7 +64,7 @@ class MovementPacket extends ClientPacket {
         player.lastActivity = Math.round(performance.now());
 
         // send player's position/rotation to other clients
-        new ServerMovementPacket(
+        new ServerTeleportPacket(
 
             utils.getOtherPlayerClients(this.client),
             false,

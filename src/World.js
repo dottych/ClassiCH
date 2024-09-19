@@ -55,15 +55,16 @@ class World {
             // generate world
             this.generate();
         }
+
         //toggle world saves, good for debugging
-        let saveWorld = config.self.world.saveWorld;
+        this.saveWorld = config.self.world.saveWorld;
+
         //force saves if saveWorld is missing from config.json
-        if(saveWorld == undefined) {
-            saveWorld = true;
-        }
+        if (this.saveWorld == undefined)
+            this.saveWorld = true;
         
         // save world on interval
-        if(saveWorld) {
+        if (this.saveWorld) {
             setInterval(() => {
 
                 this.save();
@@ -158,6 +159,19 @@ class World {
                 
             case "garden":
                 this.generateGarden();
+                break;
+
+            case "void":
+                /*new (require('./Generation'))(
+            
+                    this.buffer,
+                    this.x,
+                    this.y,
+                    this.z,
+                    this.setBlock,
+                    this.getBlock
+                    
+                ).generate();*/
                 break;
         }
 

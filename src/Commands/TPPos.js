@@ -1,7 +1,7 @@
 const Command = require('../Command');
 
 const ServerMessagePacket = require('../Packets/Server/Message');
-const ServerMovementPacket = require('../Packets/Server/Movement');
+const ServerTeleportPacket = require('../Packets/Server/Teleport');
 
 const utils = require('../Utils');
 const lists = require('../Lists');
@@ -35,7 +35,7 @@ class CommandTPPos extends Command {
                 return;
             }
 
-            new ServerMovementPacket(
+            new ServerTeleportPacket(
             
                 [this.client],
                 true,
@@ -47,7 +47,7 @@ class CommandTPPos extends Command {
                 me.pitch
 
             );
-            new ServerMessagePacket([this.client], 0xFF, `Teleported to ${this.args[0]}.`);
+            new ServerMessagePacket([this.client], 0xFF, `Teleported to ${this.args[0]} ${this.args[1]} ${this.args[2]}.`);
 
             return;
 
@@ -69,7 +69,7 @@ class CommandTPPos extends Command {
             return;
         }
 
-        new ServerMovementPacket(
+        new ServerTeleportPacket(
         
             [this.client],
             true,
@@ -81,7 +81,7 @@ class CommandTPPos extends Command {
             pitch
 
         );
-        new ServerMessagePacket([this.client], 0xFF, `Teleported to ${this.args[0]}.`);
+        new ServerMessagePacket([this.client], 0xFF, `Teleported to ${this.args[0]} ${this.args[1]} ${this.args[2]} ${this.args[3]} ${this.args[4]}.`);
     }
 }
 

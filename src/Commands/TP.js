@@ -1,7 +1,7 @@
 const Command = require('../Command');
 
 const ServerMessagePacket = require('../Packets/Server/Message');
-const ServerMovementPacket = require('../Packets/Server/Movement');
+const ServerTeleportPacket = require('../Packets/Server/Teleport');
 
 const utils = require('../Utils');
 
@@ -27,7 +27,7 @@ class CommandTP extends Command {
             let player2 = utils.findPlayerByName(this.args[1]);
 
             if (player1 != undefined && player2 != undefined) {
-                new ServerMovementPacket(
+                new ServerTeleportPacket(
                     
                     [player1.client],
                     true,
@@ -49,7 +49,7 @@ class CommandTP extends Command {
             let player = utils.findPlayerByName(this.args[0]);
 
             if (player != undefined) {
-                new ServerMovementPacket(
+                new ServerTeleportPacket(
                     
                     [this.client],
                     true,
