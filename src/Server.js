@@ -16,8 +16,29 @@ if (!config.checkCrucialConfig()) {
     process.exit(0);
 }
 
+// initialise world
 const world = require('./World');
 
+// generate world of type
+if (!world.generated) {
+    const generationType = config.self.world.generationType.toLowerCase();
+
+    try {
+        const generation = require(`./Generations/${generationType}`);
+
+        utils.log(`Generating ${world.x}x${world.y}x${world.z} world of type ${generationType}`);
+        const start = performance.now();
+
+        generation.generate();
+        world.generated = true;
+
+        utils.log(`Generating done, took ${Math.round(performance.now() - start)}ms`);
+    } catch (e) {
+        utils.log(`Invalid generation type ${generationType}, cancelling generation`);
+    }
+}
+
+// main server class
 class Server {
     constructor() {
         this.closing = false;
