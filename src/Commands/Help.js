@@ -37,9 +37,13 @@ class CommandHelp extends Command {
             }
 
             let commandStrings = utils.splitString(`Commands: ${commands.join(', ')}`, "&a");
+            let commandInfoStrings = utils.splitString("Use /help (command) to view information about a command.", "&b");
 
             for (let commandString of commandStrings)
                 new ServerMessagePacket([this.client], 0xFF, commandString);
+
+            for (let commandInfoString of commandInfoStrings)
+                new ServerMessagePacket([this.client], 0xFF, commandInfoString);
         }
     }
 }

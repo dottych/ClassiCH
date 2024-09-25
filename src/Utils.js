@@ -303,6 +303,15 @@ class Utils {
 
         return string;
     }
+
+    /**
+     * Splits a string by lines.
+     * @param {string} string Any string.
+     * @returns Array with split strings.
+     */
+    getLines(string) {
+        return string.replaceAll('\r', '').split('\n');
+    }
 }
 
 module.exports = new Utils();
