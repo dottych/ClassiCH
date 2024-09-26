@@ -50,6 +50,32 @@ class Packets {
         // handled all packets
         client.busy = false;
     }
+
+    /**
+     * Splits combined packets.
+     * @param {Buffer} packet Buffer with combined packets.
+     * @returns Split packets.
+     */
+    splitPackets(packet) {
+        let buffer = [];
+        let _packet = [...packet];
+        let cancelled = false;
+
+        function split() {
+            const packetLength = lists.clientPacketLengths[_packet[0]];
+
+            if (packetLength == undefined) return [];
+            
+            buffer.push([...(_packet.slice(0, packetLength))]);
+            _packet = _packet.slice(packetLength, _packet.length);
+            
+            if (_packet.length > 0 && !cancelled) split();
+        }
+
+        split();
+
+        return buffer;
+    }
 }
 
 module.exports = new Packets();

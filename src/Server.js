@@ -21,7 +21,7 @@ const world = require('./World');
 
 // generate world of type
 if (!world.generated) {
-    const generationType = config.self.world.generationType.toLowerCase();
+    const generationType = config.self.world.generationType;
 
     try {
         const generation = require(`./Generations/${generationType}`);
@@ -69,7 +69,7 @@ class Server {
     }
 
     onData(client, data) {
-        client.packets.push(...(utils.splitPackets(data)));
+        client.packets.push(...(packets.splitPackets(data)));
         if (!client.busy) packets.handle(client);
     }
 

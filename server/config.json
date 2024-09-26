@@ -36,7 +36,7 @@
         "saveWorld": true,
         "saveInterval": 45,
 
-        "generationType": "land",
+        "generationType": "Land",
 
         "spamCount": 80,
         "spamInterval": 5,

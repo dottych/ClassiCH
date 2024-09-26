@@ -79,7 +79,7 @@ class Utils {
      */
     uInt16(int) {
         let bytes = [];
-        bytes.push(int >> 8);
+        bytes.push(int >> 8 % 256);
         bytes.push(int % 256);
         return bytes;
     }
@@ -106,6 +106,20 @@ class Utils {
      */
     parseUInt16(int) {
         return int[1] + int[0] * 256;
+    }
+
+    /**
+     * Converts an integer into a UInt32 array. However, numbers higher than the limit's half break JavaScript, so uh...
+     * @param {number} int Any integer (under 4294967296).
+     * @returns A Uint32 array.
+     */
+    uInt32(int) {
+        let bytes = [];
+        bytes.push((int >> 24) % 256);
+        bytes.push((int >> 16) % 256);
+        bytes.push((int >> 8) % 256);
+        bytes.push(int % 256);
+        return bytes;
     }
 
     /**
@@ -187,32 +201,6 @@ class Utils {
      */
     generatePlayerKey(name) {
         return crypto.createHash("md5").update(config.salt + name).digest("hex");
-    }
-
-    /**
-     * Splits combined packets.
-     * @param {Buffer} packet Buffer with combined packets.
-     * @returns Split packets.
-     */
-    splitPackets(packet) {
-        let buffer = [];
-        let _packet = [...packet];
-        let cancelled = false;
-
-        function split() {
-            const packetLength = lists.clientPacketLengths[_packet[0]];
-
-            if (packetLength == undefined) return [];
-            
-            buffer.push([...(_packet.slice(0, packetLength))]);
-            _packet = _packet.slice(packetLength, _packet.length);
-            
-            if (_packet.length > 0 && !cancelled) split();
-        }
-
-        split();
-
-        return buffer;
     }
 
     /**
