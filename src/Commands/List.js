@@ -22,14 +22,18 @@ class CommandList extends Command {
         for (let player of Object.values(lists.players))
             players.push(
         
-                `${player.name}${player.op ? " (OP)" : ""}${player.lastActivity + 120000 < performance.now() ? " (AFK)" : ""}`
+                player.name +
+                (player.cpe ? " (CPE)" : "") +
+                (player.op ? " (OP)" : "") +
+                (player.lastActivity + 120000 < performance.now() ? " (AFK)" : "") +
+                (player.name === this.client.name ? " (YOU)" : "")
                 
             );
         
-        let playerStrings = utils.splitString(players.join(", "));
+        let playerStrings = utils.splitString(players.join(", "), "&a");
 
         for (let playerString of playerStrings)
-            new ServerMessagePacket([this.client], 0xFF, playerString);
+            new ServerMessagePacket([this.client], 0x00, playerString);
         
     }
 }
