@@ -15,11 +15,12 @@ let salt;
 const self = JSON.parse(fs.readFileSync('./config.json').toString());
 
 function checkCrucialConfig() {
-    if (self.server.port < 0 || self.server.port > 65535) return false;
+    if (self.server.port <= 0 || self.server.port >= 65536) return false;
 
     if (self.server.name.length <= 0) return false;
     if (self.server.name.length > 64) return false;
 
+    if (self.server.maxPlayers <= 0) return false;
     if (self.server.maxPlayers >= 128) return false;
 
     if (self.world.name.trim().length <= 0) return false;

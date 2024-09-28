@@ -4,7 +4,8 @@ const Generation = require('../Generation');
 
 class GenerationDesert extends Generation {
     constructor() {
-        super("desert");
+        super("Desert");
+        this.author = "marioood";
     }
 
     generate() {

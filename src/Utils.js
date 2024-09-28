@@ -123,6 +123,23 @@ class Utils {
     }
 
     /**
+     * Reads a UInt32 from a buffer.
+     * @param {Buffer} buffer Buffer containing a UInt32.
+     * @param {number} byte Starting byte.
+     * @returns UInt32 array.
+     */
+    readUInt32(buffer, byte) {
+        let int = [];
+
+        int.push(buffer[byte]);
+        int.push(buffer[byte+1]);
+        int.push(buffer[byte+2]);
+        int.push(buffer[byte+3]);
+
+        return int;
+    }
+
+    /**
      * Converts a UInt32 into a normal integer.
      * @param {object} int A UInt32 array.
      * @returns A normal integer.
@@ -288,6 +305,7 @@ class Utils {
         string = string.replaceAll("%playercount%", this.getPlayerCount().toString());
         string = string.replaceAll("%playername%", populations.playerName);
         string = string.replaceAll("%greeting%", lists.greetings[Math.floor(Math.random() * lists.greetings.length)]);
+        //string = string.replaceAll("%time%", `${Date.getHours()}:${Date.getMinutes()}:${Date.getSeconds()}`);
 
         return string;
     }

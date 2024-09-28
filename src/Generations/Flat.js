@@ -2,7 +2,8 @@ const Generation = require('../Generation');
 
 class GenerationFlat extends Generation {
     constructor() {
-        super("flat");
+        super("Flat");
+        this.author = "dottych";
     }
 
     generate() {

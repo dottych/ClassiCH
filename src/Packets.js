@@ -7,6 +7,9 @@ const ClientMovementPacket = require('./Packets/Client/Movement');
 const ClientMessagePacket = require('./Packets/Client/Message');
 const ServerDisconnectPacket = require('./Packets/Server/Disconnect');
 
+const ClientExtInfoPacket = require('./Packets/Client/Ext/ExtInfo');
+const ClientExtEntryPacket = require('./Packets/Client/Ext/ExtEntry');
+
 class Packets {
     constructor() {}
 
@@ -33,6 +36,16 @@ class Packets {
                 case lists.clientPackets.message:
                     if (lists.players[client.id] == undefined) break;
                     new ClientMessagePacket(client, client.packets[0]);
+                    break;
+
+                case lists.clientPackets.ext.info:
+                    if (lists.players[client.id] != undefined) break;
+                    new ClientExtInfoPacket(client, client.packets[0]);
+                    break;
+            
+                case lists.clientPackets.ext.entry:
+                    if (lists.players[client.id] != undefined) break;
+                    new ClientExtEntryPacket(client, client.packets[0]);
                     break;
 
                 default:

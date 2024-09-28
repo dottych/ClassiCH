@@ -64,6 +64,23 @@ class MovementPacket extends ClientPacket {
         player.lastActivity = Math.round(performance.now());
 
         // send player's position/rotation to other clients
+        // if (this.x !== previousX || this.y !== previousY || this.z !== previousZ) {
+        //     if (this.yaw !== previousYaw || this.pitch !== previousPitch) {
+
+        //     } else {
+
+        //     }
+        // } else if (this.yaw !== previousYaw || this.pitch !== previousPitch) {
+        //     new ServerRotationPacket(
+
+        //         utils.getOtherPlayerClients(this.client),
+        //         false,
+        //         this.client.id,
+        //         this.yaw,
+        //         this.pitch
+
+        //     );
+        // }
         new ServerTeleportPacket(
 
             utils.getOtherPlayerClients(this.client),

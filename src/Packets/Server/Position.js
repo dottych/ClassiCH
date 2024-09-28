@@ -1,9 +1,9 @@
 const ServerPacket = require('../ServerPacket');
 const lists = require('../../Lists');
 
-class MovementPacket extends ServerPacket {
-    constructor(clients, isClient, id, xChange, yChange, zChange, yaw, pitch) {
-        super(clients, lists.serverPackets.movement);
+class PositionPacket extends ServerPacket {
+    constructor(clients, isClient, id, xChange, yChange, zChange) {
+        super(clients, lists.serverPackets.position);
 
         this.isClient = isClient;
 
@@ -11,8 +11,6 @@ class MovementPacket extends ServerPacket {
         this.xChange = xChange;
         this.yChange = yChange;
         this.zChange = zChange;
-        this.yaw = yaw;
-        this.pitch = pitch;
 
         this.constructBuffer();
         super.send();
@@ -27,9 +25,7 @@ class MovementPacket extends ServerPacket {
             this.isClient ? 0xFF : this.id,
             this.xChange,
             this.yChange,
-            this.zChange,
-            this.yaw,
-            this.pitch
+            this.zChange
 
         );
 
@@ -37,4 +33,4 @@ class MovementPacket extends ServerPacket {
     }
 }
 
-module.exports = MovementPacket;
+module.exports = PositionPacket;

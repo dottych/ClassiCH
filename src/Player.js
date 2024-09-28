@@ -7,15 +7,21 @@ const ServerMessagePacket = require('./Packets/Server/Message');
 const ServerDespawnPacket = require('./Packets/Server/Despawn');
 
 class Player {
-    constructor(client, id, name, op) {
+    constructor(client, id, name, op, cpe) {
         this.client = client;
         this.id = id;
         this.name = name;
         
         this.op = op;
 
+        this.cpe = cpe;
+        this.extensions = {};
+
+        this.message = "";
+
         this.msgCount = 0;
         this.blockCount = 0;
+        this.longMsgCount = 0;
 
         this.joined = Math.round(performance.now());
 
@@ -42,9 +48,10 @@ class Player {
         // custom variables for commands
         this.commandVars = {
 
-            explosion: false,
-            slab: true,
-            sapling: false
+            explosions: false,
+            slabs: true,
+            saplings: false,
+            sponges: true
             
         };
 
@@ -60,11 +67,15 @@ class Player {
     disconnect() {
         // remove this player for other clients and say message
         new ServerDespawnPacket(utils.getOtherPlayerClients(this.client), this.id);
-        new ServerMessagePacket(utils.getOtherPlayerClients(this.client), 0xFF, `${this.name} left the game`);
+        new ServerMessagePacket(utils.getOtherPlayerClients(this.client), 0x00, `&e${this.name} left the game`);
 
         delete lists.players[this.id];
         
         utils.log(`${this.name} left the game`);
+    }
+
+    hasExtension(extension, version) {
+        return this.extensions[extension] != undefined && this.extensions[extension] === version;
     }
 }
 

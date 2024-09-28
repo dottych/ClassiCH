@@ -50,6 +50,8 @@ class Server {
             client.packets = []; // client's incoming packets
             client.busy = false; // is handling client's packets?
             client.id = -1; // client's player ID
+            client.extensions = {};
+            client.extensionCount = 0;
 
             // client events
             client.on('data', data => this.onData(client, data));

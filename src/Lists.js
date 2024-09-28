@@ -38,12 +38,14 @@ class Lists {
         // allowed chat characters
         this.chatCharacters = [...this.characters, ..." `~!@#$%^*()+-={}[]<>:;\"'\\|,./?"];
 
-        // lengths of client packets
+        // lengths of client packets (unfortunately has to stay for now...)
         this.clientPacketLengths = {
             0x00: 131,
             0x05: 9,
             0x08: 10,
-            0x0D: 66
+            0x0D: 66,
+            0x10: 67,
+            0x11: 69 // nice
         }
         
         // client packet list
@@ -51,7 +53,13 @@ class Lists {
             "identification": 0x00,
             "block": 0x05,
             "movement": 0x08,
-            "message": 0x0D
+            "message": 0x0D,
+
+            // protocol extension packets
+            "ext": {
+                "info": 0x10,
+                "entry": 0x11
+            }
         }
 
         // server packet list
@@ -70,7 +78,13 @@ class Lists {
             "despawn": 0x0C,
             "message": 0x0D,
             "disconnect": 0x0E,
-            "type": 0x0F
+            "type": 0x0F,
+
+            // protocol extension packets
+            "ext": {
+                "info": 0x10,
+                "entry": 0x11
+            }
         }
 
         this.answers = [
@@ -94,11 +108,11 @@ class Lists {
             "My sources say no",
             "Outlook not so good",
             "Very doubtful"
-        ]
-    }
+        ];
 
-    getLines(string) {
-        return string.replaceAll('\r', '').split('\n');
+        this.supportedExtensions = {
+            "LongerMessages": 1
+        }
     }
 
     addOp(name) {
