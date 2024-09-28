@@ -78,7 +78,7 @@ class BlockPacket extends ClientPacket {
             switch (this.type) {
                 // slabs
                 case 44:
-                    if (config.self.world.features.slabs && player.commandVars.slab) {
+                    if (config.self.world.features.slabs && player.commandVars.slabs) {
                         if (world.getBlock(x, y - 1, z) === 44) {
                             world.setBlock(0x00, true, x, y, z); // replace with serverblockpacket
                             world.setBlock(43, true, x, y - 1, z);
@@ -103,7 +103,7 @@ class BlockPacket extends ClientPacket {
                     if (
                         
                         config.self.world.features.saplings &&
-                        player.commandVars.sapling &&
+                        player.commandVars.saplings &&
                         world.getBlock(x, y - 1, z) === 6 &&
                         world.getBlock(x, y - 2, z) === 2 &&
                         x > 1 && x < world.x-2 &&
@@ -122,19 +122,21 @@ class BlockPacket extends ClientPacket {
 
                 // sponges
                 case 19:
-                    if (!config.self.world.features.sponges) break;
+                    if (config.self.world.features.sponges && player.commandVars.sponges)
+                        for (let bx = -1; bx <= 1; bx++)
+                            for (let by = -1; by <= 1; by++)
+                                for (let bz = -1; bz <= 1; bz++) {
+                                    // if that is the sponge
+                                    if (bx === 0 && by === 0 && bz === 0) continue;
+
+                                    let block = world.getBlock(x + bx, y + by, z +bz);
+
+                                    if (block == 8 || block == 9)
+                                        world.setBlock(0, true, x + bx, y + by, z + bz);
+
+                                }
 
                     world.setBlockOthers(this.client, this.type, x, y, z);
-
-                    for (let bx = -1; bx <= 1; bx++)
-                        for (let by = -1; by <= 1; by++)
-                            for (let bz = -1; bz <= 1; bz++) {
-                                let block = world.getBlock(x + bx, y + by, z +bz);
-
-                                if (block == 8 || block == 9)
-                                    world.setBlock(0, true, x + bx, y + by, z + bz);
-
-                            }
                     
                     break;
 
