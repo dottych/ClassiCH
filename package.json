@@ -1,6 +1,7 @@
 {
   "name": "classich",
   "author": "dottych",
+  "license": "MIT",
   "dependencies": {
     "perlin-noise": "^0.0.1",
     "request": "^2.88.2"
