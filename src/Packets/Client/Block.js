@@ -205,7 +205,7 @@ class BlockPacket extends ClientPacket {
 
                 // tnt
                 case 46:
-                    if (!config.self.world.features.explosions || !player.commandVars.explosion) {
+                    if (!config.self.world.features.explosions || !player.commandVars.explosions) {
                         world.setBlockOthers(this.client, 0x00, x, y, z);
                         break;
                     }
