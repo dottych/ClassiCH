@@ -20,14 +20,14 @@ class CommandMe extends Command {
         const me = lists.players[this.client.id];
 
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a message!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a message!");
             return;
         }
 
-        const messages = utils.splitString(`* ${me.name} ${this.args.join(' ')}`);
+        const messages = utils.splitString(`* ${me.name} ${this.args.join(' ')}`, "&e");
 
         for (let message of messages)
-            new ServerMessagePacket(utils.getAllPlayerClients(), 0xFF, message);
+            new ServerMessagePacket(utils.getAllPlayerClients(), 0x00, message);
 
     }
 }

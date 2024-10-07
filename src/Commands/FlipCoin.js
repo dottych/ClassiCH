@@ -21,7 +21,7 @@ class CommandFlipCoin extends Command {
         const me = lists.players[this.client.id];
 
         if (performance.now() < me.commandVars.flipped + config.self.commands["flipDelay"] * 1000) {
-            new ServerMessagePacket([this.client], 0xFF, `You can flip a coin later.`);
+            new ServerMessagePacket([this.client], 0x00, `&eYou can flip a coin later.`);
             return;
         }
 
@@ -32,7 +32,7 @@ class CommandFlipCoin extends Command {
         new ServerMessagePacket(
             
             utils.getAllPlayerClients(),
-            0xFF,
+            0x00,
             `&b${me.name} flipped a coin and got ${coin}!`
             
         );

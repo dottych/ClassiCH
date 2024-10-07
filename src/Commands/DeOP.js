@@ -20,12 +20,12 @@ class CommandDeOP extends Command {
 
     execute() {
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a name!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a name!");
             return;
         }
 
         if (!config.self.commands.selfActions && this.args[0] === lists.players[this.client.id].name) {
-            new ServerMessagePacket([this.client], 0xFF, "You can't deop yourself!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou can't deop yourself!");
             return;
         }
 
@@ -37,9 +37,9 @@ class CommandDeOP extends Command {
                 new ServerTypePacket([player.client], 0x00);
             }  
 
-            new ServerMessagePacket([this.client], 0xFF, `${this.args[0]} is no longer OP.`);
+            new ServerMessagePacket([this.client], 0x00, `&e${this.args[0]} is no longer OP.`);
         } else
-            new ServerMessagePacket([this.client], 0xFF, `${this.args[0]} isn't OP!`);
+            new ServerMessagePacket([this.client], 0x00, `&e${this.args[0]} isn't OP!`);
 
     }
 }

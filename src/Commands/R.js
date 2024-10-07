@@ -20,19 +20,19 @@ class CommandR extends Command {
         let messaging = lists.players[this.client.id].commandVars.messaging;
 
         if (messaging == undefined || messaging == "") {
-            new ServerMessagePacket([this.client], 0xFF, "There is no one to reply to!");
+            new ServerMessagePacket([this.client], 0x00, "&eThere is no one to reply to!");
             return;
         }
 
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a message!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a message!");
             return;
         }
 
         let player = utils.findPlayerByName(messaging);
 
         if (player == undefined) {
-            new ServerMessagePacket([this.client], 0xFF, "Player is not online!");
+            new ServerMessagePacket([this.client], 0x00, "&ePlayer is not online!");
             return;
         }
 
@@ -40,10 +40,10 @@ class CommandR extends Command {
         let messagesThem = utils.splitString(`[${lists.players[this.client.id].name} > YOU] ${this.args.join(' ')}`, "&7");
 
         for (let message of messagesMe)
-            new ServerMessagePacket([this.client], 0xFF, message);
+            new ServerMessagePacket([this.client], 0x00, message);
 
         for (let message of messagesThem)
-            new ServerMessagePacket([player.client], 0xFF, message);
+            new ServerMessagePacket([player.client], 0x00, message);
 
     }
 }

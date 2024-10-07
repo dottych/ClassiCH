@@ -14,7 +14,7 @@ class CommandPing extends Command {
     }
 
     execute() {
-        new ServerMessagePacket([this.client], 0xFF, "Pong!");
+        new ServerMessagePacket([this.client], 0x00, "&ePong!");
     }
 }
 

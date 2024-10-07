@@ -58,7 +58,8 @@ class Lists {
             // protocol extension packets
             "ext": {
                 "info": 0x10,
-                "entry": 0x11
+                "entry": 0x11,
+                "customBlockSupportLevel": 0x13
             }
         }
 
@@ -83,7 +84,8 @@ class Lists {
             // protocol extension packets
             "ext": {
                 "info": 0x10,
-                "entry": 0x11
+                "entry": 0x11,
+                "customBlockSupportLevel": 0x13
             }
         }
 
@@ -111,7 +113,9 @@ class Lists {
         ];
 
         this.supportedExtensions = {
-            "LongerMessages": 1
+            "LongerMessages": 1,
+            "MessageTypes": 1,
+            "CustomBlocks": 1
         }
     }
 

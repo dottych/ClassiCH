@@ -71,7 +71,7 @@ class MessagePacket extends ClientPacket {
         } else {
             utils.log(`${player.name} issued command: ${player.message}`);
 
-            let args = player.message.split(' ');
+            let args = player.message.trim().split(' ');
             const command = args.shift().replace('/', '');
 
             try {

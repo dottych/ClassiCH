@@ -17,14 +17,14 @@ class CommandUnban extends Command {
 
     execute() {
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a name!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a name!");
             return;
         }
 
         if (lists.removeBan(this.args[0]))
-            new ServerMessagePacket([this.client], 0xFF, `${this.args[0]} is now unbanned.`);
+            new ServerMessagePacket([this.client], 0x00, `&e${this.args[0]} is now unbanned.`);
         else
-            new ServerMessagePacket([this.client], 0xFF, `${this.args[0]} isn't banned!`);
+            new ServerMessagePacket([this.client], 0x00, `&e${this.args[0]} isn't banned!`);
 
     }
 }

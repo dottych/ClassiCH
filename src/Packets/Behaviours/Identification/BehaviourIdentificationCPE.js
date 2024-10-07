@@ -17,10 +17,9 @@ class BehaviourIdentificationCPE extends Behaviour {
     execute() {
         new ServerExtInfoPacket([this.client]);
 
-        for (let extension of Object.entries(lists.supportedExtensions)) {
+        for (let extension of Object.entries(lists.supportedExtensions))
             new ServerExtEntryPacket([this.client], extension[0], extension[1]);
-        }
-        
+
         return true;
     }
 }

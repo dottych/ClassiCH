@@ -19,7 +19,7 @@ class CommandTPPos extends Command {
 
     execute() {
         if (this.args.length < 3) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a position!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a position!");
             return;
         }
 
@@ -31,7 +31,7 @@ class CommandTPPos extends Command {
             let z = Math.round(+this.args[2]);
 
             if (isNaN(x) || isNaN(y) || isNaN(z)) {
-                new ServerMessagePacket([this.client], 0xFF, `Invalid values!`);
+                new ServerMessagePacket([this.client], 0x00, `&eInvalid values!`);
                 return;
             }
 
@@ -39,7 +39,7 @@ class CommandTPPos extends Command {
             
                 [this.client],
                 true,
-                0xFF,
+                0x00,
                 utils.uInt16(x * 32 + 16),
                 utils.uInt16((y + 1) * 32),
                 utils.uInt16(z * 32 + 16),
@@ -47,14 +47,14 @@ class CommandTPPos extends Command {
                 me.pitch
 
             );
-            new ServerMessagePacket([this.client], 0xFF, `Teleported to ${this.args[0]} ${this.args[1]} ${this.args[2]}.`);
+            new ServerMessagePacket([this.client], 0x00, `&eTeleported to ${this.args[0]} ${this.args[1]} ${this.args[2]}.`);
 
             return;
 
         }
 
         if (this.args.length < 5) {
-            new ServerMessagePacket([this.client], 0xFF, `You must provide an orientation!`);
+            new ServerMessagePacket([this.client], 0x00, `&eYou must provide an orientation!`);
             return;
         }
         
@@ -65,7 +65,7 @@ class CommandTPPos extends Command {
         let pitch = Math.round(+this.args[4]);
 
         if (isNaN(x) || isNaN(y) || isNaN(z) || isNaN(yaw) || isNaN(pitch)) {
-            new ServerMessagePacket([this.client], 0xFF, `Invalid values!`);
+            new ServerMessagePacket([this.client], 0x00, `&eInvalid values!`);
             return;
         }
 
@@ -73,7 +73,7 @@ class CommandTPPos extends Command {
         
             [this.client],
             true,
-            0xFF,
+            0x00,
             utils.uInt16(x * 32 + 16),
             utils.uInt16((y + 1) * 32),
             utils.uInt16(z * 32 + 16),
@@ -81,7 +81,7 @@ class CommandTPPos extends Command {
             pitch
 
         );
-        new ServerMessagePacket([this.client], 0xFF, `Teleported to ${this.args[0]} ${this.args[1]} ${this.args[2]} ${this.args[3]} ${this.args[4]}.`);
+        new ServerMessagePacket([this.client], 0x00, `&eTeleported to ${this.args[0]} ${this.args[1]} ${this.args[2]} ${this.args[3]} ${this.args[4]}.`);
     }
 }
 

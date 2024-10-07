@@ -19,7 +19,7 @@ class CommandSponges extends Command {
         const me = lists.players[this.client.id];
         me.commandVars.sponges = !me.commandVars.sponges;
 
-        new ServerMessagePacket([this.client], 0xFF, "Toggled sponges.");
+        new ServerMessagePacket([this.client], 0x00, "&eToggled sponges.");
     }
 }
 

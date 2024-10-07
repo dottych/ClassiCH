@@ -20,16 +20,16 @@ class CommandBan extends Command {
 
     execute() {
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a name!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a name!");
             return;
         }
 
         if (!config.self.commands.selfActions && this.args[0] === lists.players[this.client.id].name) {
-            new ServerMessagePacket([this.client], 0xFF, "You can't ban yourself!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou can't ban yourself!");
             return;
         }
 
-        let name = this.args.shift()
+        let name = this.args.shift();
         let player = utils.findPlayerByName(name);
         let reason = this.args.join(' ');
 
@@ -40,9 +40,9 @@ class CommandBan extends Command {
                 else
                     new ServerDisconnectPacket([player.client], "You were banned!");
 
-            new ServerMessagePacket([this.client], 0xFF, `${name} is now banned.`);
+            new ServerMessagePacket([this.client], 0x00, `&e${name} is now banned.`);
         } else
-            new ServerMessagePacket([this.client], 0xFF, `${name} is already banned!`);
+            new ServerMessagePacket([this.client], 0x00, `&e${name} is already banned!`);
 
     }
 }

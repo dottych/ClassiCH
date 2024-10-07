@@ -19,7 +19,7 @@ class CommandOP extends Command {
 
     execute() {
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a name!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a name!");
             return;
         }
 
@@ -29,12 +29,12 @@ class CommandOP extends Command {
             if (player != undefined) {
                 player.op = true;
                 new ServerTypePacket([player.client], 0x64);
-                new ServerMessagePacket([player.client], 0xFF, "You're now OP!");
+                new ServerMessagePacket([player.client], 0x00, "&eYou're now OP!");
             }  
 
-            new ServerMessagePacket([this.client], 0xFF, `${this.args[0]} is now OP.`);
+            new ServerMessagePacket([this.client], 0x00, `&e${this.args[0]} is now OP.`);
         } else
-            new ServerMessagePacket([this.client], 0xFF, `${this.args[0]} is already OP!`);
+            new ServerMessagePacket([this.client], 0x00, `&e${this.args[0]} is already OP!`);
 
     }
 }

@@ -16,10 +16,10 @@ class CommandSoftware extends Command {
     }
 
     execute() {
-        new ServerMessagePacket([this.client], 0xFF, config.software);
-        new ServerMessagePacket([this.client], 0xFF, "----------------");
-        new ServerMessagePacket([this.client], 0xFF, config.softwareUrl);
-        new ServerMessagePacket([this.client], 0xFF, "Thank you for using ClassiCH!");
+        new ServerMessagePacket([this.client], 0x00, config.software);
+        new ServerMessagePacket([this.client], 0x00, "&e----------------");
+        new ServerMessagePacket([this.client], 0x00, config.softwareUrl);
+        new ServerMessagePacket([this.client], 0x00, "&eThank you for using ClassiCH!");
     }
 }
 

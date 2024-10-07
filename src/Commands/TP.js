@@ -18,7 +18,7 @@ class CommandTP extends Command {
 
     execute() {
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a name!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a name!");
             return;
         }
 
@@ -31,7 +31,7 @@ class CommandTP extends Command {
                     
                     [player1.client],
                     true,
-                    0xFF,
+                    0x00,
                     player2.x,
                     utils.uInt16(utils.parseUInt16(player2.y) - 21),
                     player2.z,
@@ -39,12 +39,12 @@ class CommandTP extends Command {
                     player2.pitch
                     
                 );
-                new ServerMessagePacket([this.client], 0xFF, `Teleported ${this.args[0]} to ${this.args[1]}.`);
+                new ServerMessagePacket([this.client], 0x00, `&eTeleported ${this.args[0]} to ${this.args[1]}.`);
 
                 return;
             }
 
-            new ServerMessagePacket([this.client], 0xFF, "One of the players is not online!");
+            new ServerMessagePacket([this.client], 0x00, "&eOne of the players is not online!");
         } else {
             let player = utils.findPlayerByName(this.args[0]);
 
@@ -53,7 +53,7 @@ class CommandTP extends Command {
                     
                     [this.client],
                     true,
-                    0xFF,
+                    0x00,
                     player.x,
                     utils.uInt16(utils.parseUInt16(player.y) - 21),
                     player.z,
@@ -61,12 +61,12 @@ class CommandTP extends Command {
                     player.pitch
                     
                 );
-                new ServerMessagePacket([this.client], 0xFF, `Teleported to ${this.args[0]}.`);
+                new ServerMessagePacket([this.client], 0x00, `&eTeleported to ${this.args[0]}.`);
 
                 return;
             }  
 
-            new ServerMessagePacket([this.client], 0xFF, "Player is not online!");
+            new ServerMessagePacket([this.client], 0x00, "&ePlayer is not online!");
         }
     }
 }

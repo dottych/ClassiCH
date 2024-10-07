@@ -35,7 +35,7 @@ class BlockPacket extends ClientPacket {
         //if (this.mode === 0x00) this.type = 0x00;
         
         // if block type is out of range
-        if (this.type < 0 || this.type > 49) {
+        if (this.type < 0 || this.type > 65) {
             new ServerDisconnectPacket([this.client], "Invalid block!");
             return;
         }

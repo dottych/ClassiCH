@@ -1,5 +1,7 @@
 const ClientPacket = require('../ClientPacket');
 
+const ServerDisconnectPacket = require ('../Server/Disconnect');
+
 const BehaviourIdentificationCheck = require('../Behaviours/Identification/BehaviourIdentificationCheck');
 const BehaviourIdentificationCPE = require('../Behaviours/Identification/BehaviourIdentificationCPE');
 const BehaviourIdentificationCreate = require('../Behaviours/Identification/BehaviourIdentificationCreate');
@@ -31,6 +33,12 @@ class IdentificationPacket extends ClientPacket {
     }
 
     handle() {
+        if (!this.cpe) {
+            // TEMPORARY!
+            new ServerDisconnectPacket([this.client], "Non-CPE clients aren't supported for now, sorry!");
+            return;
+        }
+
         if (!new BehaviourIdentificationCheck(this.client, this.pvn, this.name, this.key).successful) return;
 
         if (this.cpe) {

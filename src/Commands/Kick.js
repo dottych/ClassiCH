@@ -20,16 +20,17 @@ class CommandKick extends Command {
 
     execute() {
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, "You must provide a name!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou must provide a name!");
             return;
         }
 
         if (!config.self.commands.selfActions && this.args[0] === lists.players[this.client.id].name) {
-            new ServerMessagePacket([this.client], 0xFF, "You can't kick yourself!");
+            new ServerMessagePacket([this.client], 0x00, "&eYou can't kick yourself!");
             return;
         }
 
-        let player = utils.findPlayerByName(this.args.shift());
+        let name = this.args.shift();
+        let player = utils.findPlayerByName(name);
         let reason = this.args.join(' ');
 
         if (player != undefined) {
@@ -38,9 +39,9 @@ class CommandKick extends Command {
             else
                 new ServerDisconnectPacket([player.client], "You were kicked!");
             
-            new ServerMessagePacket([this.client], 0xFF, `${this.args[0]} was kicked.`);
+            new ServerMessagePacket([this.client], 0x00, `&e${name} was kicked.`);
         } else
-            new ServerMessagePacket([this.client], 0xFF, `${this.args[0]} isn't online!`);
+            new ServerMessagePacket([this.client], 0x00, `&e${name} isn't online!`);
 
     }
 }

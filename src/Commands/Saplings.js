@@ -19,7 +19,7 @@ class CommandSaplings extends Command {
         const me = lists.players[this.client.id];
         me.commandVars.saplings = !me.commandVars.saplings;
 
-        new ServerMessagePacket([this.client], 0xFF, "Toggled saplings.");
+        new ServerMessagePacket([this.client], 0x00, "&eToggled saplings.");
     }
 }
 

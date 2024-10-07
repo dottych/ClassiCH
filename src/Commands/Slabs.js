@@ -19,7 +19,7 @@ class CommandSlabs extends Command {
         const me = lists.players[this.client.id];
         me.commandVars.slabs = !me.commandVars.slabs;
 
-        new ServerMessagePacket([this.client], 0xFF, "Toggled slabs.");
+        new ServerMessagePacket([this.client], 0x00, "&eToggled slabs.");
     }
 }
 

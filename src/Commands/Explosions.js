@@ -19,7 +19,7 @@ class CommandExplosions extends Command {
         const me = lists.players[this.client.id];
         me.commandVars.explosions = !me.commandVars.explosions;
 
-        new ServerMessagePacket([this.client], 0xFF, "Toggled explosions.");
+        new ServerMessagePacket([this.client], 0x00, "&eToggled explosions.");
     }
 }
 

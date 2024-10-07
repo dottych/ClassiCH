@@ -5,6 +5,7 @@ const ServerMessagePacket = require('../../Server/Message');
 
 const utils = require('../../../Utils');
 const lists = require('../../../Lists');
+const config = require('../../../Config');
 
 class BehaviourIdentificationSpawn extends Behaviour {
     constructor(client, playerName) {
@@ -48,6 +49,7 @@ class BehaviourIdentificationSpawn extends Behaviour {
                 );
 
         new ServerMessagePacket(utils.getAllPlayerClients(), 0x00, `&e${this.name} joined the game`);
+        new ServerMessagePacket([this.client], 100, config.self.server.name);
         utils.log(`${this.name} joined the game`);
 
         return true;

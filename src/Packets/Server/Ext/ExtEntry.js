@@ -2,7 +2,6 @@ const ServerPacket = require('../../ServerPacket');
 
 const lists = require('../../../Lists');
 const utils = require('../../../Utils');
-const config = require('../../../Config');
 
 class ExtEntryPacket extends ServerPacket {
     constructor(clients, extensionName, extensionVersion) {

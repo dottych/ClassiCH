@@ -16,7 +16,7 @@ class CommandAbout extends Command {
     }
 
     execute() {
-        new ServerMessagePacket([this.client], 0xFF, config.self.server.name);
+        new ServerMessagePacket([this.client], 0x00, config.self.server.name);
     }
 }
 

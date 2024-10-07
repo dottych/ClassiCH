@@ -50,9 +50,9 @@ class Packets {
 
                 default:
                     if (client.id === -1)
-                        utils.log("Received invalid packet from an unknown client!");
+                        utils.log("Received unknown packet from an unknown client!");
 
-                    new ServerDisconnectPacket([client], "You have sent an invalid packet!");
+                    new ServerDisconnectPacket([client], "You have sent an unknown packet!");
                     break;
             }
 
@@ -78,9 +78,18 @@ class Packets {
             const packetLength = lists.clientPacketLengths[_packet[0]];
 
             if (packetLength == undefined) return [];
+
+            const slicedPacket = _packet.slice(0, packetLength);
+
+            if (slicedPacket.length == packetLength) {
+                buffer.push([...slicedPacket]);
+                _packet = _packet.slice(packetLength, _packet.length);
+            } else {
+                cancelled = true;
+                utils.log("Received invalid (corrupted) packet!")
+                new ServerDisconnectPacket([client], "You have sent an invalid packet!");
+            }
             
-            buffer.push([...(_packet.slice(0, packetLength))]);
-            _packet = _packet.slice(packetLength, _packet.length);
             
             if (_packet.length > 0 && !cancelled) split();
         }

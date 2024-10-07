@@ -16,9 +16,9 @@ class CommandStats extends Command {
     }
 
     execute() {
-        new ServerMessagePacket([this.client], 0xFF, `Players online: ${Object.entries(lists.players).length}`);
-        new ServerMessagePacket([this.client], 0xFF, `Uptime: ${Math.floor(performance.now() / 1000)}s`);
-        new ServerMessagePacket([this.client], 0xFF, `Memory used: ${Math.round(process.memoryUsage().heapUsed / 1000000)} MB`);
+        new ServerMessagePacket([this.client], 0x00, `&ePlayers online: ${Object.entries(lists.players).length}`);
+        new ServerMessagePacket([this.client], 0x00, `&eUptime: ${Math.floor(performance.now() / 1000)}s`);
+        new ServerMessagePacket([this.client], 0x00, `&eMemory used: ${Math.round(process.memoryUsage().heapUsed / 1000000)} MB`);
     }
 }
 

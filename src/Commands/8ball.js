@@ -25,12 +25,12 @@ class Command8ball extends Command {
         const me = lists.players[this.client.id];
 
         if (this.args.length <= 0) {
-            new ServerMessagePacket([this.client], 0xFF, `You must ask a question.`);
+            new ServerMessagePacket([this.client], 0x00, `&eYou must ask a question.`);
             return;
         }
 
         if (performance.now() < me.commandVars.asked + config.self.commands["8ballDelay"] * 1000) {
-            new ServerMessagePacket([this.client], 0xFF, `Ask later.`);
+            new ServerMessagePacket([this.client], 0x00, `&eAsk later.`);
             return;
         }
 
@@ -43,7 +43,7 @@ class Command8ball extends Command {
                 new ServerMessagePacket(
                     
                     utils.getAllPlayerClients(),
-                    0xFF,
+                    0x00,
                     questionMessage
                     
                 );
@@ -61,7 +61,7 @@ class Command8ball extends Command {
                 new ServerMessagePacket(
                     
                     utils.getAllPlayerClients(),
-                    0xFF,
+                    0x00,
                     answerMessage
                     
                 );

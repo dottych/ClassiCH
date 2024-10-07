@@ -16,12 +16,12 @@ class CommandAbout extends Command {
     }
 
     execute() {
-        new ServerMessagePacket([this.client], 0xFF, "Saving backup...");
+        new ServerMessagePacket([this.client], 0x00, "&eSaving backup...");
 
         if (world.backup())
-            new ServerMessagePacket([this.client], 0xFF, "Backup saved.");
+            new ServerMessagePacket([this.client], 0x00, "&eBackup saved.");
         else
-            new ServerMessagePacket([this.client], 0xFF, "Something went wrong.");
+            new ServerMessagePacket([this.client], 0x00, "&eSomething went wrong.");
     }
 }
 
