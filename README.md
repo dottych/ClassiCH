@@ -22,6 +22,9 @@
 - High customisability
 - Extendable code *(gentypes, commands, ...)*
 
+# Prerequisites
+- Node.JS
+
 # Installation
 1. Clone the repository
 2. Run the **install** file - *.bat on Windows, .sh on Linux*
