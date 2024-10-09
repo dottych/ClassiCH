@@ -35,7 +35,9 @@ function checkCrucialConfig() {
 
     if (self.world.saveInterval <= 0) return false;
 
-    if (self.heartbeat.url.length <= 0) return false;
+    for (let url of self.heartbeat.URLs)
+        if (url.length <= 0) return false;
+
     if (self.heartbeat.interval <= 0) return false;
 
     // if everything is valid

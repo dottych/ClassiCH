@@ -65,7 +65,9 @@
 
     "heartbeat": {
         "enabled": false,
-        "url": "https://www.classicube.net/server/heartbeat",
+        "URLs": [
+            "https://www.classicube.net/server/heartbeat"
+        ],
         "interval": 45
     },
 

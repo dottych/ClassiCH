@@ -112,9 +112,9 @@ class Server {
     }
 
     heartbeat() {
-        function send(initial) {
+        function send(initial, url) {
             request(
-                config.self.heartbeat.url +
+                url +
                 '?port=' + config.self.server.port +
                 '&max=' + config.self.server.maxPlayers +
                 //'&name=' + utils.populate(config.self.server.name) +
@@ -143,13 +143,16 @@ class Server {
         }
 
         // initial heartbeat
-        send(this.initialBeat);
+        for (let url of config.self.heartbeat.URLs)
+            send(this.initialBeat, url);
+
         this.initialBeat = false;
 
         // periodic heartbeat
         setInterval(async () => {
 
-            send();
+            for (let url of config.self.heartbeat.URLs)
+                send(this.initialBeat, url);
 
         }, config.self.heartbeat.interval * 1000);
     }
