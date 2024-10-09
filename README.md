@@ -20,7 +20,7 @@
 - Simple to set up and use
 - Partial CPE support
 - High customisability
-- Extendable code *(gentypes, commands, ...)*
+- Extendable code *(gentypes, commands, blocks, ...)*
 
 # Prerequisites
 - Node.JS
