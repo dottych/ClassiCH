@@ -15,7 +15,9 @@
         "motdDescription": "%greeting%, %playername%! -noclip",
         "motdDescriptionOP": "%greeting%, %playername%!",
 
-        "checkForUpdate": true
+        "checkForUpdate": true,
+
+        "texturePackURL": "https://github.com/dottych/dottych/raw/refs/heads/main/chtex.zip"
     },
 
     "world": {

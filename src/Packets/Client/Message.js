@@ -8,7 +8,7 @@ const Command = require('../../Command');
 const lists = require('../../Lists');
 const utils = require('../../Utils');
 const config = require('../../Config');
-const commands = require('../../Commands');
+const commandList = require('../../CommandList');
 
 class MessagePacket extends ClientPacket {
     constructor(client, buffer) {
@@ -75,13 +75,13 @@ class MessagePacket extends ClientPacket {
             const command = args.shift().replace('/', '');
 
             try {
-                if (commands[command] != undefined) {
+                if (commandList[command] != undefined) {
                     if (lists.commands[command].op && !player.op) {
                         new ServerMessagePacket([this.client], 0x00, "You're not OP!");
                         return;
                     }
                     
-                    new (commands[command])(this.client, args).execute();
+                    new (commandList[command])(this.client, args).execute();
                 } else
                     // unknown command
                     new Command(this.client, args).execute();

@@ -5,8 +5,12 @@ const Behaviour = require('../../Behaviour');
 const ServerInitPacket = require('../../Server/Init');
 const ServerChunkPacket = require('../../Server/Chunk');
 const ServerFinalPacket = require('../../Server/Final');
+const ServerDefineBlockPacket = require('../../Server/Ext/DefineBlock');
+const ServerSetMapEnvUrlPacket = require('../../Server/Ext/SetMapEnvUrl');
 
 const world = require('../../../World');
+const lists = require('../../../Lists');
+const config = require('../../../Config');
 
 class BehaviourIdentificationWorld extends Behaviour {
     constructor(client) {
@@ -45,9 +49,36 @@ class BehaviourIdentificationWorld extends Behaviour {
             );
         }
 
+        // send all custom blocks
+        for (let customBlock of Object.values(lists.customBlocks))
+            new ServerDefineBlockPacket(
+
+                [this.client],
+                customBlock.id,
+                customBlock.name,
+                customBlock.solidity,
+                customBlock.speed,
+                customBlock.top,
+                customBlock.side,
+                customBlock.bottom,
+                customBlock.transmitLight,
+                customBlock.sound,
+                customBlock.bright,
+                customBlock.height,
+                customBlock.drawMode,
+                customBlock.fogDensity,
+                customBlock.fogR,
+                customBlock.fogG,
+                customBlock.fogB
+
+            );
+
+        // send url for texture pack
+        new ServerSetMapEnvUrlPacket([this.client], config.self.server.texturePackURL);
+
         // tell client the world is final
         new ServerFinalPacket([this.client]);
-
+        
         return true;
     }
 }

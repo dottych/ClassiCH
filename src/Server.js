@@ -1,14 +1,14 @@
 const net = require('net');
-const fs = require('fs');
 const request = require('request');
 
 const config = require('./Config');
 const utils = require('./Utils');
 const lists = require('./Lists');
 const packets = require('./Packets');
-const commands = require('./Commands');
+const commandList = require('./CommandList');
 
-utils.log(`Loaded ${Object.keys(commands).length} command${Object.keys(commands).length === 1 ? "" : "s"}`);
+utils.log(`Loaded ${Object.keys(commandList).length} command${Object.keys(commandList).length === 1 ? "" : "s"}`);
+utils.log(`Loaded ${Object.keys(lists.customBlocks).length} custom block${Object.keys(lists.customBlocks).length === 1 ? "" : "s"}`);
 
 // check if crucial config values are valid
 if (!config.checkCrucialConfig()) {
