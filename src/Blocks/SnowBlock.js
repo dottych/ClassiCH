@@ -1,25 +1,25 @@
 const CustomBlock = require('../CustomBlock');
 
-class RedstoneLampOn extends CustomBlock {
+class SnowBlock extends CustomBlock {
     constructor() {
         // ID, ext
-        super(88, false);
+        super(92, false);
 
-        this.name = "Redstone lamp (on)";
+        this.name = "Snow block";
 
         this.solidity = this.solidityModes.solid;
         this.speed = 128;
 
         // textures
-        this.top = 95;
-        this.side = 95;
-        this.bottom = 95;
+        this.top = 50;
+        this.side = 50;
+        this.bottom = 50;
         
-        this.transmitLight = true;
+        this.transmitLight = false;
 
-        this.sound = this.sounds.glass;
+        this.sound = this.sounds.snow;
 
-        this.bright = true;
+        this.bright = false;
         this.height = 16;
         this.drawMode = this.drawModes.opaque;
 
@@ -30,4 +30,4 @@ class RedstoneLampOn extends CustomBlock {
     }
 }
 
-module.exports = RedstoneLampOn;
+module.exports = SnowBlock;

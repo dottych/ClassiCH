@@ -74,7 +74,10 @@ class BehaviourIdentificationWorld extends Behaviour {
             );
 
         // send url for texture pack
-        new ServerSetMapEnvUrlPacket([this.client], config.self.server.texturePackURL);
+        let url = config.self.server.texturePackURL;
+
+        if (url != "")
+            new ServerSetMapEnvUrlPacket([this.client], url);
 
         // tell client the world is final
         new ServerFinalPacket([this.client]);

@@ -17,7 +17,7 @@ class RedstoneLampOff extends CustomBlock {
         
         this.transmitLight = false;
 
-        this.sound = this.sounds.metal;
+        this.sound = this.sounds.glass;
 
         this.bright = false;
         this.height = 16;

@@ -1,26 +1,26 @@
 const CustomBlock = require('../CustomBlock');
 
-class RedstoneLampOn extends CustomBlock {
+class FarmlandWet extends CustomBlock {
     constructor() {
         // ID, ext
-        super(88, false);
+        super(100, false);
 
-        this.name = "Redstone lamp (on)";
+        this.name = "Farmland (wet)";
 
         this.solidity = this.solidityModes.solid;
         this.speed = 128;
 
         // textures
-        this.top = 95;
-        this.side = 95;
-        this.bottom = 95;
+        this.top = 88;
+        this.side = 2;
+        this.bottom = 2;
         
-        this.transmitLight = true;
+        this.transmitLight = false;
 
-        this.sound = this.sounds.glass;
+        this.sound = this.sounds.gravel;
 
-        this.bright = true;
-        this.height = 16;
+        this.bright = false;
+        this.height = 15;
         this.drawMode = this.drawModes.opaque;
 
         this.fogDensity = 0;
@@ -30,4 +30,4 @@ class RedstoneLampOn extends CustomBlock {
     }
 }
 
-module.exports = RedstoneLampOn;
+module.exports = FarmlandWet;

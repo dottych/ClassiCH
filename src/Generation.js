@@ -9,6 +9,9 @@ class Generation {
         this.y = world.y;
         this.z = world.z;
         this.halfY = world.halfY;
+
+        world.generationType = this.type;
+        world.generationTypeAuthor = this.author;
     }
 
     // overriden by subclasses

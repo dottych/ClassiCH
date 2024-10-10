@@ -28,6 +28,8 @@ class World {
 
         this.halfY = this.y / 2 - 1;
 
+        this.generationType = "Void";
+        this.generationTypeAuthor = "Nizzotch";
         this.generated = false;
 
         if (fs.existsSync(this.file)) {

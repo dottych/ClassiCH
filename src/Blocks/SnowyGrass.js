@@ -17,7 +17,7 @@ class SnowyGrass extends CustomBlock {
         
         this.transmitLight = false;
 
-        this.sound = this.sounds.grass;
+        this.sound = this.sounds.snow;
 
         this.bright = false;
         this.height = 16;
