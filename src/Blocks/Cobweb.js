@@ -17,7 +17,7 @@ class Cobweb extends CustomBlock {
         
         this.transmitLight = true;
 
-        this.sound = this.sounds.stone;
+        this.sound = this.sounds.none;
 
         this.bright = false;
         this.height = 0;
