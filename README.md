@@ -32,8 +32,11 @@
 4. Run the **run** file - *.bat on Windows, .sh on Linux*
 5. Realise it's that simple
 
+To close the server, use CTRL+C on the console or use the /stop command.
+
 > [!NOTE]
 > This server software is still experimental, some features might be broken or missing, there may also be some bugs, so make sure you either use stable releases or keep up with the latest commits.
+> Also note that development versions of ClassiCH will not check for updates, only stable versions will.
 
 > [!IMPORTANT]
 > If you plan to publicly distribute, use or host your own fork of ClassiCH,
