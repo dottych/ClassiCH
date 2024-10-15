@@ -60,7 +60,7 @@ class MessagePacket extends ClientPacket {
             if (player.message.indexOf('&') > 0) return;
 
             // split message into 64 characters and send them to all clients
-            let actualMessage = utils.splitString(`<${player.name}> ${player.message}`);
+            let actualMessage = utils.splitString(`${config.self.messages.prefix.replaceAll("%playername%", player.name)}${player.message}`);
 
             for (let string of actualMessage) {
                 // if message still has characters

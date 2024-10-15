@@ -7,6 +7,7 @@ const ServerChunkPacket = require('../../Server/Chunk');
 const ServerFinalPacket = require('../../Server/Final');
 const ServerDefineBlockPacket = require('../../Server/Ext/DefineBlock');
 const ServerSetMapEnvUrlPacket = require('../../Server/Ext/SetMapEnvUrl');
+const ServerSetMapEnvPropertyPacket = require('../../Server/Ext/SetMapEnvProperty');
 
 const world = require('../../../World');
 const lists = require('../../../Lists');
@@ -51,33 +52,64 @@ class BehaviourIdentificationWorld extends Behaviour {
 
         // send all custom blocks
         for (let customBlock of Object.values(lists.customBlocks))
-            new ServerDefineBlockPacket(
+            if (!customBlock.ext)
+                new ServerDefineBlockPacket(
 
-                [this.client],
-                customBlock.id,
-                customBlock.name,
-                customBlock.solidity,
-                customBlock.speed,
-                customBlock.top,
-                customBlock.side,
-                customBlock.bottom,
-                customBlock.transmitLight,
-                customBlock.sound,
-                customBlock.bright,
-                customBlock.height,
-                customBlock.drawMode,
-                customBlock.fogDensity,
-                customBlock.fogR,
-                customBlock.fogG,
-                customBlock.fogB
+                    [this.client],
+                    customBlock.id,
+                    customBlock.name,
+                    customBlock.solidity,
+                    customBlock.speed,
+                    customBlock.top,
+                    customBlock.side,
+                    customBlock.bottom,
+                    customBlock.transmitLight,
+                    customBlock.sound,
+                    customBlock.bright,
+                    customBlock.height,
+                    customBlock.drawMode,
+                    customBlock.fogDensity,
+                    customBlock.fogR,
+                    customBlock.fogG,
+                    customBlock.fogB
 
-            );
+                );
+            else
+                continue; // todo
+        
+        // send env (make this shorter?)
+        if (config.self.world.env.texturePackURL != "")
+            new ServerSetMapEnvUrlPacket([this.client], config.self.world.env.texturePackURL);
 
-        // send url for texture pack
-        let url = config.self.server.texturePackURL;
+        if (config.self.world.env.mapSideID >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapSideID, config.self.world.env.mapSideID);
 
-        if (url != "")
-            new ServerSetMapEnvUrlPacket([this.client], url);
+        if (config.self.world.env.mapEdgeID >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeID, config.self.world.env.mapEdgeID);
+
+        if (config.self.world.env.mapEdgeHeight >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeHeight, config.self.world.env.mapEdgeHeight);
+
+        if (config.self.world.env.mapCloudsHeight >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapCloudsHeight, config.self.world.env.mapCloudsHeight);
+
+        if (config.self.world.env.fogDistance >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.fogDistance, config.self.world.env.fogDistance);
+
+        if (config.self.world.env.cloudsSpeed >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.cloudsSpeed, config.self.world.env.cloudsSpeed);
+
+        if (config.self.world.env.weatherSpeed >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherSpeed, config.self.world.env.weatherSpeed);
+
+        if (config.self.world.env.weatherFade >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherFade, config.self.world.env.weatherFade);
+
+        if (config.self.world.env.exponentialFog >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.exponentialFog, config.self.world.env.exponentialFog);
+
+        if (config.self.world.env.sideEdgeOffset >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.sideEdgeOffset, config.self.world.env.sideEdgeOffset);
 
         // tell client the world is final
         new ServerFinalPacket([this.client]);

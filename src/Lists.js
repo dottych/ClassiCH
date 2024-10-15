@@ -116,11 +116,11 @@ class Lists {
         ];
 
         this.supportedExtensions = {
-            "LongerMessages": 1,
-            "MessageTypes": 1,
-            "CustomBlocks": 1,
             "BlockDefinitions": 1,
-            "EnvMapAspect": 1
+            "CustomBlocks": 1,
+            "EnvMapAspect": 1,
+            "LongerMessages": 1,
+            "MessageTypes": 1
         }
 
         this.mapPropertyTypes = {

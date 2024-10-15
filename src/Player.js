@@ -48,10 +48,10 @@ class Player {
         // custom variables for commands
         this.commandVars = {
 
-            explosions: false,
-            slabs: true,
-            saplings: false,
-            sponges: true
+            explosions: config.self.world.features.explosions.default,
+            slabs: config.self.world.features.slabs.default,
+            flowers: config.self.world.features.flowers.default,
+            sponges: config.self.world.features.sponges.default
             
         };
 
