@@ -111,8 +111,8 @@
         "env": {
             "texturePackURL": "https://github.com/dottych/dottych/raw/refs/heads/main/chtex.zip",
 
-            "mapSideID": 0,
-            "mapEdgeID": 0,
+            "mapSideID": -1,
+            "mapEdgeID": -1,
             "mapEdgeHeight": -1,
             "mapCloudsHeight": -1,
             "fogDistance": -1,
