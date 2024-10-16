@@ -43,12 +43,84 @@
         "spamCount": 80,
         "spamInterval": 5,
 
+        "tick": {
+            "grass": true,
+            "liquid": true  
+        },
+
         "features": {
-            "blastRadius": 2,
-            "explosions": false,
-            "slabs": true,
-            "saplings": true,
-            "sponges": true
+            "explosions": {
+                "default": false,
+                "forced": false,
+
+                "blastRadius": 2,
+
+                "IDs": [
+                    46
+                ],
+
+                "avoidIDs": [
+                    0,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11
+                ]
+            },
+
+            "slabs": {
+                "default": true,
+                "forced": false,
+
+                "IDs": [
+                    44,
+                    50,
+                    91
+                ],
+                "replacementIDs": [
+                    43,
+                    4,
+                    52
+                ]
+            },
+
+            "flowers": {
+                "default": true,
+                "forced": true,
+
+                "IDs": [
+                    6,
+                    37,
+                    38,
+                    95
+                ]
+            },
+
+            "sponges": {
+                "default": true,
+                "forced": false,
+
+                "IDs": [
+                    8,
+                    9
+                ]
+            }
+        },
+
+        "env": {
+            "texturePackURL": "https://github.com/dottych/dottych/raw/refs/heads/main/chtex.zip",
+
+            "mapSideID": 0,
+            "mapEdgeID": 0,
+            "mapEdgeHeight": -1,
+            "mapCloudsHeight": -1,
+            "fogDistance": -1,
+            "cloudsSpeed": -1,
+            "weatherSpeed": -1,
+            "weatherFade": -1,
+            "exponentialFog": -1,
+            "sideEdgeOffset": -1
         }
     },
 
