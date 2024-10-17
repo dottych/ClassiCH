@@ -35,7 +35,7 @@
             "z": -1
         },
 
-        "saveWorld": true,
+        "autoSave": true,
         "saveInterval": 45,
 
         "generationType": "Land",
@@ -125,8 +125,17 @@
     },
 
     "messages": {
+        "prefix": "<%playername%> ",
+
         "spamCount": 5,
-        "spamInterval": 5
+        "spamInterval": 5,
+
+        "announcer": {
+            "enabled": true,
+
+            "prefix": "* ",
+            "interval": 10
+        }
     },
 
     "commands": {

@@ -4,25 +4,25 @@ const ServerMessagePacket = require('../Packets/Server/Message');
 
 const world = require('../World');
 
-class CommandBackup extends Command {
+class CommandSave extends Command {
     constructor(client, args) {
         super(client, args);
 
-        this.name = "backup";
-        this.description = "Saves a backup of the current world.";
+        this.name = "save";
+        this.description = "Saves the current world.";
 
         this.op = true;
         this.hidden = false;
     }
 
     execute() {
-        new ServerMessagePacket([this.client], 0x00, "&eSaving backup...");
+        new ServerMessagePacket([this.client], 0x00, "&eSaving world...");
 
-        if (world.backup())
-            new ServerMessagePacket([this.client], 0x00, "&eBackup saved.");
+        if (world.save())
+            new ServerMessagePacket([this.client], 0x00, "&eWorld saved.");
         else
             new ServerMessagePacket([this.client], 0x00, "&eSomething went wrong.");
     }
 }
 
-module.exports = CommandBackup;
+module.exports = CommandSave;

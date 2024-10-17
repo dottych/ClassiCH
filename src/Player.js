@@ -73,10 +73,6 @@ class Player {
         
         utils.log(`${this.name} left the game`);
     }
-
-    hasExtension(extension, version) {
-        return this.extensions[extension] != undefined && this.extensions[extension] === version;
-    }
 }
 
 module.exports = Player;

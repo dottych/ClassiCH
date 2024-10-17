@@ -6,6 +6,7 @@ const utils = require('./Utils');
 const lists = require('./Lists');
 const packets = require('./Packets');
 const commandList = require('./CommandList');
+const announcer = require('./Announcer');
 
 utils.log(`Loaded ${Object.keys(commandList).length} command${Object.keys(commandList).length === 1 ? "" : "s"}`);
 utils.log(`Loaded ${Object.keys(lists.customBlocks).length} custom block${Object.keys(lists.customBlocks).length === 1 ? "" : "s"}`);
@@ -64,6 +65,8 @@ class Server {
             utils.log(`TCP: listening on ${config.self.server.port}`);
         });
 
+        if (config.self.messages.announcer.enabled) announcer.start();
+
         // initiate heartbeat interval if enabled
         if (config.self.heartbeat.enabled) this.heartbeat();
 
@@ -71,7 +74,7 @@ class Server {
     }
 
     onData(client, data) {
-        client.packets.push(...(packets.splitPackets(data)));
+        client.packets.push(...packets.splitPackets(data));
         if (!client.busy) packets.handle(client);
     }
 
@@ -104,9 +107,10 @@ class Server {
             console.log(error);
         }
 
-        utils.log("Server is shutting down");
+        utils.log("Server is shutting down...");
         
-        world.save();
+        if (config.self.world.autoSave) world.save();
+        if (config.self.messages.announcer.enabled) announcer.stop();
 
         process.exit();
     }

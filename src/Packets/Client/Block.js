@@ -32,7 +32,7 @@ class BlockPacket extends ClientPacket {
 
     handle() {
         // if mode is breaking, set block to air
-        //if (this.mode === 0x00) this.type = 0x00;
+        if (this.mode === 0x00) this.type = 0x00;
         
         // if block type is out of range
         if (this.type < 0 || this.type > lists.blockLimit) {

@@ -9,7 +9,7 @@ class GenerationLand extends Generation {
 
     generate() {
         const noise = perlin.generatePerlinNoise(this.z, this.x);
-        const multiNoise = perlin.generatePerlinNoise(this.z, this.x);
+        const multiNoise = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 5});
         const miscNoise = perlin.generatePerlinNoise(this.z, this.x);
         const smoothNoise = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 6});
         const hillNoise = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 7});
@@ -18,7 +18,7 @@ class GenerationLand extends Generation {
         const calculateHeight = (x, z) => {
             return Math.round(noise[z + (x * this.z)] * 4) +
                 this.halfY - 18 +
-                (multiNoise[z + (x * this.z)] * 2 > 1.25 ? 0 : 1) *
+                (multiNoise[z + (x * this.z)] * 2 > 1 ? 0 : 1) *
                 Math.round(smoothNoise[z + (x * this.z)] * 16) +
                 Math.round(miscNoise[z + (x * this.z)] * 3) +
                 Math.round(hillNoise[z + (x * this.z)] * 32);

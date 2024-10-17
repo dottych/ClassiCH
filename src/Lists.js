@@ -32,6 +32,14 @@ class Lists {
             fs.writeFileSync('./greetings.json', JSON.stringify(this.greetings));
         }
 
+        // announcements
+        try {
+            this.announcements = JSON.parse(fs.readFileSync('./announcements.json').toString());
+        } catch(error) {
+            this.announcements = ["This server hasn't set up its announcer yet!"];
+            fs.writeFileSync('./announcements.json', JSON.stringify(this.announcements));
+        }
+
         // allowed name characters
         this.characters = [..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"];
 

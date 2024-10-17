@@ -48,7 +48,7 @@ class World {
         }
         
         // save world on interval
-        setInterval(() => {
+        if (config.self.world.autoSave) setInterval(() => {
 
             this.save();
 
@@ -180,8 +180,6 @@ class World {
     }
 
     save() {
-        if (!config.self.world.saveWorld) return;
-
         // if no changes have been done
         if (this.buffer.equals(this.oldBuffer)) return;
 
