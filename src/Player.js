@@ -19,6 +19,8 @@ class Player {
 
         this.message = "";
 
+        this.model = "humanoid";
+
         this.msgCount = 0;
         this.blockCount = 0;
         this.longMsgCount = 0;
@@ -48,10 +50,10 @@ class Player {
         // custom variables for commands
         this.commandVars = {
 
-            explosions: false,
-            slabs: true,
-            saplings: false,
-            sponges: true
+            explosions: config.self.world.features.explosions.default,
+            slabs: config.self.world.features.slabs.default,
+            flowers: config.self.world.features.flowers.default,
+            sponges: config.self.world.features.sponges.default
             
         };
 
@@ -72,10 +74,6 @@ class Player {
         delete lists.players[this.id];
         
         utils.log(`${this.name} left the game`);
-    }
-
-    hasExtension(extension, version) {
-        return this.extensions[extension] != undefined && this.extensions[extension] === version;
     }
 }
 

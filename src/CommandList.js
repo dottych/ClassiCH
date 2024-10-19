@@ -3,7 +3,7 @@ const fs = require('fs');
 const utils = require('./Utils');
 const lists = require('./Lists');
 
-let commands = {};
+let commandList = {};
 
 for (let command of fs.readdirSync('../src/Commands/')) {
     // check if it's a module
@@ -14,9 +14,9 @@ for (let command of fs.readdirSync('../src/Commands/')) {
 
     // register command and add its information to list
     try {
-        commands[command.toLowerCase()] = require(`./Commands/${command}`);
+        commandList[command.toLowerCase()] = require(`./Commands/${command}`);
 
-        const tempCommand = new (commands[command.toLowerCase()])(null, []);
+        const tempCommand = new (commandList[command.toLowerCase()])(null, []);
 
         lists.commands[command.toLowerCase()] = {
             
@@ -27,10 +27,10 @@ for (let command of fs.readdirSync('../src/Commands/')) {
         };
     } catch(error) {
         console.log(error);
-        delete commands[command.toLowerCase()];
-        delete lists.commands[command.toLowerCase()]
+        delete commandList[command.toLowerCase()];
+        delete lists.commands[command.toLowerCase()];
         utils.log(`"${command}" is NOT a valid command! Ignoring file`);
     }
 }
 
-module.exports = commands;
+module.exports = commandList;

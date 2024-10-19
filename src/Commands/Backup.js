@@ -4,7 +4,7 @@ const ServerMessagePacket = require('../Packets/Server/Message');
 
 const world = require('../World');
 
-class CommandAbout extends Command {
+class CommandBackup extends Command {
     constructor(client, args) {
         super(client, args);
 
@@ -25,4 +25,4 @@ class CommandAbout extends Command {
     }
 }
 
-module.exports = CommandAbout;
+module.exports = CommandBackup;

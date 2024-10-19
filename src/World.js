@@ -28,6 +28,8 @@ class World {
 
         this.halfY = this.y / 2 - 1;
 
+        this.generationType = "Void";
+        this.generationTypeAuthor = "Nizzotch";
         this.generated = false;
 
         if (fs.existsSync(this.file)) {
@@ -46,7 +48,7 @@ class World {
         }
         
         // save world on interval
-        setInterval(() => {
+        if (config.self.world.autoSave) setInterval(() => {
 
             this.save();
 
@@ -147,9 +149,9 @@ class World {
     }
 
     explode(x, y, z) {
-        if (!config.self.world.features.explosions) return;
+        //if (!config.self.world.features.explosions) return;
 
-        let radius = config.self.world.features.blastRadius;
+        let radius = config.self.world.features.explosions.blastRadius;
 
         for (let bx = 0-radius; bx <= radius; bx++)
             for (let by = 0-radius; by <= radius; by++)
@@ -158,14 +160,19 @@ class World {
                     if (y+by < 0 || y+by >= this.y) continue;
                     if (z+bz < 0 || z+bz >= this.z) continue;
 
-                    let block = this.getBlock(x+bx, y+by, z+bz);
+                    const block = this.getBlock(x+bx, y+by, z+bz);
+                    const explosiveIndex = config.self.world.features.explosions.IDs.indexOf(block);
+                    const avoidIndex = config.self.world.features.explosions.avoidIDs.indexOf(block);
 
-                    if (block !== 0) {
-                        if (block === 46) {
+                    if (avoidIndex < 0) {
+                        if (explosiveIndex >= 0) {
                             this.setBlock(0, false, x+bx, y+by, z+bz);
                             this.explode(x+bx, y+by, z+bz);
                         }
 
+                        // not sure why it's here twice anymore...
+                        // but you know how the saying goes
+                        // never remove stuff you think is useless...
                         this.setBlock(0, true, x+bx, y+by, z+bz);
                     }
                 }
@@ -173,8 +180,6 @@ class World {
     }
 
     save() {
-        if (!config.self.world.saveWorld) return;
-
         // if no changes have been done
         if (this.buffer.equals(this.oldBuffer)) return;
 

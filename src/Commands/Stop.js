@@ -4,7 +4,7 @@ const ServerDisconnectPacket = require('../Packets/Server/Disconnect');
 
 const utils = require('../Utils');
 
-class CommandUptime extends Command {
+class CommandStop extends Command {
     constructor(client, args) {
         super(client, args);
 
@@ -24,4 +24,4 @@ class CommandUptime extends Command {
     }
 }
 
-module.exports = CommandUptime;
+module.exports = CommandStop;

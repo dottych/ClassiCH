@@ -1,14 +1,15 @@
 const net = require('net');
-const fs = require('fs');
 const request = require('request');
 
 const config = require('./Config');
 const utils = require('./Utils');
 const lists = require('./Lists');
 const packets = require('./Packets');
-const commands = require('./Commands');
+const commandList = require('./CommandList');
+const announcer = require('./Announcer');
 
-utils.log(`Loaded ${Object.keys(commands).length} command${Object.keys(commands).length === 1 ? "" : "s"}`);
+utils.log(`Loaded ${Object.keys(commandList).length} command${Object.keys(commandList).length === 1 ? "" : "s"}`);
+utils.log(`Loaded ${Object.keys(lists.customBlocks).length} custom block${Object.keys(lists.customBlocks).length === 1 ? "" : "s"}`);
 
 // check if crucial config values are valid
 if (!config.checkCrucialConfig()) {
@@ -64,6 +65,8 @@ class Server {
             utils.log(`TCP: listening on ${config.self.server.port}`);
         });
 
+        if (config.self.messages.announcer.enabled) announcer.start();
+
         // initiate heartbeat interval if enabled
         if (config.self.heartbeat.enabled) this.heartbeat();
 
@@ -71,7 +74,7 @@ class Server {
     }
 
     onData(client, data) {
-        client.packets.push(...(packets.splitPackets(data)));
+        client.packets.push(...packets.splitPackets(data));
         if (!client.busy) packets.handle(client);
     }
 
@@ -104,17 +107,18 @@ class Server {
             console.log(error);
         }
 
-        utils.log("Server is shutting down");
+        utils.log("Server is shutting down...");
         
-        world.save();
+        if (config.self.world.autoSave) world.save();
+        if (config.self.messages.announcer.enabled) announcer.stop();
 
         process.exit();
     }
 
     heartbeat() {
-        function send(initial) {
+        function send(initial, url) {
             request(
-                config.self.heartbeat.url +
+                url +
                 '?port=' + config.self.server.port +
                 '&max=' + config.self.server.maxPlayers +
                 //'&name=' + utils.populate(config.self.server.name) +
@@ -143,13 +147,16 @@ class Server {
         }
 
         // initial heartbeat
-        send(this.initialBeat);
+        for (let url of config.self.heartbeat.URLs)
+            send(this.initialBeat, url);
+
         this.initialBeat = false;
 
         // periodic heartbeat
         setInterval(async () => {
 
-            send();
+            for (let url of config.self.heartbeat.URLs)
+                send(this.initialBeat, url);
 
         }, config.self.heartbeat.interval * 1000);
     }

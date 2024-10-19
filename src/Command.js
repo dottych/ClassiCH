@@ -8,7 +8,7 @@ class Command {
 
     // default response
     execute() {
-        new ServerMessagePacket([this.client], 0xFF, "Command does not exist!");
+        new ServerMessagePacket([this.client], 0x00, "&eCommand does not exist!");
     }
 }
 

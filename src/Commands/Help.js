@@ -17,7 +17,6 @@ class CommandHelp extends Command {
     }
 
     execute() {
-        console.log(this.args);
         if (this.args.length > 0) {
             new ServerMessagePacket(
                 

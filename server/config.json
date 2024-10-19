@@ -15,7 +15,9 @@
         "motdDescription": "%greeting%, %playername%! -noclip",
         "motdDescriptionOP": "%greeting%, %playername%!",
 
-        "checkForUpdate": true
+        "checkForUpdate": true,
+
+        "texturePackURL": "https://github.com/dottych/dottych/raw/refs/heads/main/chtex.zip"
     },
 
     "world": {
@@ -33,7 +35,7 @@
             "z": -1
         },
 
-        "saveWorld": true,
+        "autoSave": true,
         "saveInterval": 45,
 
         "generationType": "Land",
@@ -41,18 +43,112 @@
         "spamCount": 80,
         "spamInterval": 5,
 
+        "tick": {
+            "grass": true,
+            "liquid": true  
+        },
+
         "features": {
-            "blastRadius": 2,
-            "explosions": false,
-            "slabs": true,
-            "saplings": true,
-            "sponges": true
+            "explosions": {
+                "default": false,
+                "forced": false,
+
+                "blastRadius": 2,
+
+                "IDs": [
+                    46
+                ],
+
+                "avoidIDs": [
+                    0,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11
+                ]
+            },
+
+            "slabs": {
+                "default": true,
+                "forced": false,
+
+                "IDs": [
+                    44,
+                    50,
+                    91
+                ],
+                "replacementIDs": [
+                    43,
+                    4,
+                    52
+                ]
+            },
+
+            "flowers": {
+                "default": true,
+                "forced": true,
+
+                "IDs": [
+                    6,
+                    37,
+                    38,
+                    95
+                ]
+            },
+
+            "sponges": {
+                "default": true,
+                "forced": false,
+
+                "IDs": [
+                    8,
+                    9
+                ]
+            }
+        },
+
+        "env": {
+            "texturePackURL": "https://github.com/dottych/dottych/raw/refs/heads/main/chtex.zip",
+
+            "colors": {
+                "sky": { "r": -1, "g": -1, "b": -1 },
+                "clouds": { "r": -1, "g": -1, "b": -1 },
+                "fog": { "r": -1, "g": -1, "b": -1 },
+                "shadows": { "r": -1, "g": -1, "b": -1 },
+                "sunlight": { "r": -1, "g": -1, "b": -1 },
+                "skybox": { "r": -1, "g": -1, "b": -1 },
+                "lava": { "r": -1, "g": -1, "b": -1 },
+                "lamp": { "r": -1, "g": -1, "b": -1 }
+            },
+
+            "appearance": {
+                "mapSideID": -1,
+                "mapEdgeID": -1,
+                "mapEdgeHeight": -1,
+                "mapCloudsHeight": -1,
+                "fogDistance": -1,
+                "cloudsSpeed": -1,
+                "weatherSpeed": -1,
+                "weatherFade": -1,
+                "exponentialFog": -1,
+                "sideEdgeOffset": -1
+            }
         }
     },
 
     "messages": {
+        "prefix": "<%playername%> ",
+
         "spamCount": 5,
-        "spamInterval": 5
+        "spamInterval": 5,
+
+        "announcer": {
+            "enabled": true,
+
+            "prefix": "* ",
+            "interval": 10
+        }
     },
 
     "commands": {
@@ -63,7 +159,9 @@
 
     "heartbeat": {
         "enabled": false,
-        "url": "https://www.classicube.net/server/heartbeat",
+        "URLs": [
+            "https://www.classicube.net/server/heartbeat"
+        ],
         "interval": 45
     },
 

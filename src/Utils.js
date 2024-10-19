@@ -109,16 +109,31 @@ class Utils {
     }
 
     /**
-     * Converts an integer into a UInt32 array. However, numbers higher than the limit's half break JavaScript, so uh...
+     * Compares two UInt16 arrays.
+     * @param {object} uInt16_1 UInt16 array.
+     * @param {object} uInt16_2 UInt16 array.
+     * @returns True if they are the same, false if not.
+     */
+    compareUInt16(uInt16_1, uInt16_2) {
+        if (uInt16_1[0] !== uInt16_2[0]) return false;
+        if (uInt16_1[1] !== uInt16_2[1]) return false;
+
+        return true;
+    }
+
+    /**
+     * Converts an integer into a UInt32 array.
      * @param {number} int Any integer (under 4294967296).
      * @returns A Uint32 array.
      */
     uInt32(int) {
+        int = BigInt(int);
+
         let bytes = [];
-        bytes.push((int >> 24) % 256);
-        bytes.push((int >> 16) % 256);
-        bytes.push((int >> 8) % 256);
-        bytes.push(int % 256);
+        bytes.push(Number((int >> 24n) % 256n));
+        bytes.push(Number((int >> 16n) % 256n));
+        bytes.push(Number((int >> 8n) % 256n));
+        bytes.push(Number(int % 256n));
         return bytes;
     }
 
@@ -139,6 +154,7 @@ class Utils {
         return int;
     }
 
+    // return BigInt, or just a normal int? think about this
     /**
      * Converts a UInt32 into a normal integer.
      * @param {object} int A UInt32 array.
@@ -146,19 +162,6 @@ class Utils {
      */
     parseUInt32(int) {
         return int[3] + int[2] * 256 + int[1] * 256**2 + int[0] * 256**3;
-    }
-
-    /**
-     * Compares two UInt16 arrays.
-     * @param {object} uInt16_1 UInt16 array.
-     * @param {object} uInt16_2 UInt16 array.
-     * @returns True if they are the same, false if not.
-     */
-    compareUInt16(uInt16_1, uInt16_2) {
-        if (uInt16_1[0] !== uInt16_2[0]) return false;
-        if (uInt16_1[1] !== uInt16_2[1]) return false;
-
-        return true;
     }
 
     /**

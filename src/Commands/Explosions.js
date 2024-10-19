@@ -3,6 +3,7 @@ const Command = require('../Command');
 const ServerMessagePacket = require('../Packets/Server/Message');
 
 const lists = require('../Lists');
+const config = require('../Config');
 
 class CommandExplosions extends Command {
     constructor(client, args) {
@@ -17,9 +18,25 @@ class CommandExplosions extends Command {
 
     execute() {
         const me = lists.players[this.client.id];
-        me.commandVars.explosions = !me.commandVars.explosions;
 
-        new ServerMessagePacket([this.client], 0x00, "&eToggled explosions.");
+        if (config.self.world.features.explosions.forced) {
+            new ServerMessagePacket(
+                
+                [this.client],
+                0x00,
+                `&eExplosions are forced ${config.self.world.features.explosions.default ? "on" : "off"}.`
+                
+            );
+        } else {
+            me.commandVars.explosions = !me.commandVars.explosions;
+            new ServerMessagePacket(
+
+                [this.client],
+                0x00,
+                `&eTurned explosions ${me.commandVars.explosions ? "on" : "off"}.`
+                
+            );
+        }
     }
 }
 
