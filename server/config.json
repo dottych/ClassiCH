@@ -111,16 +111,29 @@
         "env": {
             "texturePackURL": "https://github.com/dottych/dottych/raw/refs/heads/main/chtex.zip",
 
-            "mapSideID": -1,
-            "mapEdgeID": -1,
-            "mapEdgeHeight": -1,
-            "mapCloudsHeight": -1,
-            "fogDistance": -1,
-            "cloudsSpeed": -1,
-            "weatherSpeed": -1,
-            "weatherFade": -1,
-            "exponentialFog": -1,
-            "sideEdgeOffset": -1
+            "colors": {
+                "sky": { "r": -1, "g": -1, "b": -1 },
+                "clouds": { "r": -1, "g": -1, "b": -1 },
+                "fog": { "r": -1, "g": -1, "b": -1 },
+                "shadows": { "r": -1, "g": -1, "b": -1 },
+                "sunlight": { "r": -1, "g": -1, "b": -1 },
+                "skybox": { "r": -1, "g": -1, "b": -1 },
+                "lava": { "r": -1, "g": -1, "b": -1 },
+                "lamp": { "r": -1, "g": -1, "b": -1 }
+            },
+
+            "appearance": {
+                "mapSideID": -1,
+                "mapEdgeID": -1,
+                "mapEdgeHeight": -1,
+                "mapCloudsHeight": -1,
+                "fogDistance": -1,
+                "cloudsSpeed": -1,
+                "weatherSpeed": -1,
+                "weatherFade": -1,
+                "exponentialFog": -1,
+                "sideEdgeOffset": -1
+            }
         }
     },
 

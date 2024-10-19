@@ -19,6 +19,8 @@ class Player {
 
         this.message = "";
 
+        this.model = "humanoid";
+
         this.msgCount = 0;
         this.blockCount = 0;
         this.longMsgCount = 0;

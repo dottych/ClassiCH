@@ -23,7 +23,6 @@ class CommandList extends Command {
             players.push(
         
                 player.name +
-                (player.cpe ? " (CPE)" : "") +
                 (player.op ? " (OP)" : "") +
                 (player.lastActivity + 120000 < performance.now() ? " (AFK)" : "") +
                 (player.name === this.client.name ? " (YOU)" : "")

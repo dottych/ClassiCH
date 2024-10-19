@@ -81,35 +81,35 @@ class BehaviourIdentificationWorld extends Behaviour {
         if (config.self.world.env.texturePackURL != "")
             new ServerSetMapEnvUrlPacket([this.client], config.self.world.env.texturePackURL);
 
-        if (config.self.world.env.mapSideID >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapSideID, config.self.world.env.mapSideID);
+        if (config.self.world.env.appearance.mapSideID >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapSideID, config.self.world.env.appearance.mapSideID);
 
-        if (config.self.world.env.mapEdgeID >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeID, config.self.world.env.mapEdgeID);
+        if (config.self.world.env.appearance.mapEdgeID >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeID, config.self.world.env.appearance.mapEdgeID);
 
-        if (config.self.world.env.mapEdgeHeight >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeHeight, config.self.world.env.mapEdgeHeight);
+        if (config.self.world.env.appearance.mapEdgeHeight >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeHeight, config.self.world.env.appearance.mapEdgeHeight);
 
-        if (config.self.world.env.mapCloudsHeight >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapCloudsHeight, config.self.world.env.mapCloudsHeight);
+        if (config.self.world.env.appearance.mapCloudsHeight >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapCloudsHeight, config.self.world.env.appearance.mapCloudsHeight);
 
-        if (config.self.world.env.fogDistance >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.fogDistance, config.self.world.env.fogDistance);
+        if (config.self.world.env.appearance.fogDistance >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.fogDistance, config.self.world.env.appearance.fogDistance);
 
-        if (config.self.world.env.cloudsSpeed >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.cloudsSpeed, config.self.world.env.cloudsSpeed);
+        if (config.self.world.env.appearance.cloudsSpeed >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.cloudsSpeed, config.self.world.env.appearance.cloudsSpeed);
 
-        if (config.self.world.env.weatherSpeed >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherSpeed, config.self.world.env.weatherSpeed);
+        if (config.self.world.env.appearance.weatherSpeed >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherSpeed, config.self.world.env.appearance.weatherSpeed);
 
-        if (config.self.world.env.weatherFade >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherFade, config.self.world.env.weatherFade);
+        if (config.self.world.env.appearance.weatherFade >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherFade, config.self.world.env.appearance.weatherFade);
 
-        if (config.self.world.env.exponentialFog >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.exponentialFog, config.self.world.env.exponentialFog);
+        if (config.self.world.env.appearance.exponentialFog >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.exponentialFog, config.self.world.env.appearance.exponentialFog);
 
-        if (config.self.world.env.sideEdgeOffset >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.sideEdgeOffset, config.self.world.env.sideEdgeOffset);
+        if (config.self.world.env.appearance.sideEdgeOffset >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.sideEdgeOffset, config.self.world.env.appearance.sideEdgeOffset);
 
         // tell client the world is final
         new ServerFinalPacket([this.client]);

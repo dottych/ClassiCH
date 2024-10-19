@@ -94,6 +94,7 @@ class Lists {
                 "info": 0x10,
                 "entry": 0x11,
                 "customBlockSupportLevel": 0x13,
+                "changeModel": 0x1D,
                 "defineBlock": 0x23,
                 "setMapEnvUrl": 0x28,
                 "setMapEnvProperty": 0x29
@@ -125,10 +126,22 @@ class Lists {
 
         this.supportedExtensions = {
             "BlockDefinitions": 1,
+            "ChangeModel": 1,
             "CustomBlocks": 1,
             "EnvMapAspect": 1,
             "LongerMessages": 1,
             "MessageTypes": 1
+        }
+
+        this.mapColorTypes = {
+            sky: 0,
+            clouds: 1,
+            fog: 2,
+            shadows: 3,
+            sunlight: 4,
+            skybox: 5,
+            lava: 6,
+            lamp: 7
         }
 
         this.mapPropertyTypes = {
