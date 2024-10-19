@@ -20,6 +20,7 @@ class ExtInfoPacket extends ClientPacket {
     }
 
     handle() {
+        this.client.appName = this.appName.trim();
         this.client.extensionCount = this.extensionCount;
     }
 }

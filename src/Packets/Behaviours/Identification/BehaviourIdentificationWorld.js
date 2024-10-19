@@ -5,8 +5,13 @@ const Behaviour = require('../../Behaviour');
 const ServerInitPacket = require('../../Server/Init');
 const ServerChunkPacket = require('../../Server/Chunk');
 const ServerFinalPacket = require('../../Server/Final');
+const ServerDefineBlockPacket = require('../../Server/Ext/DefineBlock');
+const ServerSetMapEnvUrlPacket = require('../../Server/Ext/SetMapEnvUrl');
+const ServerSetMapEnvPropertyPacket = require('../../Server/Ext/SetMapEnvProperty');
 
 const world = require('../../../World');
+const lists = require('../../../Lists');
+const config = require('../../../Config');
 
 class BehaviourIdentificationWorld extends Behaviour {
     constructor(client) {
@@ -45,9 +50,70 @@ class BehaviourIdentificationWorld extends Behaviour {
             );
         }
 
+        // send all custom blocks
+        for (let customBlock of Object.values(lists.customBlocks))
+            if (!customBlock.ext)
+                new ServerDefineBlockPacket(
+
+                    [this.client],
+                    customBlock.id,
+                    customBlock.name,
+                    customBlock.solidity,
+                    customBlock.speed,
+                    customBlock.top,
+                    customBlock.side,
+                    customBlock.bottom,
+                    customBlock.transmitLight,
+                    customBlock.sound,
+                    customBlock.bright,
+                    customBlock.height,
+                    customBlock.drawMode,
+                    customBlock.fogDensity,
+                    customBlock.fogR,
+                    customBlock.fogG,
+                    customBlock.fogB
+
+                );
+            else
+                continue; // todo
+        
+        // send env (make this shorter?)
+        if (config.self.world.env.texturePackURL != "")
+            new ServerSetMapEnvUrlPacket([this.client], config.self.world.env.texturePackURL);
+
+        if (config.self.world.env.appearance.mapSideID >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapSideID, config.self.world.env.appearance.mapSideID);
+
+        if (config.self.world.env.appearance.mapEdgeID >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeID, config.self.world.env.appearance.mapEdgeID);
+
+        if (config.self.world.env.appearance.mapEdgeHeight >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeHeight, config.self.world.env.appearance.mapEdgeHeight);
+
+        if (config.self.world.env.appearance.mapCloudsHeight >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapCloudsHeight, config.self.world.env.appearance.mapCloudsHeight);
+
+        if (config.self.world.env.appearance.fogDistance >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.fogDistance, config.self.world.env.appearance.fogDistance);
+
+        if (config.self.world.env.appearance.cloudsSpeed >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.cloudsSpeed, config.self.world.env.appearance.cloudsSpeed);
+
+        if (config.self.world.env.appearance.weatherSpeed >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherSpeed, config.self.world.env.appearance.weatherSpeed);
+
+        if (config.self.world.env.appearance.weatherFade >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherFade, config.self.world.env.appearance.weatherFade);
+
+        if (config.self.world.env.appearance.exponentialFog >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.exponentialFog, config.self.world.env.appearance.exponentialFog);
+
+        if (config.self.world.env.appearance.sideEdgeOffset >= 0)
+            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.sideEdgeOffset, config.self.world.env.appearance.sideEdgeOffset);
+
         // tell client the world is final
         new ServerFinalPacket([this.client]);
-
+        
         return true;
     }
 }

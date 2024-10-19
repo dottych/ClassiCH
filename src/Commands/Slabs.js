@@ -3,6 +3,7 @@ const Command = require('../Command');
 const ServerMessagePacket = require('../Packets/Server/Message');
 
 const lists = require('../Lists');
+const config = require('../Config');
 
 class CommandSlabs extends Command {
     constructor(client, args) {
@@ -17,9 +18,25 @@ class CommandSlabs extends Command {
 
     execute() {
         const me = lists.players[this.client.id];
-        me.commandVars.slabs = !me.commandVars.slabs;
+        
+        if (config.self.world.features.slabs.forced) {
+            new ServerMessagePacket(
+                
+                [this.client],
+                0x00,
+                `&eSlabs are forced ${config.self.world.features.slabs.default ? "on" : "off"}.`
+                
+            );
+        } else {
+            me.commandVars.slabs = !me.commandVars.slabs;
+            new ServerMessagePacket(
 
-        new ServerMessagePacket([this.client], 0x00, "&eToggled slabs.");
+                [this.client],
+                0x00,
+                `&eTurned slabs ${me.commandVars.slabs ? "on" : "off"}.`
+                
+            );
+        }
     }
 }
 

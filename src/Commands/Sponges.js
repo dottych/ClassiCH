@@ -3,6 +3,7 @@ const Command = require('../Command');
 const ServerMessagePacket = require('../Packets/Server/Message');
 
 const lists = require('../Lists');
+const config = require('../Config');
 
 class CommandSponges extends Command {
     constructor(client, args) {
@@ -17,9 +18,25 @@ class CommandSponges extends Command {
 
     execute() {
         const me = lists.players[this.client.id];
-        me.commandVars.sponges = !me.commandVars.sponges;
+        
+        if (config.self.world.features.sponges.forced) {
+            new ServerMessagePacket(
+                
+                [this.client],
+                0x00,
+                `&eSponges are forced ${config.self.world.features.sponges.default ? "on" : "off"}.`
+                
+            );
+        } else {
+            me.commandVars.sponges = !me.commandVars.sponges;
+            new ServerMessagePacket(
 
-        new ServerMessagePacket([this.client], 0x00, "&eToggled sponges.");
+                [this.client],
+                0x00,
+                `&eTurned sponges ${me.commandVars.sponges ? "on" : "off"}.`
+                
+            );
+        }
     }
 }
 

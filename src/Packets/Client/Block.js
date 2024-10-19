@@ -32,10 +32,10 @@ class BlockPacket extends ClientPacket {
 
     handle() {
         // if mode is breaking, set block to air
-        //if (this.mode === 0x00) this.type = 0x00;
+        if (this.mode === 0x00) this.type = 0x00;
         
         // if block type is out of range
-        if (this.type < 0 || this.type > 65) {
+        if (this.type < 0 || this.type > lists.blockLimit) {
             new ServerDisconnectPacket([this.client], "Invalid block!");
             return;
         }
@@ -75,158 +75,108 @@ class BlockPacket extends ClientPacket {
 
         // placing
         if (this.mode === 0x01) {
-            switch (this.type) {
-                // slabs
-                case 44:
-                    if (config.self.world.features.slabs && player.commandVars.slabs) {
-                        if (world.getBlock(x, y - 1, z) === 44) {
-                            world.setBlock(0x00, true, x, y, z); // replace with serverblockpacket
-                            world.setBlock(43, true, x, y - 1, z);
-                            
-                            break;
-                        }
+            const slabIndex = config.self.world.features.slabs.IDs.indexOf(this.type);
+            const flowerIndex = config.self.world.features.flowers.IDs.indexOf(this.type);
+            let placeOriginal = true;
 
-                        if (world.getBlock(x, y + 1, z) === 44) {
-                            world.setBlock(0x00, true, x, y + 1, z); // replace with serverblockpacket
-                            world.setBlock(43, true, x, y, z);
-                            
-                            break;
-                        }
-                    }
+            // slabs
+            if (player.commandVars.slabs && slabIndex >= 0) {
+                if (world.getBlock(x, y - 1, z) === this.type) {
+                    new ServerBlockPacket(
 
-                    world.setBlockOthers(this.client, this.type, x, y, z);
-
-                    break;
-
-                // saplings
-                case 6:
-                    if (
-                        
-                        config.self.world.features.saplings &&
-                        player.commandVars.saplings &&
-                        world.getBlock(x, y - 1, z) === 6 &&
-                        world.getBlock(x, y - 2, z) === 2 &&
-                        x > 1 && x < world.x-2 &&
-                        z > 1 && z < world.z-2 &&
-                        !world.treeNearby(x, y+1, z)
-                        
-                    ) {
-
-                        world.tree(x, y - 1, z, true);
-                        world.setBlock(3, true, x, y - 2, z);
-
-                    } else
-                        world.setBlockOthers(this.client, this.type, x, y, z);
-
-                    break;
-
-                // sponges
-                case 19:
-                    if (config.self.world.features.sponges && player.commandVars.sponges)
-                        for (let bx = -1; bx <= 1; bx++)
-                            for (let by = -1; by <= 1; by++)
-                                for (let bz = -1; bz <= 1; bz++) {
-                                    // if that is the sponge
-                                    if (bx === 0 && by === 0 && bz === 0) continue;
-
-                                    let block = world.getBlock(x + bx, y + by, z +bz);
-
-                                    if (block == 8 || block == 9)
-                                        world.setBlock(0, true, x + bx, y + by, z + bz);
-
-                                }
-
-                    world.setBlockOthers(this.client, this.type, x, y, z);
-                    
-                    break;
-
-                // flowers
-                case 37:
-                case 38:
-                    if (world.getBlock(x, y-1, z) !== 2)
-                        new ServerBlockPacket(
-
-                            [this.client],
-                            utils.uInt16(x),
-                            utils.uInt16(y),
-                            utils.uInt16(z),
-                            world.getBlock(x, y, z)
-
-                        );
-                    else
-                        world.setBlockOthers(this.client, this.type, x, y, z);
-
-                    break;
-
-                // grass
-                case 2:
-                    let blockAbove = world.getBlock(x, y+1, z);
-                    if (blockAbove === 2 || blockAbove === 3)
-                        world.setBlock(3, true, x, y, z);
-                    else
-                        world.setBlockOthers(this.client, this.type, x, y, z);
-
-                    if (world.getBlock(x, y-1, z) === 2)
-                        world.setBlock(3, true, x, y-1, z);
-
-                    break;
-
-                default:
-                    world.setBlockOthers(
-                
-                        this.client,
-                        this.type,
-                        x,
-                        y,
-                        z
-                        
+                        [this.client],
+                        utils.uInt16(x),
+                        utils.uInt16(y),
+                        utils.uInt16(z),
+                        world.getBlock(x, y, z)
+    
                     );
-                    break;
+                    world.setBlock(config.self.world.features.slabs.replacementIDs[slabIndex], true, x, y - 1, z);
+                    placeOriginal = false;
+                }
+
+                if (world.getBlock(x, y + 1, z) === this.type) {
+                    new ServerBlockPacket(
+
+                        [this.client],
+                        utils.uInt16(x),
+                        utils.uInt16(y),
+                        utils.uInt16(z),
+                        world.getBlock(x, y, z)
+    
+                    );
+                    world.setBlock(config.self.world.features.slabs.replacementIDs[slabIndex], true, x, y, z);
+                    placeOriginal = false;
+                }
+            }
+
+            // flowers
+            if (player.commandVars.flowers && flowerIndex >= 0 && world.getBlock(x, y-1, z) !== 2) {
+                new ServerBlockPacket(
+
+                    [this.client],
+                    utils.uInt16(x),
+                    utils.uInt16(y),
+                    utils.uInt16(z),
+                    world.getBlock(x, y, z)
+
+                );
+                placeOriginal = false;
+            }
+
+            if (player.commandVars.sponges && this.type === 19)
+                for (let bx = -1; bx <= 1; bx++)
+                    for (let by = -1; by <= 1; by++)
+                        for (let bz = -1; bz <= 1; bz++) {
+                            // if that is the sponge
+                            if (bx === 0 && by === 0 && bz === 0) continue;
+
+                            let liquidIndex = config.self.world.features.sponges.IDs.indexOf(world.getBlock(x + bx, y + by, z +bz));
+
+                            if (liquidIndex >= 0)
+                                world.setBlock(0, true, x + bx, y + by, z + bz);
+
+                        }
+
+            if (this.type === 2) {
+                placeOriginal = false;
+
+                let blockAbove = world.getBlock(x, y+1, z);
+                
+                if (blockAbove === 2 || blockAbove === 3)
+                    world.setBlock(3, true, x, y, z);
+                else
+                    world.setBlockOthers(this.client, this.type, x, y, z);
+
+                if (world.getBlock(x, y-1, z) === 2)
+                    world.setBlock(3, true, x, y-1, z);
 
             }
+
+            if (placeOriginal) world.setBlockOthers(this.client, this.type, x, y, z);
             
         // breaking
         } else {
-            switch (world.getBlock(x, y, z)) {
-                // grass
-                case 2:
-                    world.setBlockOthers(this.client, 0x00, x, y, z);
+            const brokenBlock = world.getBlock(x, y, z);
+            const explosiveIndex = config.self.world.features.explosions.IDs.indexOf(brokenBlock);
 
-                    let blockAbove = world.getBlock(x, y+1, z);
-                    let blockBelow = world.getBlock(x, y-1, z);
+            world.setBlockOthers(this.client, 0x00, x, y, z);
 
-                    if (blockAbove === 37 || blockAbove === 38)
-                        world.setBlock(0x00, true, x, y+1,z);
+            // explosives
+            if (player.commandVars.explosions && explosiveIndex >= 0)
+                world.explode(x, y, z);
 
-                    if (blockBelow === 3)
-                        world.setBlock(2, true, x, y-1,z);
+            // grass and flowers
+            let blockAbove = world.getBlock(x, y+1, z);
+            let blockBelow = world.getBlock(x, y-1, z);
+            const flowerIndex = config.self.world.features.flowers.IDs.indexOf(blockAbove);
 
-                    break;
+            if (flowerIndex >= 0)
+                world.setBlock(0x00, true, x, y+1,z);
 
-                // tnt
-                case 46:
-                    if (!config.self.world.features.explosions || !player.commandVars.explosions) {
-                        world.setBlockOthers(this.client, 0x00, x, y, z);
-                        break;
-                    }
+            if (blockBelow === 3)
+                world.setBlock(2, true, x, y-1,z);
 
-                    world.setBlockOthers(this.client, 0x00, x, y, z);
-                    world.explode(x, y, z);
-                    break;
-
-                default:
-                    world.setBlockOthers(
-                
-                        this.client,
-                        0x00,
-                        x,
-                        y,
-                        z
-                        
-                    );
-                    break;
-
-            }
         }
     }
 }
