@@ -325,6 +325,26 @@ class GenerationBoppin extends Generation {
             this.tree(x, height + 1, z);
             this.setBlock(3, x, height, z); //dirt
         }
+        //flowers
+        for(let i = 0; i < (this.x + this.z) / 2; i++) {
+            let x = Math.floor(Math.random() * this.x);
+            let z = Math.floor(Math.random() * this.z);
+            if(flatness[z][x] < Math.random()) continue;
+            
+            let amount = Math.floor(Math.random() * 120) + 8;
+            let type = Math.floor(Math.random() * 2);
+            for(let f = 0; f < amount; f++) {
+                let height = Math.round(calculateHeight(x, z));
+                if(this.getBlock(x, height - 1, z) != 2) continue; // check for grass
+                if(this.getBlock(x, height, z) != 0) continue; // generating in a wall?
+                this.setBlock(37 + type, x, height, z); //dandelion or rose
+                x += Math.round((Math.random() - 0.5) * 8);
+                z += Math.round((Math.random() - 0.5) * 8);
+                if(x % this.x != x || z % this.z != z) break; //stop if out of bounds
+                if(Math.abs(x) != x || Math.abs(z) != z) break; //stop if out onegative
+            }
+        }
+        
         //walls and lfoors
         const floor = this.halfY + 4
         const doWall = (block, x, z, offs, height) => {
@@ -352,7 +372,6 @@ class GenerationBoppin extends Generation {
                 }
             }
         };
-        
         for(let z = 0; z < 64; z++) {
             for(let x = 0; x < 64; x++) {
                 switch(bopMap[z][x]) {
@@ -375,27 +394,6 @@ class GenerationBoppin extends Generation {
                 }
             }
         }
-        
-        //flowers
-        for(let i = 0; i < (this.x + this.z) / 2; i++) {
-            let x = Math.floor(Math.random() * this.x);
-            let z = Math.floor(Math.random() * this.z);
-            if(flatness[z][x] < Math.random()) continue;
-            
-            let amount = Math.floor(Math.random() * 120) + 8;
-            let type = Math.floor(Math.random() * 2);
-            for(let f = 0; f < amount; f++) {
-                let height = Math.round(calculateHeight(x, z));
-                if(this.getBlock(x, height - 1, z) != 2) continue; // check for grass
-                if(this.getBlock(x, height, z) != 0) continue; // generating in a wall?
-                this.setBlock(37 + type, x, height, z); //dandelion or rose
-                x += Math.round((Math.random() - 0.5) * 8);
-                z += Math.round((Math.random() - 0.5) * 8);
-                if(x % this.x != x || z % this.z != z) break; //stop if out of bounds
-                if(Math.abs(x) != x || Math.abs(z) != z) break; //stop if out onegative
-            }
-        }
-        
     }
 }
 
