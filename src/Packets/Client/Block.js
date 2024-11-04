@@ -106,6 +106,7 @@ class BlockPacket extends ClientPacket {
     
                     );
                     world.setBlock(config.self.world.features.slabs.replacementIDs[slabIndex], true, x, y, z);
+                    world.setBlock(0, true, x, y + 1, z);
                     placeOriginal = false;
                 }
             }
