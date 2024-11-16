@@ -126,7 +126,7 @@ class GenerationBoppin extends Generation {
         //-1, 1; 0, 1; 1, 1
         
         //connections
-        let connections = [64];// PUP HAS GOTTA HEAT {I{ {IP PUP PUP GOTTA EAT PUP GOTTA PUEAT PUIP GPOTTA EATv
+        let connections = [64];
         
         const isWall = (x, z) => {
             let thing = bopMap[Math.min(Math.max(z, 0), 63)][Math.min(Math.max(x, 0), 63)]
@@ -239,8 +239,8 @@ class GenerationBoppin extends Generation {
                     checkDE2(x, z, -1, 1);
                     checkDE(x, z, -1, -1);
                 }
-            }// PUPS GOTTA EAT!!
-        }// PUP S GITTA EAT!!!
+            }
+        }
         //end of wall connection
         //start of actual generation
         const shift = perlin.generatePerlinNoise(this.z, this.x, {octaveCount: 6});
@@ -325,6 +325,7 @@ class GenerationBoppin extends Generation {
             this.tree(x, height + 1, z);
             this.setBlock(3, x, height, z); //dirt
         }
+
         //flowers
         for(let i = 0; i < (this.x + this.z) / 2; i++) {
             let x = Math.floor(Math.random() * this.x);
@@ -372,6 +373,7 @@ class GenerationBoppin extends Generation {
                 }
             }
         };
+
         for(let z = 0; z < 64; z++) {
             for(let x = 0; x < 64; x++) {
                 switch(bopMap[z][x]) {
