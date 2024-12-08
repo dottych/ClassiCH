@@ -23,7 +23,7 @@
 - Extendable code *(gentypes, commands, blocks, ...)*
 
 # Prerequisites
-- Node.JS
+- Node.JS v18+
 
 # Installation
 1. Clone the repository
