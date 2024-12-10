@@ -1,26 +1,26 @@
 const CustomBlock = require('../CustomBlock');
 
-class Vinyl extends CustomBlock {
+class SeaLantern extends CustomBlock {
     constructor() {
         // ID, ext
-        super(86, false);
+        super(102, false);
 
-        this.name = "Vinyl";
+        this.name = "Sea lantern";
 
         this.solidity = this.solidityModes.solid;
         this.speed = 128;
 
         // textures
-        this.top = 93;
-        this.side = 62;
-        this.bottom = 62;
+        this.top = 117;
+        this.side = 117;
+        this.bottom = 117;
         
-        this.transmitLight = false;
+        this.transmitLight = true;
 
-        this.sound = this.sounds.metal;
+        this.sound = this.sounds.glass;
 
-        this.brightness = 0;
-        this.isLamp = false;
+        this.brightness = 15;
+        this.isLamp = true;
         
         this.height = 16;
         this.drawMode = this.drawModes.opaque;
@@ -32,4 +32,4 @@ class Vinyl extends CustomBlock {
     }
 }
 
-module.exports = Vinyl;
+module.exports = SeaLantern;

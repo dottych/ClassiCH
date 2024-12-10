@@ -4,7 +4,8 @@ const LightInfoStructure = require('../../Structures/LightInfo');
 const lists = require('../../../Lists');
 const utils = require('../../../Utils');
 
-class DefineBlockPacket extends ServerPacket {
+// this does not support sprites - use non ext instead
+class DefineBlockExtPacket extends ServerPacket {
     constructor(
         clients,
         id,
@@ -12,33 +13,49 @@ class DefineBlockPacket extends ServerPacket {
         solidity,
         speed,
         top,
-        side,
+        left,
+        right,
+        front,
+        back,
         bottom,
         transmitLight,
         sound,
         brightness,
         isLamp,
-        height,
+        minX,
+        minY,
+        minZ,
+        maxX,
+        maxY,
+        maxZ,
         drawMode,
         fogDensity,
         fogR,
         fogG,
         fogB
     ) {
-        super(clients, lists.serverPackets.ext.defineBlock);
+        super(clients, lists.serverPackets.ext.defineBlockExt);
 
         this.id = id;
         this.name = name;
         this.solidity = solidity;
         this.speed = speed;
         this.top = top;
-        this.side = side;
+        this.left = left;
+        this.right = right;
+        this.front = front;
+        this.back = back;
         this.bottom = bottom;
         this.transmitLight = transmitLight;
         this.sound = sound;
         this.brightness = brightness;
         this.isLamp = isLamp;
-        this.height = height;
+        this.minX = minX;
+        this.minY = minY;
+        this.minZ = minZ;
+        this.maxX = maxX;
+        this.maxY = maxY;
+        this.maxZ = maxZ;
         this.drawMode = drawMode;
         this.fogDensity = fogDensity;
         this.fogR = fogR;
@@ -60,12 +77,20 @@ class DefineBlockPacket extends ServerPacket {
             this.solidity,
             this.speed,
             this.top,
-            this.side,
+            this.left,
+            this.right,
+            this.front,
+            this.back,
             this.bottom,
             this.transmitLight ? 1 : 0,
             this.sound,
             new LightInfoStructure(this.brightness, this.isLamp, true).toBits(),
-            this.height,
+            this.minX,
+            this.minY,
+            this.minZ,
+            this.maxX,
+            this.maxY,
+            this.maxZ,
             this.drawMode,
             this.fogDensity,
             this.fogR,
@@ -78,4 +103,4 @@ class DefineBlockPacket extends ServerPacket {
     }
 }
 
-module.exports = DefineBlockPacket;
+module.exports = DefineBlockExtPacket;

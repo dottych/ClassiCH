@@ -1,19 +1,22 @@
 const CustomBlock = require('../CustomBlock');
 
-class Vinyl extends CustomBlock {
+class Pole extends CustomBlock {
     constructor() {
         // ID, ext
-        super(86, false);
+        super(103, true);
 
-        this.name = "Vinyl";
+        this.name = "Pole";
 
         this.solidity = this.solidityModes.solid;
         this.speed = 128;
 
         // textures
-        this.top = 93;
-        this.side = 62;
-        this.bottom = 62;
+        this.top = 26;
+        this.left = 42;
+        this.right = 42;
+        this.front = 42;
+        this.back = 42;
+        this.bottom = 58;
         
         this.transmitLight = false;
 
@@ -21,8 +24,14 @@ class Vinyl extends CustomBlock {
 
         this.brightness = 0;
         this.isLamp = false;
-        
-        this.height = 16;
+
+        this.minX = 7;
+        this.minY = 0;
+        this.minZ = 7;
+        this.maxX = 9;
+        this.maxY = 16;
+        this.maxZ = 9;
+
         this.drawMode = this.drawModes.opaque;
 
         this.fogDensity = 0;
@@ -32,4 +41,4 @@ class Vinyl extends CustomBlock {
     }
 }
 
-module.exports = Vinyl;
+module.exports = Pole;

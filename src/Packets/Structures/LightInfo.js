@@ -1,5 +1,9 @@
+const Structure = require('../Structure');
+
 class StructureLightInfo extends Structure {
     constructor(brightness, isLamp = false, isStructure = false) {
+        super();
+        
         this.brightness = brightness;
         this.isLamp = isLamp;
         this.isStructure = isStructure;

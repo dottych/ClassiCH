@@ -26,10 +26,10 @@ class BehaviourIdentificationInit extends Behaviour {
 
             [this.client],
             config.pvn,
-            utils.populate(config.self.server.motdTitle, {playerName: this.name}),
+            utils.populate(config.self.server.motd.title, {playerName: this.name}),
             utils.populate(
                 
-                isOp ? config.self.server.motdDescriptionOP : config.self.server.motdDescription,
+                isOp ? config.self.server.motd.descriptionOP : config.self.server.motd.description,
                 {playerName: this.name}
 
             ),

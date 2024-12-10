@@ -19,7 +19,9 @@ class DeadBush extends CustomBlock {
 
         this.sound = this.sounds.grass;
 
-        this.bright = false;
+        this.brightness = 0;
+        this.isLamp = false;
+        
         this.height = 0;
         this.drawMode = this.drawModes.leaves;
 

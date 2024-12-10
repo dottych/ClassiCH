@@ -19,7 +19,9 @@ class Maroon extends CustomBlock {
 
         this.sound = this.sounds.wool;
 
-        this.bright = false;
+        this.brightness = 0;
+        this.isLamp = false;
+        
         this.height = 16;
         this.drawMode = this.drawModes.opaque;
 

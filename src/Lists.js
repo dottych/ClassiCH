@@ -94,10 +94,14 @@ class Lists {
                 "info": 0x10,
                 "entry": 0x11,
                 "customBlockSupportLevel": 0x13,
+                "envSetColor": 0x19,
                 "changeModel": 0x1D,
+                "envSetWeatherType": 0x1F,
                 "defineBlock": 0x23,
+                "defineBlockExt": 0x25,
                 "setMapEnvUrl": 0x28,
-                "setMapEnvProperty": 0x29
+                "setMapEnvProperty": 0x29,
+                "lightingMode": 0x37
             }
         }
 
@@ -126,9 +130,13 @@ class Lists {
 
         this.supportedExtensions = {
             "BlockDefinitions": 1,
+            "BlockDefinitionsExt": 2,
             "ChangeModel": 1,
             "CustomBlocks": 1,
+            "EnvColors": 1,
             "EnvMapAspect": 1,
+            "EnvWeatherType": 1,
+            "LightingMode": 1,
             "LongerMessages": 1,
             "MessageTypes": 1
         }
@@ -139,7 +147,7 @@ class Lists {
             fog: 2,
             shadows: 3,
             sunlight: 4,
-            skybox: 5,
+            skybox: 5, // was testing and this might actually be unused?
             lava: 6,
             lamp: 7
         }

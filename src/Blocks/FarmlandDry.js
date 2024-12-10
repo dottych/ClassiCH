@@ -19,7 +19,9 @@ class FarmlandDry extends CustomBlock {
 
         this.sound = this.sounds.gravel;
 
-        this.bright = false;
+        this.brightness = 0;
+        this.isLamp = false;
+        
         this.height = 15;
         this.drawMode = this.drawModes.opaque;
 

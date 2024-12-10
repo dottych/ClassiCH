@@ -6,8 +6,12 @@ const ServerInitPacket = require('../../Server/Init');
 const ServerChunkPacket = require('../../Server/Chunk');
 const ServerFinalPacket = require('../../Server/Final');
 const ServerDefineBlockPacket = require('../../Server/Ext/DefineBlock');
+const ServerDefineBlockExtPacket = require('../../Server/Ext/DefineBlockExt');
 const ServerSetMapEnvUrlPacket = require('../../Server/Ext/SetMapEnvUrl');
 const ServerSetMapEnvPropertyPacket = require('../../Server/Ext/SetMapEnvProperty');
+const ServerEnvSetColorPacket = require('../../Server/Ext/EnvSetColor');
+const ServerEnvSetWeatherTypePacket = require('../../Server/Ext/EnvSetWeatherType');
+const ServerLightingModePacket = require('../../Server/Ext/LightingMode');
 
 const world = require('../../../World');
 const lists = require('../../../Lists');
@@ -65,7 +69,8 @@ class BehaviourIdentificationWorld extends Behaviour {
                     customBlock.bottom,
                     customBlock.transmitLight,
                     customBlock.sound,
-                    customBlock.bright,
+                    customBlock.brightness,
+                    customBlock.isLamp,
                     customBlock.height,
                     customBlock.drawMode,
                     customBlock.fogDensity,
@@ -75,41 +80,94 @@ class BehaviourIdentificationWorld extends Behaviour {
 
                 );
             else
-                continue; // todo
+                new ServerDefineBlockExtPacket(
+
+                    [this.client],
+                    customBlock.id,
+                    customBlock.name,
+                    customBlock.solidity,
+                    customBlock.speed,
+                    customBlock.top,
+                    customBlock.left,
+                    customBlock.right,
+                    customBlock.front,
+                    customBlock.back,
+                    customBlock.bottom,
+                    customBlock.transmitLight,
+                    customBlock.sound,
+                    customBlock.brightness,
+                    customBlock.isLamp,
+                    customBlock.minX,
+                    customBlock.minY,
+                    customBlock.minZ,
+                    customBlock.maxX,
+                    customBlock.maxY,
+                    customBlock.maxZ,
+                    customBlock.drawMode,
+                    customBlock.fogDensity,
+                    customBlock.fogR,
+                    customBlock.fogG,
+                    customBlock.fogB
+
+                );
         
-        // send env (make this shorter?)
+        // send env
         if (config.self.world.env.texturePackURL != "")
             new ServerSetMapEnvUrlPacket([this.client], config.self.world.env.texturePackURL);
 
-        if (config.self.world.env.appearance.mapSideID >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapSideID, config.self.world.env.appearance.mapSideID);
+        for (let key of Object.keys(lists.mapPropertyTypes))
+            if (config.self.world.env.appearance[key] >= 0)
+                new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes[key], config.self.world.env.appearance[key]);
+        
+        for (let key of Object.keys(lists.mapColorTypes))
+            if (
+                config.self.world.env.colors[key].r >= 0 &&
+                config.self.world.env.colors[key].g >= 0 &&
+                config.self.world.env.colors[key].b >= 0
+            )
+                new ServerEnvSetColorPacket(
+                    [this.client],
+                    lists.mapColorTypes[key],
+                    config.self.world.env.colors[key].r,
+                    config.self.world.env.colors[key].g,
+                    config.self.world.env.colors[key].b
+                );
 
-        if (config.self.world.env.appearance.mapEdgeID >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeID, config.self.world.env.appearance.mapEdgeID);
+        let lightingMode = 0;
 
-        if (config.self.world.env.appearance.mapEdgeHeight >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapEdgeHeight, config.self.world.env.appearance.mapEdgeHeight);
+        switch (config.self.world.env.lighting.mode) {
+            case "classic":
+                lightingMode = 1;
+                break;
 
-        if (config.self.world.env.appearance.mapCloudsHeight >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.mapCloudsHeight, config.self.world.env.appearance.mapCloudsHeight);
+            case "fancy":
+                lightingMode = 2;
+                break;
 
-        if (config.self.world.env.appearance.fogDistance >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.fogDistance, config.self.world.env.appearance.fogDistance);
+        }
 
-        if (config.self.world.env.appearance.cloudsSpeed >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.cloudsSpeed, config.self.world.env.appearance.cloudsSpeed);
+        if (lightingMode > 0)
+            new ServerLightingModePacket([this.client], lightingMode, config.self.world.env.lighting.locked);
 
-        if (config.self.world.env.appearance.weatherSpeed >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherSpeed, config.self.world.env.appearance.weatherSpeed);
+        let weatherType = -1;
 
-        if (config.self.world.env.appearance.weatherFade >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.weatherFade, config.self.world.env.appearance.weatherFade);
+        switch (config.self.world.env.weather) {
+            case "sunny":
+                weatherType = 0;
+                break;
 
-        if (config.self.world.env.appearance.exponentialFog >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.exponentialFog, config.self.world.env.appearance.exponentialFog);
+            case "raining":
+                weatherType = 1;
+                break;
 
-        if (config.self.world.env.appearance.sideEdgeOffset >= 0)
-            new ServerSetMapEnvPropertyPacket([this.client], lists.mapPropertyTypes.sideEdgeOffset, config.self.world.env.appearance.sideEdgeOffset);
+            case "snowing":
+                weatherType = 2;
+                break;
+
+        }
+
+        if (weatherType >= 0)
+            new ServerEnvSetWeatherTypePacket([this.client], weatherType);
 
         // tell client the world is final
         new ServerFinalPacket([this.client]);

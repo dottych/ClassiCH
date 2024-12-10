@@ -19,7 +19,9 @@ class Melon extends CustomBlock {
 
         this.sound = this.sounds.wood;
 
-        this.bright = false;
+        this.brightness = 0;
+        this.isLamp = false;
+        
         this.height = 16;
         this.drawMode = this.drawModes.opaque;
 

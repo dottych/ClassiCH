@@ -19,7 +19,9 @@ class Glowstone extends CustomBlock {
 
         this.sound = this.sounds.glass;
 
-        this.bright = true;
+        this.brightness = 15;
+        this.isLamp = true;
+        
         this.height = 16;
         this.drawMode = this.drawModes.opaque;
 

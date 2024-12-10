@@ -11,13 +11,13 @@
 
         "joinKick": false,
 
-        "motdTitle": "%servername%",
-        "motdDescription": "%greeting%, %playername%! -noclip",
-        "motdDescriptionOP": "%greeting%, %playername%!",
+        "motd": {
+            "title": "%servername%",
+            "description": "%greeting%, %playername%! -noclip",
+            "descriptionOP": "%greeting%, %playername%!"
+        },
 
-        "checkForUpdate": true,
-
-        "texturePackURL": "https://github.com/dottych/dottych/raw/refs/heads/main/chtex.zip"
+        "checkForUpdate": true
     },
 
     "world": {
@@ -133,7 +133,14 @@
                 "weatherFade": -1,
                 "exponentialFog": -1,
                 "sideEdgeOffset": -1
-            }
+            },
+
+            "lighting": {
+                "mode": "classic",
+                "locked": false
+            },
+
+            "weather": "sunny"
         }
     },
 

@@ -19,7 +19,9 @@ class Cobweb extends CustomBlock {
 
         this.sound = this.sounds.none;
 
-        this.bright = false;
+        this.brightness = 0;
+        this.isLamp = false;
+        
         this.height = 0;
         this.drawMode = this.drawModes.leaves;
 

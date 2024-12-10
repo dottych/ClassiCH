@@ -19,7 +19,9 @@ class RedstoneLampOn extends CustomBlock {
 
         this.sound = this.sounds.glass;
 
-        this.bright = true;
+        this.brightness = 15;
+        this.isLamp = false; // makes this specific lamp look more yellow with lava lighting
+        
         this.height = 16;
         this.drawMode = this.drawModes.opaque;
 
