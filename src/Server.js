@@ -122,12 +122,12 @@ class Server {
                 '?port=' + config.self.server.port +
                 '&max=' + config.self.server.maxPlayers +
                 //'&name=' + utils.populate(config.self.server.name) +
-                '&name=' + config.self.server.name +
+                '&name=' + encodeURIComponent(config.self.server.name) +
                 '&public=' + config.self.server.public +
                 '&version=' + config.pvn +
                 '&salt=' + config.salt +
                 '&users=' + utils.getPlayerCount() +
-                '&software=' + config.software +
+                '&software=' + encodeURIComponent(config.software) +
                 '&web=' + true,
                 (error, response, body) => {
                     if (body.indexOf("/play/") >= 0) {
