@@ -9,6 +9,7 @@ const ServerDisconnectPacket = require('./Packets/Server/Disconnect');
 
 const ClientExtInfoPacket = require('./Packets/Client/Ext/ExtInfo');
 const ClientExtEntryPacket = require('./Packets/Client/Ext/ExtEntry');
+const ClientTwoWayPingPacket = require('./Packets/Client/Ext/TwoWayPing');
 
 class Packets {
     constructor() {}
@@ -46,6 +47,11 @@ class Packets {
                 case lists.clientPackets.ext.entry:
                     if (lists.players[client.id] != undefined) break;
                     new ClientExtEntryPacket(client, client.packets[0]);
+                    break;
+
+                case lists.clientPackets.ext.twoWayPing:
+                    if (lists.players[client.id] == undefined) break;
+                    new ClientTwoWayPingPacket(client, client.packets[0]);
                     break;
 
                 default:

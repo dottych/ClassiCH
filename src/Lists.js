@@ -53,7 +53,9 @@ class Lists {
             0x08: 10,
             0x0D: 66,
             0x10: 67,
-            0x11: 69 // nice
+            0x11: 69, // nice
+            //0x13: 2,
+            0x2B: 4
         }
         
         // client packet list
@@ -67,7 +69,8 @@ class Lists {
             "ext": {
                 "info": 0x10,
                 "entry": 0x11,
-                "customBlockSupportLevel": 0x13
+                "customBlockSupportLevel": 0x13,
+                "twoWayPing": 0x2B
             }
         }
 
@@ -101,6 +104,7 @@ class Lists {
                 "defineBlockExt": 0x25,
                 "setMapEnvUrl": 0x28,
                 "setMapEnvProperty": 0x29,
+                "twoWayPing": 0x2B,
                 "lightingMode": 0x37
             }
         }
@@ -138,7 +142,8 @@ class Lists {
             "EnvWeatherType": 1,
             "LightingMode": 1,
             "LongerMessages": 1,
-            "MessageTypes": 1
+            "MessageTypes": 1,
+            "TwoWayPing": 1
         }
 
         this.mapColorTypes = {

@@ -3,6 +3,7 @@ const Behaviour = require('../../Behaviour');
 const ServerSpawnPacket = require('../../Server/Spawn');
 const ServerMessagePacket = require('../../Server/Message');
 const ServerExtChangeModelPacket = require('../../Server/Ext/ChangeModel');
+const ServerTwoWayPingPacket = require('../../Server/Ext/TwoWayPing');
 
 const utils = require('../../../Utils');
 const lists = require('../../../Lists');
@@ -71,7 +72,7 @@ class BehaviourIdentificationSpawn extends Behaviour {
 
         new ServerMessagePacket(utils.getAllPlayerClients(), 0x00, `&e${this.name} joined the game`);
         new ServerMessagePacket([this.client], 100, config.self.server.name);
-        utils.log(`${this.name} joined the game`);
+        utils.log(`${this.name} joined the game`); 
 
         return true;
     }
