@@ -2,9 +2,11 @@ const Command = require('../Command');
 
 const ServerMessagePacket = require('../Packets/Server/Message');
 const ServerTypePacket = require('../Packets/Server/Type');
+const ServerIdentificationPacket = require('../Packets/Server/Identification');
 
 const lists = require('../Lists');
 const utils = require('../Utils');
+const config = require('../Config');
 
 class CommandOP extends Command {
     constructor(client, args) {
@@ -28,6 +30,20 @@ class CommandOP extends Command {
 
             if (player != undefined) {
                 player.op = true;
+                new ServerIdentificationPacket(
+
+                    [player.client],
+                    config.pvn,
+                    utils.populate(config.self.server.motd.title, {playerName: this.name}),
+                    utils.populate(
+                        
+                        config.self.server.motd.descriptionOP,
+                        {playerName: this.name}
+        
+                    ),
+                    true
+        
+                );
                 new ServerTypePacket([player.client], 0x64);
                 new ServerMessagePacket([player.client], 0x00, "&eYou're now OP!");
             }  

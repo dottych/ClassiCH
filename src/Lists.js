@@ -140,6 +140,7 @@ class Lists {
             "EnvColors": 1,
             "EnvMapAspect": 1,
             "EnvWeatherType": 1,
+            "InstantMOTD": 1,
             "LightingMode": 1,
             "LongerMessages": 1,
             "MessageTypes": 1,

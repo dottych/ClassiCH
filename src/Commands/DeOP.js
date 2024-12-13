@@ -2,6 +2,7 @@ const Command = require('../Command');
 
 const ServerMessagePacket = require('../Packets/Server/Message');
 const ServerTypePacket = require('../Packets/Server/Type');
+const ServerIdentificationPacket = require('../Packets/Server/Identification');
 
 const lists = require('../Lists');
 const utils = require('../Utils');
@@ -34,6 +35,20 @@ class CommandDeOP extends Command {
 
             if (player != undefined) {
                 player.op = false;
+                new ServerIdentificationPacket(
+
+                    [player.client],
+                    config.pvn,
+                    utils.populate(config.self.server.motd.title, {playerName: this.name}),
+                    utils.populate(
+                        
+                        config.self.server.motd.description,
+                        {playerName: this.name}
+        
+                    ),
+                    false
+        
+                );
                 new ServerTypePacket([player.client], 0x00);
             }  
 
