@@ -1,5 +1,10 @@
 class Structure {
-    // perhaps, add something here, so it's not just an empty class?
+    constructor(clients, type) {
+        this.clients = clients;
+        this.type = type;
+        this.buffer; // defined by child packets (Doing this so it isnt a empty class -juggy)
+        
+    }
     
     constructor() {}
 

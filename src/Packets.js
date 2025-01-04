@@ -75,6 +75,8 @@ class Packets {
      * @param {Buffer} packet Buffer with combined packets.
      * @returns Split packets.
      */
+
+    /**splitting packets */
     splitPackets(packet) {
         let buffer = [];
         let _packet = [...packet];
@@ -90,6 +92,10 @@ class Packets {
             if (slicedPacket.length == packetLength) {
                 buffer.push([...slicedPacket]);
                 _packet = _packet.slice(packetLength, _packet.length);
+
+                cancelled = false
+                utils.log("Received packet with no errors")
+
             } else {
                 cancelled = true;
                 utils.log("Received invalid (corrupted) packet!")
