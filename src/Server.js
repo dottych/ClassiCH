@@ -48,11 +48,13 @@ class Server {
         config.salt = utils.generateRandomSalt();
 
         this.server = net.createServer(client => {
+            client.data = []; // client's raw unhandled packets
             client.packets = []; // client's incoming packets
             client.busy = false; // is handling client's packets?
             client.id = -1; // client's player ID
             client.extensions = {};
             client.extensionCount = 0;
+            client.blockSupportLevel = 0;
 
             // client events
             client.on('data', data => this.onData(client, data));
@@ -74,8 +76,11 @@ class Server {
     }
 
     onData(client, data) {
-        client.packets.push(...packets.splitPackets(data));
-        if (!client.busy) packets.handle(client);
+        client.data.push(...data);
+        client.packets.push(...packets.splitPackets(client));
+
+        if (!client.busy)
+            packets.handle(client);
     }
 
     onError(client, error) {
@@ -85,8 +90,11 @@ class Server {
     }
 
     onClose(client) {
-        if (lists.players[client.id] !== undefined)
-            lists.players[client.id].disconnect();
+        let player = lists.players[client.id];
+
+        // if client has a valid player, remove it
+        if (player !== undefined)
+            player.disconnect();
     }
 
     onServerClose(error) {
@@ -104,7 +112,7 @@ class Server {
 
         ) {
             utils.log("Something went wrong!");
-            console.log(error);
+            console.error(error);
         }
 
         utils.log("Server is shutting down...");
@@ -121,7 +129,6 @@ class Server {
                 url +
                 '?port=' + config.self.server.port +
                 '&max=' + config.self.server.maxPlayers +
-                //'&name=' + utils.populate(config.self.server.name) +
                 '&name=' + encodeURIComponent(config.self.server.name) +
                 '&public=' + config.self.server.public +
                 '&version=' + config.pvn +

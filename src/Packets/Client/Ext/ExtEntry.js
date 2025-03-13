@@ -3,11 +3,6 @@ const ClientPacket = require('../../ClientPacket');
 const ServerCustomBlockSupportLevelPacket = require('../../Server/Ext/CustomBlockSupportLevel');
 const ServerDisconnectPacket = require('../../Server/Disconnect');
 
-const BehaviourIdentificationCreate = require('../../Behaviours/Identification/BehaviourIdentificationCreate');
-const BehaviourIdentificationInit = require('../../Behaviours/Identification/BehaviourIdentificationInit');
-const BehaviourIdentificationWorld = require('../../Behaviours/Identification/BehaviourIdentificationWorld');
-const BehaviourIdentificationSpawn = require('../../Behaviours/Identification/BehaviourIdentificationSpawn');
-
 const lists = require('../../../Lists');
 const utils = require('../../../Utils');
 
@@ -49,12 +44,6 @@ class ExtEntryPacket extends ClientPacket {
             }
 
             new ServerCustomBlockSupportLevelPacket([this.client]);
-
-            // continue off where identification behaviour stopped
-            if (!new BehaviourIdentificationCreate(this.client, this.client.name, true).successful) return;
-            if (!new BehaviourIdentificationInit(this.client, this.client.name).successful) return;
-            if (!new BehaviourIdentificationWorld(this.client).successful) return;
-            if (!new BehaviourIdentificationSpawn(this.client, this.client.name).successful) return;
         }
     }
 }

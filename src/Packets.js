@@ -9,6 +9,7 @@ const ServerDisconnectPacket = require('./Packets/Server/Disconnect');
 
 const ClientExtInfoPacket = require('./Packets/Client/Ext/ExtInfo');
 const ClientExtEntryPacket = require('./Packets/Client/Ext/ExtEntry');
+const ClientCustomBlockSupportLevelPacket = require('./Packets/Client/Ext/CustomBlockSupportLevel');
 const ClientTwoWayPingPacket = require('./Packets/Client/Ext/TwoWayPing');
 
 class Packets {
@@ -49,6 +50,11 @@ class Packets {
                     new ClientExtEntryPacket(client, client.packets[0]);
                     break;
 
+                case lists.clientPackets.ext.customBlockSupportLevel:
+                    if (lists.players[client.id] != undefined) break;
+                    new ClientCustomBlockSupportLevelPacket(client, client.packets[0]);
+                    break;
+
                 case lists.clientPackets.ext.twoWayPing:
                     if (lists.players[client.id] == undefined) break;
                     new ClientTwoWayPingPacket(client, client.packets[0]);
@@ -71,38 +77,39 @@ class Packets {
     }
 
     /**
-     * Splits combined packets.
-     * @param {Buffer} packet Buffer with combined packets.
-     * @returns Split packets.
+     * Splits combined or "incomplete" packets while removing the raw data.
+     * @param {Socket} client Client that contains raw, unhandled packets.
+     * @returns An array of split packets. (an array of arrays)
      */
-    splitPackets(packet) {
-        let buffer = [];
-        let _packet = [...packet];
+    splitPackets(client) {
+        let packets = [];
         let cancelled = false;
 
-        function split() {
-            const packetLength = lists.clientPacketLengths[_packet[0]];
+        while (client.data.length > 0 && !cancelled) {
+            const packetLength = lists.clientPacketLengths[client.data[0]];
 
-            if (packetLength == undefined) return [];
-
-            const slicedPacket = _packet.slice(0, packetLength);
-
-            if (slicedPacket.length == packetLength) {
-                buffer.push([...slicedPacket]);
-                _packet = _packet.slice(packetLength, _packet.length);
-            } else {
-                cancelled = true;
+            // if there is no defined packet length for this specific packet...
+            // which means it does not exist
+            if (packetLength == undefined) {
                 utils.log("Received invalid (corrupted) packet!")
-                new ServerDisconnectPacket([client], "You have sent an invalid packet!");
+
+                if (client.id >= 0)
+                    new ServerDisconnectPacket([client], "You have sent an invalid packet!");
+
+                cancelled = true;
+                return [];
             }
-            
-            
-            if (_packet.length > 0 && !cancelled) split();
+
+            // if packet is incomplete, stop, else put into packet array
+            if (client.data.length < packetLength)
+                cancelled = true;
+            else {
+                const splitPacket = client.data.splice(0, packetLength);
+                packets.push([...splitPacket]);
+            }
         }
 
-        split();
-
-        return buffer;
+        return packets;
     }
 }
 

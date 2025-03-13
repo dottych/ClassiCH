@@ -5,6 +5,7 @@ const config = require('./Config');
 
 const ServerMessagePacket = require('./Packets/Server/Message');
 const ServerDespawnPacket = require('./Packets/Server/Despawn');
+const ServerTwoWayPingPacket = require('./Packets/Server/Ext/TwoWayPing');
 
 class Player {
     constructor(client, id, name, op, cpe) {
@@ -74,6 +75,10 @@ class Player {
         delete lists.players[this.id];
         
         utils.log(`${this.name} left the game`);
+    }
+
+    startPing() {
+        new ServerTwoWayPingPacket([this.client], 1, 0);
     }
 }
 
