@@ -26,18 +26,18 @@ class Lists {
 
         // greeting words
         try {
-            this.greetings = JSON.parse(fs.readFileSync('./greetings.json').toString());
+            this.greetings = require('./Utils').getLines(fs.readFileSync('./greetings.txt').toString());
         } catch(error) {
             this.greetings = ["Welcome"];
-            fs.writeFileSync('./greetings.json', JSON.stringify(this.greetings));
+            fs.writeFileSync('./greetings.txt', this.greetings.join('\n'));
         }
 
         // announcements
         try {
-            this.announcements = JSON.parse(fs.readFileSync('./announcements.json').toString());
+            this.announcements = require('./Utils').getLines(fs.readFileSync('./announcements.txt').toString());
         } catch(error) {
             this.announcements = ["This server hasn't set up its announcer yet!"];
-            fs.writeFileSync('./announcements.json', JSON.stringify(this.announcements));
+            fs.writeFileSync('./announcements.txt', this.announcements.join('\n'));
         }
 
         // allowed name characters
