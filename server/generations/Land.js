@@ -1,6 +1,6 @@
 const perlin = require('perlin-noise');
 
-const Generation = require('../Generation');
+const Generation = require('../../src/Generation');
 
 class GenerationLand extends Generation {
     constructor() {

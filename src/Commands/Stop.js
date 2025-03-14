@@ -1,6 +1,6 @@
 const Command = require('../Command');
 
-const ServerDisconnectPacket = require('../Packets/Server/Disconnect');
+const ServerDisconnectPacket = require('../packets/server/Disconnect');
 
 const utils = require('../Utils');
 

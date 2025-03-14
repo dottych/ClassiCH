@@ -1,7 +1,7 @@
 const Command = require('../Command');
 
-const ServerMessagePacket = require('../Packets/Server/Message');
-const ServerDisconnectPacket = require('../Packets/Server/Disconnect');
+const ServerMessagePacket = require('../packets/server/Message');
+const ServerDisconnectPacket = require('../packets/server/Disconnect');
 
 const lists = require('../Lists');
 const utils = require('../Utils');

@@ -1,10 +1,21 @@
+const fs = require('fs');
 const net = require('net');
 const request = require('request');
+
+// crucial server folders
+if (!fs.existsSync('./blocks')) {
+    console.log("Creating blocks folder");
+    fs.mkdirSync('./blocks');
+}
+if (!fs.existsSync('./generations')) {
+    console.log("Creating generations folder");
+    fs.mkdirSync('./generations');
+}
 
 const config = require('./Config');
 const utils = require('./Utils');
 const lists = require('./Lists');
-const packets = require('./Packets');
+const packets = require('./packets');
 const commandList = require('./CommandList');
 const announcer = require('./Announcer');
 
@@ -20,12 +31,12 @@ if (!config.checkCrucialConfig()) {
 // initialise world
 const world = require('./World');
 
-// generate world of type
+// generate world of configured type before initialising server
 if (!world.generated) {
     const generationType = config.self.world.generationType;
 
     try {
-        const generation = require(`./Generations/${generationType}`);
+        const generation = require(`../server/generations/${generationType}`);
 
         utils.log(`Generating ${world.x}x${world.y}x${world.z} world of type ${generationType}`);
         const start = performance.now();
@@ -169,7 +180,7 @@ class Server {
     }
 
     checkForUpdate() {
-        if (config.softwareRaw.toLowerCase().indexOf("dev") >= 0)
+        if (config.softwareRaw.toLowerCase().includes("dev"))
             return;
 
         request(

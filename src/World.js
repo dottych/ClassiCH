@@ -2,7 +2,7 @@ const fs = require('fs');
 const zlib = require('zlib');
 const perlin = require('perlin-noise');
 
-const ServerBlockPacket = require('./Packets/Server/Block');
+const ServerBlockPacket = require('./packets/server/Block');
 
 const config = require('./Config');
 const utils = require('./Utils');

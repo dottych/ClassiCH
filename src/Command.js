@@ -1,4 +1,4 @@
-const ServerMessagePacket = require('./Packets/Server/Message');
+const ServerMessagePacket = require('./packets/server/Message');
 
 class Command {
     constructor(client, args) {

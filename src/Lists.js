@@ -222,7 +222,7 @@ class Lists {
     addCustomBlocks() {
         this.customBlocks = {};
 
-        for (let customBlock of fs.readdirSync('../src/Blocks/')) {
+        for (let customBlock of fs.readdirSync('../server/blocks/')) {
             // check if it's a module
             if (!customBlock.endsWith('.js')) continue;
         
@@ -231,7 +231,7 @@ class Lists {
         
             // register custom block and add it to the list
             try {
-                this.customBlocks[customBlock] = new (require(`./Blocks/${customBlock}`));
+                this.customBlocks[customBlock] = new (require(`../server/blocks/${customBlock}`));
 
                 if (this.customBlocks[customBlock].id > this.blockLimit)
                     this.blockLimit = this.customBlocks[customBlock].id;

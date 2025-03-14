@@ -1,4 +1,4 @@
-const ServerMessagePacket = require('./Packets/Server/Message');
+const ServerMessagePacket = require('./packets/server/Message');
 
 const utils = require('./Utils');
 const lists = require('./Lists');

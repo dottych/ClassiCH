@@ -1,6 +1,6 @@
 const Command = require('../Command');
 
-const ServerMessagePacket = require('../Packets/Server/Message');
+const ServerMessagePacket = require('../packets/server/Message');
 
 const world = require('../World');
 

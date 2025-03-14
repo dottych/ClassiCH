@@ -3,9 +3,9 @@ const lists = require('./Lists');
 const world = require('./World');
 const config = require('./Config');
 
-const ServerMessagePacket = require('./Packets/Server/Message');
-const ServerDespawnPacket = require('./Packets/Server/Despawn');
-const ServerTwoWayPingPacket = require('./Packets/Server/Ext/TwoWayPing');
+const ServerMessagePacket = require('./packets/server/Message');
+const ServerDespawnPacket = require('./packets/server/Despawn');
+const ServerTwoWayPingPacket = require('./packets/server/Ext/TwoWayPing');
 
 class Player {
     constructor(client, id, name, op, cpe) {

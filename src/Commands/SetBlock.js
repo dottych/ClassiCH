@@ -1,6 +1,6 @@
 const Command = require('../Command');
 
-const ServerMessagePacket = require('../Packets/Server/Message');
+const ServerMessagePacket = require('../packets/server/Message');
 
 const utils = require('../Utils');
 const lists = require('../Lists');
@@ -27,9 +27,9 @@ class CommandSetBlock extends Command {
 
         // under
         if (this.args.length === 1) {
-            const type = this.args[0];
+            const type = +this.args[0];
 
-            if (type < 0 || type > lists.blockLimit) {
+            if (isNaN(type) || type < 0 || type > lists.blockLimit) {
                 new ServerMessagePacket([this.client], 0x00, "&eInvalid block type!");
                 return;
             }
@@ -73,7 +73,7 @@ class CommandSetBlock extends Command {
                     return;
                 }
 
-                if (type < 0 || type > lists.blockLimit) {
+                if (isNaN(type) || type < 0 || type > lists.blockLimit) {
                     new ServerMessagePacket([this.client], 0x00, "&eInvalid block type!");
                     return;
                 }

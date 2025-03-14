@@ -1,9 +1,10 @@
 const world = require('./World');
 
 class Generation {
-    constructor(type, author) {
+    constructor(type, author, cpe) {
         this.type = type;
         this.author = author;
+        this.cpe = cpe;
 
         this.x = world.x;
         this.y = world.y;

@@ -1,7 +1,7 @@
 const Command = require('../Command');
 
-const ServerMessagePacket = require('../Packets/Server/Message');
-const ServerTeleportPacket = require('../Packets/Server/Teleport');
+const ServerMessagePacket = require('../packets/server/Message');
+const ServerTeleportPacket = require('../packets/server/Teleport');
 
 const utils = require('../Utils');
 

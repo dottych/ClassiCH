@@ -1,16 +1,16 @@
 const lists = require('./Lists');
 const utils = require('./Utils');
 
-const ClientIdentificationPacket = require('./Packets/Client/Identification');
-const ClientBlockPacket = require('./Packets/Client/Block');
-const ClientMovementPacket = require('./Packets/Client/Movement');
-const ClientMessagePacket = require('./Packets/Client/Message');
-const ServerDisconnectPacket = require('./Packets/Server/Disconnect');
+const ClientIdentificationPacket = require('./packets/client/Identification');
+const ClientBlockPacket = require('./packets/client/Block');
+const ClientMovementPacket = require('./packets/client/Movement');
+const ClientMessagePacket = require('./packets/client/Message');
+const ServerDisconnectPacket = require('./packets/server/Disconnect');
 
-const ClientExtInfoPacket = require('./Packets/Client/Ext/ExtInfo');
-const ClientExtEntryPacket = require('./Packets/Client/Ext/ExtEntry');
-const ClientCustomBlockSupportLevelPacket = require('./Packets/Client/Ext/CustomBlockSupportLevel');
-const ClientTwoWayPingPacket = require('./Packets/Client/Ext/TwoWayPing');
+const ClientExtInfoPacket = require('./packets/client/Ext/ExtInfo');
+const ClientExtEntryPacket = require('./packets/client/Ext/ExtEntry');
+const ClientCustomBlockSupportLevelPacket = require('./packets/client/Ext/CustomBlockSupportLevel');
+const ClientTwoWayPingPacket = require('./packets/client/Ext/TwoWayPing');
 
 class Packets {
     constructor() {}
@@ -91,7 +91,7 @@ class Packets {
             // if there is no defined packet length for this specific packet...
             // which means it does not exist
             if (packetLength == undefined) {
-                utils.log("Received invalid (corrupted) packet!")
+                //utils.log("Received invalid (corrupted) packet!")
 
                 if (client.id >= 0)
                     new ServerDisconnectPacket([client], "You have sent an invalid packet!");

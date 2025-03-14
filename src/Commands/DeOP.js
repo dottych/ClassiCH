@@ -1,8 +1,8 @@
 const Command = require('../Command');
 
-const ServerMessagePacket = require('../Packets/Server/Message');
-const ServerTypePacket = require('../Packets/Server/Type');
-const ServerIdentificationPacket = require('../Packets/Server/Identification');
+const ServerMessagePacket = require('../packets/server/Message');
+const ServerTypePacket = require('../packets/server/Type');
+const ServerIdentificationPacket = require('../packets/server/Identification');
 
 const lists = require('../Lists');
 const utils = require('../Utils');
