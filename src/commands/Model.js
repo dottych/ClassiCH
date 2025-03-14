@@ -1,7 +1,7 @@
 const Command = require('../Command');
 
 const ServerMessagePacket = require('../packets/server/Message');
-const ServerExtChangeModelPacket = require('../packets/server/Ext/ChangeModel');
+const ServerExtChangeModelPacket = require('../packets/server/ext/ChangeModel');
 
 const utils = require('../Utils');
 const lists = require('../Lists');

@@ -1,7 +1,7 @@
 const ClientPacket = require('../ClientPacket');
 
-const ServerDisconnectPacket = require('../Server/Disconnect');
-const ServerBlockPacket = require('../Server/Block');
+const ServerDisconnectPacket = require('../server/Disconnect');
+const ServerBlockPacket = require('../server/Block');
 
 const lists = require('../../Lists');
 const utils = require('../../Utils');

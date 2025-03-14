@@ -1,6 +1,6 @@
 const ClientPacket = require('../ClientPacket');
 
-const ServerDisconnectPacket = require ('../Server/Disconnect');
+const ServerDisconnectPacket = require ('../server/Disconnect');
 
 const BehaviourIdentificationCheck = require('../Behaviours/Identification/BehaviourIdentificationCheck');
 const BehaviourIdentificationCPE = require('../Behaviours/Identification/BehaviourIdentificationCPE');

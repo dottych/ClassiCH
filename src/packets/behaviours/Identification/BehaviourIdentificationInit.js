@@ -1,7 +1,7 @@
 const Behaviour = require('../../Behaviour');
 
-const ServerIdentificationPacket = require('../../Server/Identification');
-const ServerPingPacket = require('../../Server/Ping');
+const ServerIdentificationPacket = require('../../server/Identification');
+const ServerPingPacket = require('../../server/Ping');
 
 const lists = require('../../../Lists');
 const utils = require('../../../Utils');
@@ -26,11 +26,24 @@ class BehaviourIdentificationInit extends Behaviour {
 
             [this.client],
             config.pvn,
-            utils.populate(config.self.server.motd.title, {playerName: this.name}),
+            utils.populate(
+                
+                config.self.server.motd.title,
+                {
+                    playerName: this.name,
+                    playerCount: utils.getPlayerCount(lists.players),
+                    greetings: lists.greetings
+                }
+                
+            ),
             utils.populate(
                 
                 isOp ? config.self.server.motd.descriptionOP : config.self.server.motd.description,
-                {playerName: this.name}
+                {
+                    playerName: this.name,
+                    playerCount: utils.getPlayerCount(lists.players),
+                    greetings: lists.greetings
+                }
 
             ),
             isOp

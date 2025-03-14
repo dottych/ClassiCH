@@ -1,6 +1,6 @@
 const ClientPacket = require('../../ClientPacket');
 
-const ServerTwoWayPingPacket = require('../../Server/Ext/TwoWayPing');
+const ServerTwoWayPingPacket = require('../../server/ext/TwoWayPing');
 
 const lists = require('../../../Lists');
 const utils = require('../../../Utils');

@@ -5,6 +5,7 @@ const perlin = require('perlin-noise');
 const ServerBlockPacket = require('./packets/server/Block');
 
 const config = require('./Config');
+const lists = require('./Lists');
 const utils = require('./Utils');
 
 class World {
@@ -63,7 +64,7 @@ class World {
         if (stream)
             new ServerBlockPacket(
 
-                utils.getAllPlayerClients(),
+                utils.getAllPlayerClients(lists.players),
                 utils.uInt16(bx),
                 utils.uInt16(by),
                 utils.uInt16(bz),
@@ -77,7 +78,7 @@ class World {
         
         new ServerBlockPacket(
 
-            utils.getOtherPlayerClients(client),
+            utils.getOtherPlayerClients(client, lists.players),
             utils.uInt16(bx),
             utils.uInt16(by),
             utils.uInt16(bz),

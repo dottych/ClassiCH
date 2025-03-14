@@ -1,7 +1,7 @@
 const Behaviour = require('../../Behaviour');
 
-const ServerExtInfoPacket = require('../../Server/Ext/ExtInfo');
-const ServerExtEntryPacket = require('../../Server/Ext/ExtEntry');
+const ServerExtInfoPacket = require('../../server/ext/ExtInfo');
+const ServerExtEntryPacket = require('../../server/ext/ExtEntry');
 
 const lists = require('../../../Lists');
 

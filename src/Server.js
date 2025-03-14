@@ -2,18 +2,19 @@ const fs = require('fs');
 const net = require('net');
 const request = require('request');
 
+const config = require('./Config');
+const utils = require('./Utils');
+
 // crucial server folders
 if (!fs.existsSync('./blocks')) {
-    console.log("Creating blocks folder");
+    utils.log("Creating blocks folder");
     fs.mkdirSync('./blocks');
 }
 if (!fs.existsSync('./generations')) {
-    console.log("Creating generations folder");
+    utils.log("Creating generations folder");
     fs.mkdirSync('./generations');
 }
 
-const config = require('./Config');
-const utils = require('./Utils');
 const lists = require('./Lists');
 const packets = require('./packets');
 const commandList = require('./CommandList');
@@ -144,7 +145,7 @@ class Server {
                 '&public=' + config.self.server.public +
                 '&version=' + config.pvn +
                 '&salt=' + config.salt +
-                '&users=' + utils.getPlayerCount() +
+                '&users=' + utils.getPlayerCount(lists.players) +
                 '&software=' + encodeURIComponent(config.software) +
                 '&web=' + true,
                 (error, response, body) => {

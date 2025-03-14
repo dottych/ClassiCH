@@ -1,7 +1,7 @@
 const ClientPacket = require('../../ClientPacket');
 
-const ServerCustomBlockSupportLevelPacket = require('../../Server/Ext/CustomBlockSupportLevel');
-const ServerDisconnectPacket = require('../../Server/Disconnect');
+const ServerCustomBlockSupportLevelPacket = require('../../server/ext/CustomBlockSupportLevel');
+const ServerDisconnectPacket = require('../../server/Disconnect');
 
 const lists = require('../../../Lists');
 const utils = require('../../../Utils');

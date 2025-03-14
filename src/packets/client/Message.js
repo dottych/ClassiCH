@@ -1,7 +1,7 @@
 const ClientPacket = require('../ClientPacket');
 
-const ServerMessagePacket = require('../Server/Message');
-const ServerDisconnectPacket = require('../Server/Disconnect');
+const ServerMessagePacket = require('../server/Message');
+const ServerDisconnectPacket = require('../server/Disconnect');
 
 const Command = require('../../Command');
 
@@ -64,7 +64,9 @@ class MessagePacket extends ClientPacket {
 
             for (let string of actualMessage) {
                 // if message still has characters
-                if (string.trim() !== "") new ServerMessagePacket(utils.getAllPlayerClients(), 0x00, string);
+                if (string.trim() !== "")
+                    new ServerMessagePacket(utils.getAllPlayerClients(lists.players), 0x00, string);
+
             }
 
             utils.log(actualMessage.join(''));

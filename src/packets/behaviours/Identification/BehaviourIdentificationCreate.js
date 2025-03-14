@@ -20,7 +20,7 @@ class BehaviourIdentificationCreate extends Behaviour {
 
     execute() {
         // give client its identity
-        this.client.id = utils.findFirstUnusedID();
+        this.client.id = utils.findFirstUnusedID(lists.players);
         
         const isOp = lists.ops.indexOf(this.name) >= 0;
 

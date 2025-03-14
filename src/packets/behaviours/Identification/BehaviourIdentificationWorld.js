@@ -2,16 +2,16 @@ const zlib = require('zlib');
 
 const Behaviour = require('../../Behaviour');
 
-const ServerInitPacket = require('../../Server/Init');
-const ServerChunkPacket = require('../../Server/Chunk');
-const ServerFinalPacket = require('../../Server/Final');
-const ServerDefineBlockPacket = require('../../Server/Ext/DefineBlock');
-const ServerDefineBlockExtPacket = require('../../Server/Ext/DefineBlockExt');
-const ServerSetMapEnvUrlPacket = require('../../Server/Ext/SetMapEnvUrl');
-const ServerSetMapEnvPropertyPacket = require('../../Server/Ext/SetMapEnvProperty');
-const ServerEnvSetColorPacket = require('../../Server/Ext/EnvSetColor');
-const ServerEnvSetWeatherTypePacket = require('../../Server/Ext/EnvSetWeatherType');
-const ServerLightingModePacket = require('../../Server/Ext/LightingMode');
+const ServerInitPacket = require('../../server/Init');
+const ServerChunkPacket = require('../../server/Chunk');
+const ServerFinalPacket = require('../../server/Final');
+const ServerDefineBlockPacket = require('../../server/ext/DefineBlock');
+const ServerDefineBlockExtPacket = require('../../server/ext/DefineBlockExt');
+const ServerSetMapEnvUrlPacket = require('../../server/ext/SetMapEnvUrl');
+const ServerSetMapEnvPropertyPacket = require('../../server/ext/SetMapEnvProperty');
+const ServerEnvSetColorPacket = require('../../server/ext/EnvSetColor');
+const ServerEnvSetWeatherTypePacket = require('../../server/ext/EnvSetWeatherType');
+const ServerLightingModePacket = require('../../server/ext/LightingMode');
 
 const world = require('../../../World');
 const lists = require('../../../Lists');

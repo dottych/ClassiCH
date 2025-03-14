@@ -7,10 +7,10 @@ const ClientMovementPacket = require('./packets/client/Movement');
 const ClientMessagePacket = require('./packets/client/Message');
 const ServerDisconnectPacket = require('./packets/server/Disconnect');
 
-const ClientExtInfoPacket = require('./packets/client/Ext/ExtInfo');
-const ClientExtEntryPacket = require('./packets/client/Ext/ExtEntry');
-const ClientCustomBlockSupportLevelPacket = require('./packets/client/Ext/CustomBlockSupportLevel');
-const ClientTwoWayPingPacket = require('./packets/client/Ext/TwoWayPing');
+const ClientExtInfoPacket = require('./packets/client/ext/ExtInfo');
+const ClientExtEntryPacket = require('./packets/client/ext/ExtEntry');
+const ClientCustomBlockSupportLevelPacket = require('./packets/client/ext/CustomBlockSupportLevel');
+const ClientTwoWayPingPacket = require('./packets/client/ext/TwoWayPing');
 
 class Packets {
     constructor() {}

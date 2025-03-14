@@ -26,7 +26,7 @@ class Announcer {
             const messages = utils.splitString(`${this.prefix}${lists.announcements[currentAnnouncement]}`, "&7");
 
             for (let message of messages)
-                new ServerMessagePacket(utils.getAllPlayerClients(), 0x00, message);
+                new ServerMessagePacket(utils.getAllPlayerClients(lists.players), 0x00, message);
 
             this.lastAnnouncement = currentAnnouncement;
             

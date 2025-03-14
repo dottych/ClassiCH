@@ -1,7 +1,7 @@
 const ClientPacket = require('../ClientPacket');
 
-const ServerTeleportPacket = require('../Server/Teleport');
-const ServerRotationPacket = require('../Server/Rotation');
+const ServerTeleportPacket = require('../server/Teleport');
+const ServerRotationPacket = require('../server/Rotation');
 
 const lists = require('../../Lists');
 const utils = require('../../Utils');
@@ -83,7 +83,7 @@ class MovementPacket extends ClientPacket {
         // }
         new ServerTeleportPacket(
 
-            utils.getOtherPlayerClients(this.client),
+            utils.getOtherPlayerClients(this.client, lists.players),
             false,
             this.client.id,
             this.x,

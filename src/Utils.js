@@ -1,6 +1,5 @@
 const fs = require('fs');
 const crypto = require('crypto');
-const lists = require('./Lists');
 const config = require('./Config');
 
 class Utils {
@@ -192,11 +191,15 @@ class Utils {
 
     /**
      * Finds the first unused player ID.
+     * @param {object} players All online players.
      * @returns Player ID.
      */
-    findFirstUnusedID() {
+    findFirstUnusedID(players) {
         // TODO elsewhere: if we return 0xFF, assume it's an error and kick joiner, because all clients assume 255 is their ID
-        for (let i = 0; i <= 255; i++) if (lists.players[i] == undefined) return i;
+        for (let i = 0; i <= 255; i++)
+            if (players[i] == undefined) 
+                return i;
+
         return 255;
     }
 
@@ -226,10 +229,11 @@ class Utils {
     /**
      * Finds if player is online.
      * @param {string} name Player's name.
+     * @param {object} players All online players.
      * @returns True if online, false if not.
      */
-    isNameOnline(name) {
-        for (let player of Object.values(lists.players))
+    isNameOnline(name, players) {
+        for (let player of Object.values(players))
             if (player.name === name) return true;
 
         return false;
@@ -238,10 +242,11 @@ class Utils {
     /**
      * Finds a player by name.
      * @param {string} name Player's name.
+     * @param {object} players All online players.
      * @returns Player class.
      */
-    findPlayerByName(name) {
-        for (let player of Object.values(lists.players))
+    findPlayerByName(name, players) {
+        for (let player of Object.values(players))
             if (player.name === name) return player;
 
         return;
@@ -249,20 +254,22 @@ class Utils {
 
     /**
      * Finds how many players are online.
+     * @param {object} players All online players.
      * @returns Integer with player count.
      */
-    getPlayerCount() {
-        return Object.keys(lists.players).length;
+    getPlayerCount(players) {
+        return Object.keys(players).length;
     }
 
     /**
      * Finds all player clients.
+     * @param {object} players All online players.
      * @returns An array with player clients.
      */
-    getAllPlayerClients() {
+    getAllPlayerClients(players) {
         let clients = [];
 
-        for (let player of Object.values(lists.players))
+        for (let player of Object.values(players))
             clients.push(player.client);
         
         return clients;
@@ -270,13 +277,14 @@ class Utils {
 
     /**
      * Finds all player clients except for the one specified.
-     * @param {Socket} client 
+     * @param {Socket} client
+     * @param {object} players All online players.
      * @returns An array with player clients.
      */
-    getOtherPlayerClients(client) {
+    getOtherPlayerClients(client, players) {
         let clients = [];
 
-        for (let player of Object.values(lists.players))
+        for (let player of Object.values(players))
             if (client != player.client) clients.push(player.client);
         
         return clients;
@@ -284,18 +292,27 @@ class Utils {
 
     /**
      * Finds all OP player clients.
+     * @param {object} players All online players.
      * @returns An array with OP clients.
      */
-    getOpClients() {
+    getOpClients(players) {
         let clients = [];
 
-        for (let player of Object.values(lists.players))
+        for (let player of Object.values(players))
             if (player.op) clients.push(player.client);
 
         return clients;
     }
 
-    // populations should be an object
+    /**
+     * Gets server's local time in 24-hour format, HH:MM:SS.
+     * @returns Time as string.
+     */
+    getServerTime() {
+        const date = new Date();
+        return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    }
+
     /**
      * Populates placeholder values with real values.
      * @param {string} string A string with placeholder values.
@@ -305,10 +322,10 @@ class Utils {
     populate(string, populations) {
         string = string.replaceAll("%servername%", config.self.server.name);
         string = string.replaceAll("%maxplayers%", config.self.server.maxPlayers);
-        string = string.replaceAll("%playercount%", this.getPlayerCount().toString());
+        string = string.replaceAll("%playercount%", populations.playerCount.toString());
         string = string.replaceAll("%playername%", populations.playerName);
-        string = string.replaceAll("%greeting%", lists.greetings[Math.floor(Math.random() * lists.greetings.length)]);
-        //string = string.replaceAll("%time%", `${Date.getHours()}:${Date.getMinutes()}:${Date.getSeconds()}`);
+        string = string.replaceAll("%greeting%", populations.greetings[Math.floor(Math.random() * populations.greetings.length)]);
+        string = string.replaceAll("%time%", this.getServerTime());
 
         return string;
     }

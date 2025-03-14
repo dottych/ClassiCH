@@ -1,6 +1,6 @@
 const Behaviour = require('../../Behaviour');
 
-const ServerDisconnectPacket = require('../../Server/Disconnect');
+const ServerDisconnectPacket = require('../../server/Disconnect');
 
 const utils = require('../../../Utils');
 const lists = require('../../../Lists');
@@ -47,21 +47,26 @@ class BehaviourIdentificationCheck extends Behaviour {
         }
 
         // is server full?
-        if (utils.getPlayerCount() >= config.self.server.maxPlayers) {
+        if (utils.getPlayerCount(lists.players) >= config.self.server.maxPlayers) {
             new ServerDisconnectPacket([this.client], "The server is full!");
             return false;
         }
         
         // is client's name already connected? (if joinKick is on)
         if (!config.self.server.joinKick) {
-            if (utils.isNameOnline(this.name)) {
+            if (utils.isNameOnline(this.name, lists.players)) {
                 new ServerDisconnectPacket([this.client], "You are already connected!");
                 return false;
             }
         }
         else {
-            if (utils.isNameOnline(this.name))
-                new ServerDisconnectPacket([utils.findPlayerByName(this.name).client], "Connected from another session!");
+            if (utils.isNameOnline(this.name, lists.players))
+                new ServerDisconnectPacket(
+
+                    [utils.findPlayerByName(this.name, lists.players).client],
+                    "Connected from another session!"
+
+                );
         }
         
 

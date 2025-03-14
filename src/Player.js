@@ -5,7 +5,7 @@ const config = require('./Config');
 
 const ServerMessagePacket = require('./packets/server/Message');
 const ServerDespawnPacket = require('./packets/server/Despawn');
-const ServerTwoWayPingPacket = require('./packets/server/Ext/TwoWayPing');
+const ServerTwoWayPingPacket = require('./packets/server/ext/TwoWayPing');
 
 class Player {
     constructor(client, id, name, op, cpe) {
@@ -69,8 +69,9 @@ class Player {
 
     disconnect() {
         // remove this player for other clients and say message
-        new ServerDespawnPacket(utils.getOtherPlayerClients(this.client), this.id);
-        new ServerMessagePacket(utils.getOtherPlayerClients(this.client), 0x00, `&e${this.name} left the game`);
+        const otherClients = utils.getOtherPlayerClients(this.client, lists.players);
+        new ServerDespawnPacket(otherClients, this.id);
+        new ServerMessagePacket(otherClients, 0x00, `&e${this.name} left the game`);
 
         delete lists.players[this.id];
         

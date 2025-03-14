@@ -1,9 +1,9 @@
 const Behaviour = require('../../Behaviour');
 
-const ServerSpawnPacket = require('../../Server/Spawn');
-const ServerMessagePacket = require('../../Server/Message');
-const ServerExtChangeModelPacket = require('../../Server/Ext/ChangeModel');
-const ServerTwoWayPingPacket = require('../../Server/Ext/TwoWayPing');
+const ServerSpawnPacket = require('../../server/Spawn');
+const ServerMessagePacket = require('../../server/Message');
+const ServerExtChangeModelPacket = require('../../server/ext/ChangeModel');
+const ServerTwoWayPingPacket = require('../../server/ext/TwoWayPing');
 
 const utils = require('../../../Utils');
 const lists = require('../../../Lists');
@@ -42,7 +42,7 @@ class BehaviourIdentificationSpawn extends Behaviour {
         // spawn client for others
         new ServerSpawnPacket(
 
-            utils.getOtherPlayerClients(this.client),
+            utils.getOtherPlayerClients(this.client, lists.players),
             false,
             this.client.id
 
@@ -70,7 +70,7 @@ class BehaviourIdentificationSpawn extends Behaviour {
 
             }
 
-        new ServerMessagePacket(utils.getAllPlayerClients(), 0x00, `&e${this.name} joined the game`);
+        new ServerMessagePacket(utils.getAllPlayerClients(lists.players), 0x00, `&e${this.name} joined the game`);
         new ServerMessagePacket([this.client], 100, config.self.server.name);
         utils.log(`${this.name} joined the game`); 
 
