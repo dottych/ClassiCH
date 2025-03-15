@@ -29,7 +29,7 @@ class CommandR extends Command {
             return;
         }
 
-        let player = utils.findPlayerByName(messaging);
+        let player = utils.findPlayerByName(messaging, lists.players);
 
         if (player == undefined) {
             new ServerMessagePacket([this.client], 0x00, "&ePlayer is not online!");

@@ -31,7 +31,7 @@ class CommandFlipCoin extends Command {
 
         new ServerMessagePacket(
             
-            utils.getAllPlayerClients(),
+            utils.getAllPlayerClients(lists.players),
             0x00,
             `&b${me.name} flipped a coin and got ${coin}!`
             

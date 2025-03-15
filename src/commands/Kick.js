@@ -30,7 +30,7 @@ class CommandKick extends Command {
         }
 
         let name = this.args.shift();
-        let player = utils.findPlayerByName(name);
+        let player = utils.findPlayerByName(name, lists.players);
         let reason = this.args.join(' ');
 
         if (player != undefined) {

@@ -4,6 +4,7 @@ const ServerMessagePacket = require('../packets/server/Message');
 const ServerTeleportPacket = require('../packets/server/Teleport');
 
 const utils = require('../Utils');
+const lists = require('../Lists');
 
 class CommandTP extends Command {
     constructor(client, args) {
@@ -23,8 +24,8 @@ class CommandTP extends Command {
         }
 
         if (this.args.length >= 2) {
-            let player1 = utils.findPlayerByName(this.args[0]);
-            let player2 = utils.findPlayerByName(this.args[1]);
+            let player1 = utils.findPlayerByName(this.args[0], lists.players);
+            let player2 = utils.findPlayerByName(this.args[1], lists.players);
 
             if (player1 != undefined && player2 != undefined) {
                 new ServerTeleportPacket(
@@ -46,7 +47,7 @@ class CommandTP extends Command {
 
             new ServerMessagePacket([this.client], 0x00, "&eOne of the players is not online!");
         } else {
-            let player = utils.findPlayerByName(this.args[0]);
+            let player = utils.findPlayerByName(this.args[0], lists.players);
 
             if (player != undefined) {
                 new ServerTeleportPacket(

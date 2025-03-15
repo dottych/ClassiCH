@@ -31,7 +31,7 @@ class CommandDeOP extends Command {
         }
 
         if (lists.removeOp(this.args[0])) {
-            let player = utils.findPlayerByName(this.args[0]);
+            let player = utils.findPlayerByName(this.args[0], lists.players);
 
             if (player != undefined) {
                 player.op = false;
@@ -39,11 +39,24 @@ class CommandDeOP extends Command {
 
                     [player.client],
                     config.pvn,
-                    utils.populate(config.self.server.motd.title, {playerName: this.name}),
+                    utils.populate(
+
+                        config.self.server.motd.title,
+                        {
+                            playerName: this.name,
+                            playerCount: utils.getPlayerCount(lists.players),
+                            greetings: lists.greetings
+                        }
+                        
+                    ),
                     utils.populate(
                         
                         config.self.server.motd.description,
-                        {playerName: this.name}
+                        {
+                            playerName: this.name,
+                            playerCount: utils.getPlayerCount(lists.players),
+                            greetings: lists.greetings
+                        }
         
                     ),
                     false

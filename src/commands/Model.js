@@ -36,7 +36,7 @@ class CommandModel extends Command {
         me.model = this.args[0];
 
         new ServerExtChangeModelPacket([this.client], 0xFF, me.model);
-        new ServerExtChangeModelPacket(utils.getOtherPlayerClients(this.client), this.client.id, me.model);
+        new ServerExtChangeModelPacket(utils.getOtherPlayerClients(this.client, lists.players), this.client.id, me.model);
 
         if (!reset) new ServerMessagePacket([this.client], 0x00, `&eSet your model to ${me.model}.`);
     }

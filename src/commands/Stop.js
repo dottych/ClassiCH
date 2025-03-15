@@ -3,6 +3,7 @@ const Command = require('../Command');
 const ServerDisconnectPacket = require('../packets/server/Disconnect');
 
 const utils = require('../Utils');
+const lists = require('../Lists');
 
 class CommandStop extends Command {
     constructor(client, args) {
@@ -16,7 +17,7 @@ class CommandStop extends Command {
     }
 
     execute() {
-        new ServerDisconnectPacket(utils.getAllPlayerClients(), `Server is shutting down...`);
+        new ServerDisconnectPacket(utils.getAllPlayerClients(lists.players), `Server is shutting down...`);
         
         setTimeout(() => {
             process.exit();

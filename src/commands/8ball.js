@@ -42,7 +42,7 @@ class Command8ball extends Command {
             for (let questionMessage of questionMessages)
                 new ServerMessagePacket(
                     
-                    utils.getAllPlayerClients(),
+                    utils.getAllPlayerClients(lists.players),
                     0x00,
                     questionMessage
                     
@@ -60,7 +60,7 @@ class Command8ball extends Command {
             for (let answerMessage of answerMessages)
                 new ServerMessagePacket(
                     
-                    utils.getAllPlayerClients(),
+                    utils.getAllPlayerClients(lists.players),
                     0x00,
                     answerMessage
                     

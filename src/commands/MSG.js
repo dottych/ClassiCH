@@ -33,7 +33,7 @@ class CommandMSG extends Command {
             return;
         }
 
-        let player = utils.findPlayerByName(this.args.shift());
+        let player = utils.findPlayerByName(this.args.shift(), lists.players);
 
         if (player == undefined) {
             new ServerMessagePacket([this.client], 0x00, "&ePlayer is not online!");

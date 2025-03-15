@@ -3,6 +3,7 @@ const Command = require('../Command');
 const ServerMessagePacket = require('../packets/server/Message');
 
 const utils = require('../Utils');
+const lists = require('../Lists');
 
 class CommandBroadcast extends Command {
     constructor(client, args) {
@@ -24,7 +25,7 @@ class CommandBroadcast extends Command {
         const messages = utils.splitString(`[BROADCAST] ${this.args.join(' ')}`, "&e");
 
         for (let message of messages)
-            new ServerMessagePacket(utils.getAllPlayerClients(), 0x00, message);
+            new ServerMessagePacket(utils.getAllPlayerClients(lists.players), 0x00, message);
         
     }
 }

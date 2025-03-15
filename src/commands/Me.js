@@ -27,7 +27,7 @@ class CommandMe extends Command {
         const messages = utils.splitString(`* ${me.name} ${this.args.join(' ')}`, "&e");
 
         for (let message of messages)
-            new ServerMessagePacket(utils.getAllPlayerClients(), 0x00, message);
+            new ServerMessagePacket(utils.getAllPlayerClients(lists.players), 0x00, message);
 
     }
 }
