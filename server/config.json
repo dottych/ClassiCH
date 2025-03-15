@@ -160,7 +160,7 @@
         "spamInterval": 5,
 
         "announcer": {
-            "enabled": true,
+            "enabled": false,
 
             "prefix": "* ",
             "interval": 10

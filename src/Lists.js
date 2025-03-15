@@ -12,6 +12,8 @@ class Lists {
         try {
             this.ops = JSON.parse(fs.readFileSync('./ops.json').toString());
         } catch(error) {
+            require('./Utils').log("Creating ops.json");
+            
             this.ops = [];
             fs.writeFileSync('./ops.json', JSON.stringify(this.ops));
         }
@@ -20,6 +22,8 @@ class Lists {
         try {
             this.bans = JSON.parse(fs.readFileSync('./bans.json').toString());
         } catch(error) {
+            require('./Utils').log("Creating bans.json");
+
             this.bans = {};
             fs.writeFileSync('./bans.json', JSON.stringify(this.bans));
         }
@@ -28,6 +32,8 @@ class Lists {
         try {
             this.greetings = require('./Utils').getLines(fs.readFileSync('./greetings.txt').toString());
         } catch(error) {
+            require('./Utils').log("Creating greetings.txt");
+
             this.greetings = ["Welcome"];
             fs.writeFileSync('./greetings.txt', this.greetings.join('\n'));
         }
@@ -36,6 +42,8 @@ class Lists {
         try {
             this.announcements = require('./Utils').getLines(fs.readFileSync('./announcements.txt').toString());
         } catch(error) {
+            require('./Utils').log("Creating announcements.txt");
+
             this.announcements = ["This server hasn't set up its announcer yet!"];
             fs.writeFileSync('./announcements.txt', this.announcements.join('\n'));
         }
