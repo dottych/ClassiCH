@@ -16,6 +16,8 @@
 
 <sub>*Yet another CPE server for Minecraft Classic... but using JavaScript!*</sub>
 
+###### Note: for generations and blocks, go to https://github.com/dottych/ClassiCH-content
+
 # Features
 - Simple to set up and use
 - Partial CPE support
