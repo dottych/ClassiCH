@@ -77,6 +77,7 @@ class BlockPacket extends ClientPacket {
         if (this.mode === 0x01) {
             const slabIndex = config.self.world.features.slabs.IDs.indexOf(this.type);
             const flowerIndex = config.self.world.features.flowers.IDs.indexOf(this.type);
+            const spongeIndex = config.self.world.features.sponges.IDs.indexOf(this.type);
             let placeOriginal = true;
 
             // slabs
@@ -125,19 +126,23 @@ class BlockPacket extends ClientPacket {
                 placeOriginal = false;
             }
 
-            if (player.commandVars.sponges && this.type === 19)
-                for (let bx = -1; bx <= 1; bx++)
-                    for (let by = -1; by <= 1; by++)
-                        for (let bz = -1; bz <= 1; bz++) {
+            // future suggestion: move sponging to World.js?
+            if (player.commandVars.sponges && spongeIndex >= 0) {
+                const radius = config.self.world.features.sponges.radius;
+
+                for (let bx = 0-radius; bx <= radius; bx++)
+                    for (let by = 0-radius; by <= radius; by++)
+                        for (let bz = 0-radius; bz <= radius; bz++) {
                             // if that is the sponge
                             if (bx === 0 && by === 0 && bz === 0) continue;
 
-                            let liquidIndex = config.self.world.features.sponges.IDs.indexOf(world.getBlock(x + bx, y + by, z +bz));
+                            let liquidIndex = config.self.world.features.sponges.liquidIDs.indexOf(world.getBlock(x + bx, y + by, z +bz));
 
                             if (liquidIndex >= 0)
                                 world.setBlock(0, true, x + bx, y + by, z + bz);
 
                         }
+            }
 
             if (this.type === 2) {
                 placeOriginal = false;

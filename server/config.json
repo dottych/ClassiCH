@@ -53,7 +53,7 @@
                 "default": false,
                 "forced": false,
 
-                "blastRadius": 2,
+                "radius": 2,
 
                 "IDs": [
                     46
@@ -75,22 +75,12 @@
 
                 "IDs": [
                     44,
-                    50,
-                    91,
-                    105,
-                    106,
-                    107,
-                    108
+                    50
                 ],
                 
                 "replacementIDs": [
                     43,
-                    4,
-                    52,
-                    1,
-                    4,
-                    5,
-                    94
+                    4
                 ]
             },
 
@@ -101,8 +91,7 @@
                 "IDs": [
                     6,
                     37,
-                    38,
-                    95
+                    38
                 ]
             },
 
@@ -110,7 +99,13 @@
                 "default": true,
                 "forced": false,
 
+                "radius": 1,
+
                 "IDs": [
+                    19
+                ],
+
+                "liquidIDs": [
                     8,
                     9
                 ]

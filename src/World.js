@@ -152,7 +152,7 @@ class World {
     explode(x, y, z) {
         //if (!config.self.world.features.explosions) return;
 
-        let radius = config.self.world.features.explosions.blastRadius;
+        let radius = config.self.world.features.explosions.radius;
 
         for (let bx = 0-radius; bx <= radius; bx++)
             for (let by = 0-radius; by <= radius; by++)
@@ -174,6 +174,8 @@ class World {
                         // not sure why it's here twice anymore...
                         // but you know how the saying goes
                         // never remove stuff you think is useless...
+                        // the only difference is the stream value though
+                        // eh I'll check on this later
                         this.setBlock(0, true, x+bx, y+by, z+bz);
                     }
                 }
