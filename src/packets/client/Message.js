@@ -76,19 +76,13 @@ class MessagePacket extends ClientPacket {
             let args = player.message.trim().split(' ');
             const command = args.shift().replace('/', '');
 
-            // no need to have player's message anymore
-            player.message = "";
-            player.longMsgCount = 0;
-
             try {
-                if (commandManager.list[command] != undefined) {
-                    if (lists.commands[command].op && !player.op) {
+                if (commandManager.list[command] != undefined)
+                    if (lists.commands[command].op && !player.op)
                         new ServerMessagePacket([this.client], 0x00, "You're not OP!");
-                        return;
-                    }
-                    
-                    new (commandManager.list[command])(this.client, args).execute();
-                } else
+                    else
+                        new (commandManager.list[command])(this.client, args).execute();
+                else
                     // unknown command
                     new Command(this.client, args).execute();
 
@@ -98,6 +92,9 @@ class MessagePacket extends ClientPacket {
                 new ServerMessagePacket([this.client], 0x00, "An unexpected error happened!");
             }
         }
+
+        player.message = "";
+        player.longMsgCount = 0;
     }
 }
 
