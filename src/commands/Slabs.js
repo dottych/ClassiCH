@@ -12,6 +12,8 @@ class CommandSlabs extends Command {
         this.name = "slabs";
         this.description = "Toggles slabs while building.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

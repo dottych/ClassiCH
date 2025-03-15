@@ -11,6 +11,8 @@ class CommandUnban extends Command {
         this.name = "unban";
         this.description = "Unbans a specified player.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

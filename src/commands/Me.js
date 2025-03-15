@@ -12,6 +12,8 @@ class CommandMe extends Command {
         this.name = "me";
         this.description = "* Player needs help!";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

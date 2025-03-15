@@ -12,6 +12,8 @@ class CommandClients extends Command {
         this.name = "clients";
         this.description = "Lists clients that players use on the server.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

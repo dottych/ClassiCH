@@ -12,6 +12,8 @@ class CommandFlowers extends Command {
         this.name = "flowers";
         this.description = "Toggles flowers while building.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

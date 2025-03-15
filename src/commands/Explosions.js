@@ -12,6 +12,8 @@ class CommandExplosions extends Command {
         this.name = "explosions";
         this.description = "Toggles explosions while building.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

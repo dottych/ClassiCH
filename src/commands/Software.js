@@ -11,6 +11,8 @@ class CommandSoftware extends Command {
         this.name = "software";
         this.description = "Says stuff about the server software.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

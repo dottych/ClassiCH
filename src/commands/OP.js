@@ -15,6 +15,8 @@ class CommandOP extends Command {
         this.name = "op";
         this.description = "OPs a specified player.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

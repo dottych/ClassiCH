@@ -12,25 +12,56 @@ class CommandHelp extends Command {
         this.name = "help";
         this.description = "Says all commands or the description of a command.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }
 
     execute() {
         if (this.args.length > 0) {
-            new ServerMessagePacket(
+            const commandExists = lists.commands[this.args[0]] != undefined;
+
+            if (commandExists) {
+                const command = lists.commands[this.args[0]];
+
+                let commandString = `&e/${command.name} `;
+                commandString += `(OP: ${command.op.toString()}, `;
+                commandString += `hidden: ${command.hidden.toString()})`;
+
+                new ServerMessagePacket(
+                
+                    [this.client],
+                    0x00,
+                    commandString
+                    
+                );
+                new ServerMessagePacket(
+                
+                    [this.client],
+                    0x00,
+                    `&bAliases: ${command.aliases.join(', ')}`
+                    
+                );
+                new ServerMessagePacket(
+                
+                    [this.client],
+                    0x00,
+                    `&a${command.description}`
+                    
+                );
+            } else new ServerMessagePacket(
                 
                 [this.client],
                 0x00,
-                lists.commands[this.args[0]] != undefined
-                ? `&a${lists.commands[this.args[0]].description}` : "&aCommand does not exist, no help here!"
+                "&aCommand does not exist, no help here!"
                 
             );
         } else {
             let commands = [];
 
             for (let command of Object.keys(lists.commands)) {
-                if (lists.commands[command].hidden) continue;
+                if (lists.commands[command].hidden || lists.commands[command].alias) continue;
                 if (lists.commands[command].op && !lists.players[this.client.id].op) continue;
                 
                 commands.push(command);

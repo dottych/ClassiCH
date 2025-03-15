@@ -11,6 +11,8 @@ class CommandAbout extends Command {
         this.name = "about";
         this.description = "Says stuff about the server.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

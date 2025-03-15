@@ -11,6 +11,8 @@ class CommandBackup extends Command {
         this.name = "backup";
         this.description = "Saves a backup of the current world.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

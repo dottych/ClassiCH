@@ -6,12 +6,14 @@ const ServerTeleportPacket = require('../packets/server/Teleport');
 const utils = require('../Utils');
 const lists = require('../Lists');
 
-class CommandTPPos extends Command {
+class CommandTeleportPos extends Command {
     constructor(client, args) {
         super(client, args);
 
-        this.name = "tppos";
+        this.name = "teleportpos";
         this.description = "Teleports you to a specified location/orientation.";
+
+        this.aliases = ["tppos"];
 
         this.op = true;
         this.hidden = false;
@@ -85,4 +87,4 @@ class CommandTPPos extends Command {
     }
 }
 
-module.exports = CommandTPPos;
+module.exports = CommandTeleportPos;

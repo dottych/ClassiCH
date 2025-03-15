@@ -5,12 +5,14 @@ const ServerMessagePacket = require('../packets/server/Message');
 const lists = require('../Lists');
 const utils = require('../Utils');
 
-class CommandR extends Command {
+class CommandReply extends Command {
     constructor(client, args) {
         super(client, args);
 
-        this.name = "r";
+        this.name = "reply";
         this.description = "Replies to the last messaged player.";
+
+        this.aliases = ["respond", "r"];
 
         this.op = false;
         this.hidden = false;
@@ -48,4 +50,4 @@ class CommandR extends Command {
     }
 }
 
-module.exports = CommandR;
+module.exports = CommandReply;

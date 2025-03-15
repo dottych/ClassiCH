@@ -6,12 +6,14 @@ const ServerTeleportPacket = require('../packets/server/Teleport');
 const utils = require('../Utils');
 const lists = require('../Lists');
 
-class CommandTP extends Command {
+class CommandTeleport extends Command {
     constructor(client, args) {
         super(client, args);
 
-        this.name = "tp";
+        this.name = "teleport";
         this.description = "Teleports you to a specified player, or player to player.";
+
+        this.aliases = ["tp"];
 
         this.op = true;
         this.hidden = false;
@@ -72,4 +74,4 @@ class CommandTP extends Command {
     }
 }
 
-module.exports = CommandTP;
+module.exports = CommandTeleport;

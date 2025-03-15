@@ -14,6 +14,8 @@ class CommandKick extends Command {
         this.name = "kick";
         this.description = "Kicks a specified player.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

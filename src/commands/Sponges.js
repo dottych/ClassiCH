@@ -12,6 +12,8 @@ class CommandSponges extends Command {
         this.name = "sponges";
         this.description = "Toggles sponges while building.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

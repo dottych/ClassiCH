@@ -17,10 +17,10 @@ if (!fs.existsSync('./generations')) {
 
 const lists = require('./Lists');
 const packets = require('./packets');
-const commandList = require('./CommandList');
+const commandManager = require('./CommandManager');
 const announcer = require('./Announcer');
 
-utils.log(`Loaded ${Object.keys(commandList).length} command${Object.keys(commandList).length === 1 ? "" : "s"}`);
+utils.log(`Loaded ${commandManager.actualSize} command${commandManager.actualSize === 1 ? "" : "s"}`);
 utils.log(`Loaded ${Object.keys(lists.customBlocks).length} custom block${Object.keys(lists.customBlocks).length === 1 ? "" : "s"}`);
 
 // check if crucial config values are valid

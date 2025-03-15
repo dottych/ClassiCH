@@ -12,6 +12,8 @@ class CommandStop extends Command {
         this.name = "stop";
         this.description = "Stops the server.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

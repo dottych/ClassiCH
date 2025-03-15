@@ -13,6 +13,8 @@ class Command8ball extends Command {
         this.name = "8ball";
         this.description = "Ask 8-Ball something.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

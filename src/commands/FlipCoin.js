@@ -13,6 +13,8 @@ class CommandFlipCoin extends Command {
         this.name = "flipcoin";
         this.description = "Flip a coin.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

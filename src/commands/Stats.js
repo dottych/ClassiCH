@@ -11,6 +11,8 @@ class CommandStats extends Command {
         this.name = "stats";
         this.description = "Says the server's stats.";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

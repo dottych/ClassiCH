@@ -12,6 +12,8 @@ class CommandBroadcast extends Command {
         this.name = "broadcast";
         this.description = "Broadcasts a message.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

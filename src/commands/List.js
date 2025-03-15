@@ -12,6 +12,8 @@ class CommandList extends Command {
         this.name = "list";
         this.description = "Lists every player on the server.";
 
+        this.aliases = ["players"];
+
         this.op = false;
         this.hidden = false;
     }

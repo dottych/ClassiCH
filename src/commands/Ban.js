@@ -14,6 +14,8 @@ class CommandBan extends Command {
         this.name = "ban";
         this.description = "Bans a specified player.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

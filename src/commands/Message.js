@@ -6,12 +6,14 @@ const lists = require('../Lists');
 const utils = require('../Utils');
 const config = require('../Config');
 
-class CommandMSG extends Command {
+class CommandMessage extends Command {
     constructor(client, args) {
         super(client, args);
 
-        this.name = "msg";
+        this.name = "message";
         this.description = "Private-messages a specified player.";
+
+        this.aliases = ["msg"];
 
         this.op = false;
         this.hidden = false;
@@ -55,4 +57,4 @@ class CommandMSG extends Command {
     }
 }
 
-module.exports = CommandMSG;
+module.exports = CommandMessage;

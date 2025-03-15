@@ -15,6 +15,8 @@ class CommandDeOP extends Command {
         this.name = "deop";
         this.description = "DeOPs a specified player.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

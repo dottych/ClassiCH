@@ -11,6 +11,8 @@ class CommandSave extends Command {
         this.name = "save";
         this.description = "Saves the current world.";
 
+        this.aliases = [];
+
         this.op = true;
         this.hidden = false;
     }

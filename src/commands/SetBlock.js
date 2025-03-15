@@ -13,6 +13,8 @@ class CommandSetBlock extends Command {
         this.name = "setblock";
         this.description = "Set specified block at coordinate (x,y,z,type) or under you.";
 
+        this.aliases = ["sb"];
+
         this.op = true;
         this.hidden = false;
     }

@@ -9,6 +9,8 @@ class CommandPing extends Command {
         this.name = "ping";
         this.description = "A game of Pong!";
 
+        this.aliases = [];
+
         this.op = false;
         this.hidden = false;
     }

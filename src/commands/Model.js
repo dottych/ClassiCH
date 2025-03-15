@@ -13,6 +13,8 @@ class CommandModel extends Command {
         this.name = "model";
         this.description = "Sets your model to a specified model. \"reset\" will reset it.";
 
+        this.aliases = ["character", "char"];
+
         this.op = false;
         this.hidden = false;
     }
