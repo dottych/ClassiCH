@@ -16,7 +16,7 @@ if (!fs.existsSync('./generations')) {
 }
 
 const lists = require('./Lists');
-const packets = require('./packets');
+const packets = require('./Packets');
 const commandManager = require('./CommandManager');
 const announcer = require('./Announcer');
 
@@ -102,7 +102,7 @@ class Server {
     }
 
     onClose(client) {
-        const player = lists.players[client.id];
+        const player = lists.players.get(client.id);
 
         // if client has a valid player, remove it
         if (player !== undefined)

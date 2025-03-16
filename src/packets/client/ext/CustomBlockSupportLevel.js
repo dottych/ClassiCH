@@ -2,10 +2,10 @@ const ClientPacket = require('../../ClientPacket');
 
 const lists = require('../../../Lists');
 
-const BehaviourIdentificationCreate = require('../../Behaviours/Identification/BehaviourIdentificationCreate');
-const BehaviourIdentificationInit = require('../../Behaviours/Identification/BehaviourIdentificationInit');
-const BehaviourIdentificationWorld = require('../../Behaviours/Identification/BehaviourIdentificationWorld');
-const BehaviourIdentificationSpawn = require('../../Behaviours/Identification/BehaviourIdentificationSpawn');
+const BehaviourIdentificationCreate = require('../../behaviours/Identification/BehaviourIdentificationCreate');
+const BehaviourIdentificationInit = require('../../behaviours/Identification/BehaviourIdentificationInit');
+const BehaviourIdentificationWorld = require('../../behaviours/Identification/BehaviourIdentificationWorld');
+const BehaviourIdentificationSpawn = require('../../behaviours/Identification/BehaviourIdentificationSpawn');
 
 class CustomBlockSupportLevelPacket extends ClientPacket {
     constructor(client, buffer) {

@@ -2,12 +2,12 @@ const ClientPacket = require('../ClientPacket');
 
 const ServerDisconnectPacket = require ('../server/Disconnect');
 
-const BehaviourIdentificationCheck = require('../Behaviours/Identification/BehaviourIdentificationCheck');
-const BehaviourIdentificationCPE = require('../Behaviours/Identification/BehaviourIdentificationCPE');
-const BehaviourIdentificationCreate = require('../Behaviours/Identification/BehaviourIdentificationCreate');
-const BehaviourIdentificationInit = require('../Behaviours/Identification/BehaviourIdentificationInit');
-const BehaviourIdentificationWorld = require('../Behaviours/Identification/BehaviourIdentificationWorld');
-const BehaviourIdentificationSpawn = require('../Behaviours/Identification/BehaviourIdentificationSpawn');
+const BehaviourIdentificationCheck = require('../behaviours/Identification/BehaviourIdentificationCheck');
+const BehaviourIdentificationCPE = require('../behaviours/Identification/BehaviourIdentificationCPE');
+const BehaviourIdentificationCreate = require('../behaviours/Identification/BehaviourIdentificationCreate');
+const BehaviourIdentificationInit = require('../behaviours/Identification/BehaviourIdentificationInit');
+const BehaviourIdentificationWorld = require('../behaviours/Identification/BehaviourIdentificationWorld');
+const BehaviourIdentificationSpawn = require('../behaviours/Identification/BehaviourIdentificationSpawn');
 
 const lists = require('../../Lists');
 const utils = require('../../Utils');

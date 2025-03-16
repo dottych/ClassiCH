@@ -1,5 +1,5 @@
 const ServerPacket = require('../../ServerPacket');
-const LightInfoStructure = require('../../Structures/LightInfo');
+const LightInfoStructure = require('../../structures/LightInfo');
 
 const lists = require('../../../Lists');
 const utils = require('../../../Utils');

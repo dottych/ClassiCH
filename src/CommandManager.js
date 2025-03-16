@@ -6,7 +6,7 @@ const lists = require('./Lists');
 let list = {};
 let actualSize = 0;
 
-for (let command of fs.readdirSync('../src/Commands/')) {
+for (let command of fs.readdirSync('../src/commands/')) {
     // check if it's a module
     if (!command.endsWith('.js')) continue;
 
@@ -15,7 +15,7 @@ for (let command of fs.readdirSync('../src/Commands/')) {
 
     // register command and add its information to list
     try {
-        list[command.toLowerCase()] = require(`./Commands/${command}`);
+        list[command.toLowerCase()] = require(`./commands/${command}`);
 
         // main command
         const tempCommand = new (list[command.toLowerCase()])(null, []);
@@ -35,7 +35,7 @@ for (let command of fs.readdirSync('../src/Commands/')) {
 
         // command aliases
         for (let alias of tempCommand.aliases) {
-            list[alias.toLowerCase()] = require(`./Commands/${command}`);
+            list[alias.toLowerCase()] = require(`./commands/${command}`);
 
             lists.commands[alias.toLowerCase()] = {
             
