@@ -26,7 +26,7 @@ class MessagePacket extends ClientPacket {
     }
 
     handle() {
-        const player = lists.players[this.client.id];
+        const player = lists.players.get(this.client.id);
 
         player.message += (this.type === 0 ? (player.message.length > 0 ? this.message.trimEnd() : this.message.trim()) : this.message);
 

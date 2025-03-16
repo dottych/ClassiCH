@@ -27,7 +27,7 @@ class CommandDeOP extends Command {
             return;
         }
 
-        if (!config.self.commands.selfActions && this.args[0] === lists.players[this.client.id].name) {
+        if (!config.self.commands.selfActions && this.args[0] === lists.players.get(this.client.id).name) {
             new ServerMessagePacket([this.client], 0x00, "&eYou can't deop yourself!");
             return;
         }

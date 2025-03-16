@@ -73,7 +73,7 @@ class Player {
         new ServerDespawnPacket(otherClients, this.id);
         new ServerMessagePacket(otherClients, 0x00, `&e${this.name} left the game`);
 
-        delete lists.players[this.id];
+        lists.players.delete(this.id);
         
         utils.log(`${this.name} left the game`);
     }

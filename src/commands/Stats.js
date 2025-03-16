@@ -2,6 +2,7 @@ const Command = require('../Command');
 
 const ServerMessagePacket = require('../packets/server/Message');
 
+const utils = require('../Utils');
 const lists = require('../Lists');
 
 class CommandStats extends Command {
@@ -18,7 +19,7 @@ class CommandStats extends Command {
     }
 
     execute() {
-        new ServerMessagePacket([this.client], 0x00, `&ePlayers online: ${Object.entries(lists.players).length}`);
+        new ServerMessagePacket([this.client], 0x00, `&ePlayers online: ${utils.getPlayerCount(lists.players)}`);
         new ServerMessagePacket([this.client], 0x00, `&eUptime: ${Math.floor(performance.now() / 1000)}s`);
         new ServerMessagePacket([this.client], 0x00, `&eMemory used: ${Math.round(process.memoryUsage().heapUsed / 1000000)} MB`);
     }

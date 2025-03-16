@@ -19,7 +19,7 @@ class CommandMe extends Command {
     }
 
     execute() {
-        const me = lists.players[this.client.id];
+        const me = lists.players.get(this.client.id);
 
         if (this.args.length <= 0) {
             new ServerMessagePacket([this.client], 0x00, "&eYou must provide a message!");

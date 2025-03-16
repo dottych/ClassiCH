@@ -25,7 +25,7 @@ class CommandTeleportPos extends Command {
             return;
         }
 
-        let me = lists.players[this.client.id];
+        const me = lists.players.get(this.client.id);
 
         if (this.args.length === 3) {
             let x = Math.round(+this.args[0]);

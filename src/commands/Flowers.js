@@ -19,7 +19,7 @@ class CommandFlowers extends Command {
     }
 
     execute() {
-        const me = lists.players[this.client.id];
+        const me = lists.players.get(this.client.id);
         
         if (config.self.world.features.flowers.forced) {
             new ServerMessagePacket(

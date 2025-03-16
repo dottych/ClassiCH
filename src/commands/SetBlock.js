@@ -25,7 +25,7 @@ class CommandSetBlock extends Command {
             return;
         }
 
-        const me = lists.players[this.client.id];
+        const me = lists.players.get(this.client.id);
 
         // under
         if (this.args.length === 1) {

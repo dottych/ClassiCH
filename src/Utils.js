@@ -197,7 +197,7 @@ class Utils {
     findFirstUnusedID(players) {
         // TODO elsewhere: if we return 0xFF, assume it's an error and kick joiner, because all clients assume 255 is their ID
         for (let i = 0; i <= 255; i++)
-            if (players[i] == undefined) 
+            if (players.get(i) == undefined) 
                 return i;
 
         return 255;
@@ -233,7 +233,7 @@ class Utils {
      * @returns True if online, false if not.
      */
     isNameOnline(name, players) {
-        for (let player of Object.values(players))
+        for (let player of players.values())
             if (player.name === name) return true;
 
         return false;
@@ -246,7 +246,7 @@ class Utils {
      * @returns Player class.
      */
     findPlayerByName(name, players) {
-        for (let player of Object.values(players))
+        for (let player of players.values())
             if (player.name === name) return player;
 
         return;
@@ -258,7 +258,7 @@ class Utils {
      * @returns Integer with player count.
      */
     getPlayerCount(players) {
-        return Object.keys(players).length;
+        return players.size;
     }
 
     /**
@@ -269,7 +269,7 @@ class Utils {
     getAllPlayerClients(players) {
         let clients = [];
 
-        for (let player of Object.values(players))
+        for (let player of players.values())
             clients.push(player.client);
         
         return clients;
@@ -284,7 +284,7 @@ class Utils {
     getOtherPlayerClients(client, players) {
         let clients = [];
 
-        for (let player of Object.values(players))
+        for (let player of players.values())
             if (client != player.client) clients.push(player.client);
         
         return clients;
@@ -298,7 +298,7 @@ class Utils {
     getOpClients(players) {
         let clients = [];
 
-        for (let player of Object.values(players))
+        for (let player of players.values())
             if (player.op) clients.push(player.client);
 
         return clients;

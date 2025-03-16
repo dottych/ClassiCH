@@ -25,7 +25,7 @@ class CommandMessage extends Command {
             return;
         }
 
-        if (!config.self.commands.selfActions && this.args[0] === lists.players[this.client.id].name) {
+        if (!config.self.commands.selfActions && this.args[0] === lists.players.get(this.client.id).name) {
             new ServerMessagePacket([this.client], 0x00, "&eYou can't message yourself!");
             return;
         }
@@ -42,11 +42,11 @@ class CommandMessage extends Command {
             return;
         }
 
-        lists.players[this.client.id].commandVars.messaging = player.name;
-        player.commandVars.messaging = lists.players[this.client.id].name;
+        lists.players.get(this.client.id).commandVars.messaging = player.name;
+        player.commandVars.messaging = lists.players.get(this.client.id).name;
 
         let messagesMe = utils.splitString(`[YOU > ${player.name}] ${this.args.join(' ')}`, "&7");
-        let messagesThem = utils.splitString(`[${lists.players[this.client.id].name} > YOU] ${this.args.join(' ')}`, "&7");
+        let messagesThem = utils.splitString(`[${player.commandVars.messaging} > YOU] ${this.args.join(' ')}`, "&7");
 
         for (let message of messagesMe)
             new ServerMessagePacket([this.client], 0x00, message);

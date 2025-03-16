@@ -49,7 +49,7 @@ class BehaviourIdentificationSpawn extends Behaviour {
         );
 
         // spawn other players for client with model
-        for (let player of Object.values(lists.players)) 
+        for (let player of lists.players.values()) 
             if (player.id != this.client.id) {
                 new ServerSpawnPacket(
 

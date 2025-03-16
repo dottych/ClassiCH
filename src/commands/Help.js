@@ -62,7 +62,7 @@ class CommandHelp extends Command {
 
             for (let command of Object.keys(lists.commands)) {
                 if (lists.commands[command].hidden || lists.commands[command].alias) continue;
-                if (lists.commands[command].op && !lists.players[this.client.id].op) continue;
+                if (lists.commands[command].op && !lists.players.get(this.client.id).op) continue;
                 
                 commands.push(command);
             }

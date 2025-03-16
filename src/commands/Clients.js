@@ -21,7 +21,7 @@ class CommandClients extends Command {
     execute() {
         let clients = {};
 
-        for (let player of Object.values(lists.players)) {
+        for (let player of lists.players.values()) {
             if (clients[player.client.appName] == undefined)
                 clients[player.client.appName] = [];
 

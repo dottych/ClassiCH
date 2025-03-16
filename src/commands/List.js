@@ -21,7 +21,7 @@ class CommandList extends Command {
     execute() {
         let players = [];
 
-        for (let player of Object.values(lists.players))
+        for (let player of lists.players.values())
             players.push(
         
                 player.name +

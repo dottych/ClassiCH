@@ -3,7 +3,7 @@ const fs = require('fs');
 class Lists {
     constructor() {
         // connected players
-        this.players = {};
+        this.players = new Map();
 
         // commands with information, supplied by Commands.js
         this.commands = {};

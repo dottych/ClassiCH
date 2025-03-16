@@ -29,7 +29,7 @@ class MovementPacket extends ClientPacket {
     }
 
     handle() {
-        let player = lists.players[this.client.id];
+        let player = lists.players.get(this.client.id);
 
         // don't do anything if position/rotation is the same
         if (

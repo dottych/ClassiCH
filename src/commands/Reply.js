@@ -19,7 +19,8 @@ class CommandReply extends Command {
     }
 
     execute() {
-        let messaging = lists.players[this.client.id].commandVars.messaging;
+        const me = lists.players.get(this.client.id);
+        let messaging = me.commandVars.messaging;
 
         if (messaging == undefined || messaging == "") {
             new ServerMessagePacket([this.client], 0x00, "&eThere is no one to reply to!");
@@ -39,7 +40,7 @@ class CommandReply extends Command {
         }
 
         let messagesMe = utils.splitString(`[YOU > ${player.name}] ${this.args.join(' ')}`, "&7");
-        let messagesThem = utils.splitString(`[${lists.players[this.client.id].name} > YOU] ${this.args.join(' ')}`, "&7");
+        let messagesThem = utils.splitString(`[${me.name} > YOU] ${this.args.join(' ')}`, "&7");
 
         for (let message of messagesMe)
             new ServerMessagePacket([this.client], 0x00, message);

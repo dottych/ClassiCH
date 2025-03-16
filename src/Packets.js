@@ -15,6 +15,10 @@ const ClientTwoWayPingPacket = require('./packets/client/ext/TwoWayPing');
 class Packets {
     constructor() {}
 
+    /**
+     * Handles a client's packets and removes them from the queue.
+     * @param {Socket} client Client with packets.
+     */
     async handle(client) {
         while (client.packets.length > 0) {
             client.busy = true;
@@ -22,42 +26,42 @@ class Packets {
             // big emphasis on the != and == here, so watch out when copying
             switch(client.packets[0][0]) {
                 case lists.clientPackets.identification:
-                    if (lists.players[client.id] != undefined) break;
+                    if (lists.players.get(client.id) != undefined) break;
                     new ClientIdentificationPacket(client, client.packets[0]);
                     break;
 
                 case lists.clientPackets.block:
-                    if (lists.players[client.id] == undefined) break;
+                    if (lists.players.get(client.id) == undefined) break;
                     new ClientBlockPacket(client, client.packets[0]);
                     break;
 
                 case lists.clientPackets.movement:
-                    if (lists.players[client.id] == undefined) break;
+                    if (lists.players.get(client.id) == undefined) break;
                     new ClientMovementPacket(client, client.packets[0]);
                     break;
 
                 case lists.clientPackets.message:
-                    if (lists.players[client.id] == undefined) break;
+                    if (lists.players.get(client.id) == undefined) break;
                     new ClientMessagePacket(client, client.packets[0]);
                     break;
 
                 case lists.clientPackets.ext.info:
-                    if (lists.players[client.id] != undefined) break;
+                    if (lists.players.get(client.id) != undefined) break;
                     new ClientExtInfoPacket(client, client.packets[0]);
                     break;
             
                 case lists.clientPackets.ext.entry:
-                    if (lists.players[client.id] != undefined) break;
+                    if (lists.players.get(client.id) != undefined) break;
                     new ClientExtEntryPacket(client, client.packets[0]);
                     break;
 
                 case lists.clientPackets.ext.customBlockSupportLevel:
-                    if (lists.players[client.id] != undefined) break;
+                    if (lists.players.get(client.id) != undefined) break;
                     new ClientCustomBlockSupportLevelPacket(client, client.packets[0]);
                     break;
 
                 case lists.clientPackets.ext.twoWayPing:
-                    if (lists.players[client.id] == undefined) break;
+                    if (lists.players.get(client.id) == undefined) break;
                     new ClientTwoWayPingPacket(client, client.packets[0]);
                     break;
 

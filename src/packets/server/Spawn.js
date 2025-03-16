@@ -9,7 +9,7 @@ class SpawnPacket extends ServerPacket {
         this.isClient = isClient;
 
         this.id = id;
-        this.player = lists.players[this.id];
+        this.player = lists.players.get(this.id);
 
         this.constructBuffer();
         super.send();

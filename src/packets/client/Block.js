@@ -56,7 +56,7 @@ class BlockPacket extends ClientPacket {
             return;
         }
 
-        let player = lists.players[this.client.id];
+        let player = lists.players.get(this.client.id);
 
         // if player isn't op and PLACES (0x01) an OP block
         if (!player.op && (this.type >= 7 && this.type <= 11)) {

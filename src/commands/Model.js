@@ -25,7 +25,7 @@ class CommandModel extends Command {
             return;
         }
 
-        const me = lists.players[this.client.id];
+        const me = lists.players.get(this.client.id);
         let reset = false;
 
         if (this.args[0] === "reset") {
