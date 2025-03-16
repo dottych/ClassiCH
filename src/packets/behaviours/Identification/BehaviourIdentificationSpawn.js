@@ -72,7 +72,7 @@ class BehaviourIdentificationSpawn extends Behaviour {
 
         new ServerMessagePacket(utils.getAllPlayerClients(lists.players), 0x00, `&e${this.name} joined the game`);
         new ServerMessagePacket([this.client], 100, config.self.server.name);
-        utils.log(`${this.name} joined the game`); 
+        utils.log(`${this.name} joined the game`);
 
         return true;
     }

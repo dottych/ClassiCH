@@ -113,7 +113,8 @@ class Lists {
                 "setMapEnvUrl": 0x28,
                 "setMapEnvProperty": 0x29,
                 "twoWayPing": 0x2B,
-                "lightingMode": 0x37
+                "lightingMode": 0x37,
+                "setCinematicGui": 0x38
             }
         }
 
@@ -144,6 +145,7 @@ class Lists {
             "BlockDefinitions": 1,
             "BlockDefinitionsExt": 2,
             "ChangeModel": 1,
+            "CinematicGui": 1,
             "CustomBlocks": 1,
             "EnvColors": 1,
             "EnvMapAspect": 1,
@@ -181,6 +183,7 @@ class Lists {
 
         this.customBlocks = {};
         this.blockLimit = 65; // is replaced with highest ID from custom block list
+        // also 65 is the last block in block support level 1
 
         this.addCustomBlocks();
     }

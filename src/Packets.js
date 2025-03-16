@@ -19,6 +19,7 @@ class Packets {
         while (client.packets.length > 0) {
             client.busy = true;
             
+            // big emphasis on the != and == here, so watch out when copying
             switch(client.packets[0][0]) {
                 case lists.clientPackets.identification:
                     if (lists.players[client.id] != undefined) break;
