@@ -102,7 +102,7 @@ class Server {
     }
 
     onClose(client) {
-        let player = lists.players[client.id];
+        const player = lists.players[client.id];
 
         // if client has a valid player, remove it
         if (player !== undefined)
@@ -147,7 +147,7 @@ class Server {
                 '&salt=' + config.salt +
                 '&users=' + utils.getPlayerCount(lists.players) +
                 '&software=' + encodeURIComponent(config.software) +
-                '&web=' + true,
+                '&web=' + false,
                 (error, response, body) => {
                     if (body.indexOf("/play/") >= 0) {
                         if (initial)
