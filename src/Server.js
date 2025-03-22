@@ -137,17 +137,18 @@ class Server {
 
     heartbeat() {
         function send(initial, url) {
+            // True and False as per the original heartbeat specification
             request(
                 url +
                 '?port=' + config.self.server.port +
                 '&max=' + config.self.server.maxPlayers +
                 '&name=' + encodeURIComponent(config.self.server.name) +
-                '&public=' + config.self.server.public +
+                '&public=' + config.self.server.public ? 'True' : 'False' +
                 '&version=' + config.pvn +
                 '&salt=' + config.salt +
                 '&users=' + utils.getPlayerCount(lists.players) +
                 '&software=' + encodeURIComponent(config.software) +
-                '&web=' + false,
+                '&web=' + 'False',
                 (error, response, body) => {
                     if (body.indexOf("/play/") >= 0) {
                         if (initial)
@@ -159,7 +160,7 @@ class Server {
                         if (error != null)
                             utils.log(`Error code: ${error}`);
 
-                        utils.log(`${body}`);
+                        utils.log(body);
                     }
                 }
             );

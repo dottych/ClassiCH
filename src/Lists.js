@@ -118,6 +118,22 @@ class Lists {
             }
         }
 
+        this.nbtTags = {
+            "end": 0x00,
+            "byte": 0x01,
+            "short": 0x02,
+            "int": 0x03,
+            "long": 0x04,
+            "float": 0x05,
+            "double": 0x06,
+            "byteArray": 0x07,
+            "string": 0x08,
+            "list": 0x09,
+            "compound": 0x0A,
+            "intArray": 0x0B,
+            "longArray": 0x0C
+        }
+
         this.answers = [
             "It is certain",
             "It is decidedly so",

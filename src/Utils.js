@@ -72,15 +72,29 @@ class Utils {
     }
 
     /**
+     * Converts a signed byte value into an actual byte.
+     * @param {number} int Any signed byte value (-128 to 127).
+     * @returns A byte (0-255).
+     */
+    signedByte(byte) {
+        if (byte < 0)
+            byte += 256;
+
+        return byte;
+    }
+
+    /**
      * Converts an integer into a UInt16 array.
      * @param {number} int Any integer (under 65536).
      * @returns A Uint16 array.
      */
     uInt16(int) {
-        let bytes = [];
-        bytes.push(int >> 8 % 256);
-        bytes.push(int % 256);
-        return bytes;
+        let buffer = [];
+
+        buffer.push(int >> 8 % 256);
+        buffer.push(int % 256);
+
+        return buffer;
     }
 
     /**
@@ -121,6 +135,23 @@ class Utils {
     }
 
     /**
+     * Converts an integer into an Int16 array.
+     * @param {number} int Any integer (under 32767, above -32768).
+     * @returns An Int16 array.
+     */
+    int16(int) {
+        if (int < 0)
+            int += 65536;
+
+        let buffer = [];
+
+        buffer.push(int >> 8 % 256);
+        buffer.push(int % 256);
+
+        return buffer;
+    }
+
+    /**
      * Converts an integer into a UInt32 array.
      * @param {number} int Any integer (under 4294967296).
      * @returns A Uint32 array.
@@ -128,12 +159,14 @@ class Utils {
     uInt32(int) {
         int = BigInt(int);
 
-        let bytes = [];
-        bytes.push(Number((int >> 24n) % 256n));
-        bytes.push(Number((int >> 16n) % 256n));
-        bytes.push(Number((int >> 8n) % 256n));
-        bytes.push(Number(int % 256n));
-        return bytes;
+        let buffer = [];
+
+        buffer.push(Number((int >> 24n) % 256n));
+        buffer.push(Number((int >> 16n) % 256n));
+        buffer.push(Number((int >> 8n) % 256n));
+        buffer.push(Number(int % 256n));
+
+        return buffer;
     }
 
     /**
@@ -161,6 +194,82 @@ class Utils {
      */
     parseUInt32(int) {
         return int[3] + int[2] * 256 + int[1] * 256**2 + int[0] * 256**3;
+    }
+
+    /**
+     * Converts an integer into an Int32 array.
+     * @param {number} int Any integer (under 2147483647, above -2147483648).
+     * @returns An Int32 array.
+     */
+    int32(int) {
+        int = BigInt(int);
+
+        if (int < 0)
+            int += 4294967296n;
+
+        let buffer = [];
+
+        buffer.push(Number((int >> 24n) % 256n));
+        buffer.push(Number((int >> 16n) % 256n));
+        buffer.push(Number((int >> 8n) % 256n));
+        buffer.push(Number(int % 256n));
+
+        return buffer;
+    }
+
+    /**
+     * Converts an integer into an Int64 array.
+     * @param {number} int Any integer (under 9223372036854775807, above -9223372036854775808).
+     * @returns An Int64 array.
+     */
+    int64(int) {
+        int = BigInt(int);
+
+        if (int < 0)
+            int += 9223372036854775808n;
+
+        let buffer = [];
+
+        buffer.push(Number((int >> 56n) % 256n));
+        buffer.push(Number((int >> 48n) % 256n));
+        buffer.push(Number((int >> 40n) % 256n));
+        buffer.push(Number((int >> 32n) % 256n));
+        buffer.push(Number((int >> 24n) % 256n));
+        buffer.push(Number((int >> 16n) % 256n));
+        buffer.push(Number((int >> 8n) % 256n));
+        buffer.push(Number(int % 256n));
+
+        return buffer;
+    }
+
+    /**
+     * Converts a float/integer into a Float32 array.
+     * @param {number} float Any number.
+     * @returns A Float32 array.
+     */
+    float32(float) {
+        const arrayBuffer = new ArrayBuffer(4);
+        const f32Buffer = new Float32Array(arrayBuffer);
+        const u8Buffer = new Uint8Array(arrayBuffer);
+
+        f32Buffer[0] = float;
+
+        return u8Buffer.reverse();
+    }
+
+    /**
+     * Converts a float/integer into a Float64 array.
+     * @param {number} float Any number.
+     * @returns A Float64 array.
+     */
+    float64(float) {
+        const arrayBuffer = new ArrayBuffer(8);
+        const f64Buffer = new Float64Array(arrayBuffer);
+        const u8Buffer = new Uint8Array(arrayBuffer);
+
+        f64Buffer[0] = float;
+
+        return u8Buffer.reverse();
     }
 
     /**
